@@ -1,0 +1,28 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Applying selection in K
+% (c) 2003 Douglas G. Scofield, d.scofield@umiami.edu
+% 
+%%%%%%
+
+%%%%%%
+\chapter{Applying selection in \K}
+%%%%%%
+
+\REDO\  In \K, just as in nature, selection reduces proportions of less fit genotypes.  Fitness in \K\ is a function of the mutations carried in the load class \Lij.  In order to maintain the infinite population at constant sum $1$, the application of selection reduces the proportions of load classes below the population mean fitness and increases the proportions of load classes above the population mean fitness.
+
+%%%%%%
+\section{Specifying the selection model}
+%%%%%%
+
+\REDO\  Kondrashov's original formulation specified a fitness model that enabled threshold selection.
+\begin{equation}
+w_{i,j}=1-({\frac{1+dj}{k}})^\alpha
+\end{equation}
+The numbers of heterozygous and homozygous mutations are specified by $i$ and $j$, respectively; individuals with $>k$ mutations died; $d$ specifies dominance with $d=2$ equal to codominance; and $\alpha=1$, $2$, and $\inf$ correspond to linear, intermediate and threshold selection, respectively ((Kondrashov 1985)).
+
+\REDO\  For the moment, \K\ does not provide Kondrashov's fitness function.  Instead, it provides a familiar fitness function parameterized by selection coefficient $s\in(0,1)$ and dominance $h\in(0,1)$.
+\begin{equation}
+w_{i,j}=(1-hs)^{i}(1-s)^{j}
+\end{equation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

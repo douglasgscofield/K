@@ -1,0 +1,83 @@
+%%%%%% Macros
+%
+\newcommand{\K}{{\bf K}}      % The name of this package
+%
+\newcommand{\REDO}{{\bf {\em REDO!}}}
+%
+\newcommand{\Order}[1]{\mbox{$\text{{\bf O}}(#1)$}}  % the O() expressions of algorithm time
+\newcommand{\genotype}[2]{\mbox{$({#1}{#2})$}}
+% This generates a code fragment
+% \newcommand{\Kcode}[1]{\mbox{{\tt #1}}}
+\newcommand{\Kcode}[1]{{\tt #1}}
+% These generate \tt-style code for a KConfig member access: K->#1[#2][#3][#4]
+\newcommand{\KK}{\mbox{{\tt K}}}  % the name of the 'master' KConfig
+\newcommand{\Kmember}[1]{\mbox{{\tt K->#1}}}
+\newcommand{\Kmemberi}[2]{\mbox{{\tt K->#1[{\it #2}\/]}}}
+\newcommand{\Kmemberij}[3]{\mbox{{\tt K->#1[{\it #2}\/][{\it #3}\/]}}}
+\newcommand{\Kmemberijk}[4]{\mbox{{\tt K->#1[{\it #2}\/][{\it #3}\/][{\it #4}\/]}}}
+\newcommand{\KScalar}{\mbox{\tt KScalar}}
+\newcommand{\KInt}{\mbox{\tt KInt}}
+\newcommand{\KArray}{\mbox{\tt KArray}}
+\newcommand{\KConfig}{\mbox{\tt KConfig}}
+
+\newcommand{\Mi}{\mbox{$M_{i}$}}
+\newcommand{\Mj}{\mbox{$M_{j}$}}
+\newcommand{\Mg}{\mbox{$M_{g}$}}
+
+\newcommand{\xijg}{\mbox{$x_{i,j}(g)$}}
+\newcommand{\xijgprev}{\mbox{$x_{(prev)i,j}(g)$}}
+\newcommand{\xpijg}{\mbox{$x'_{i,j}(g)$}}
+\newcommand{\xppsijg}{\mbox{$x''_{(S)i,j}(g)$}}
+\newcommand{\xppaijg}{\mbox{$x''_{(A)i,j}(g)$}}
+\newcommand{\xppoijg}{\mbox{$x''_{(O)i,j}(g)$}}
+\newcommand{\xppijg}{\mbox{$x''_{i,j}(g)$}}
+\newcommand{\Xijg}{\mbox{$X_{i,j}(g)$}}
+\newcommand{\xij}{\mbox{$x_{i,j}$}}
+\newcommand{\Lij}{\mbox{$L(i,j)$}}                %  L(i,j)   load class across genotypes
+\newcommand{\LCG}[3]{\mbox{$L(#1,#2;#3$)}}
+\newcommand{\Lgij}{\mbox{$L(i,j;g)$}}             %  L(i,j;g) load class by genotype
+\newcommand{\Lijg}{\mbox{$L(i,j;g)$}}             %  L(i,j;g) load class by genotype
+\newcommand{\Lnv}{\mbox{$L(n,v)$}}                %  L(n,v)   load class across genotypes
+\newcommand{\Lxnv}{\mbox{$L(n,v;\xi)$}}           %  L(xi;n,v) load class by genotype
+\newcommand{\Lllam}{\mbox{$L(l,\lambda)$}}        %  L(l,lambda)   load class across genotypes
+\newcommand{\Lzllam}{\mbox{$L(l,\lambda;\zeta)$}} %  L(zeta;l,lambda) load class by genotype
+\newcommand{\Sg}{\mbox{$S(g)$}}
+\newcommand{\DSg}{\mbox{${\cal D}_{S}(g)$}}
+\newcommand{\Ag}{\mbox{$A(g)$}}
+\newcommand{\DAg}{\mbox{${\cal D}_{A}(g)$}}
+\newcommand{\Og}{\mbox{$O(g)$}}
+\newcommand{\RSOg}{\mbox{${\cal R}_{SO}(g)$}}
+\newcommand{\RAOg}{\mbox{${\cal R}_{AO}(g)$}}
+\newcommand{\ROOg}{\mbox{${\cal R}_{OO}(g)$}}
+\newcommand{\ROPg}{\mbox{${\cal R}_{OP}(g)$}}
+
+\newcommand{\Ffemale}{\mbox{$F_{fem}$}}
+\newcommand{\Fmale}{\mbox{$F_{male}$}}
+\newcommand{\betaij}{\mbox{$\beta_{i,j}$}}
+\newcommand{\gammaij}{\mbox{$\gamma_{i,j}$}}
+\newcommand{\alphaij}{\mbox{$\alpha_{i,j}$}}
+\newcommand{\rhoij}{\mbox{$\rho_{i,j}$}}
+
+\newcommand{\betanv}{\mbox{$\beta_{n,v}$}}
+\newcommand{\gammanv}{\mbox{$\gamma_{n,v}$}}
+\newcommand{\alphanv}{\mbox{$\alpha_{n,v}$}}
+\newcommand{\rhollam}{\mbox{$\rho_{l,\lambda}$}}
+
+\newcommand{\SOijg}{\mbox{$SO_{i,j}(g)$}}
+\newcommand{\AOijg}{\mbox{$AO_{i,j}(g)$}}
+\newcommand{\OOijg}{\mbox{$OO_{i,j}(g)$}}
+\newcommand{\OPijg}{\mbox{$OP_{i,j}(g)$}}
+
+\newcommand{\SOnvx}{\mbox{$SO_{n,v}(\xi)$}}
+\newcommand{\AOnvx}{\mbox{$AO_{n,v}(\xi)$}}
+\newcommand{\OOnvx}{\mbox{$OO_{n,v}(\xi)$}}
+\newcommand{\OPllamz}{\mbox{$OP_{l,\lambda}(\zeta)$}}
+
+\newcommand{\funcself}{\mbox{$s_{i,j}(n,v)$}}
+\newcommand{\funcapomixis}{\mbox{$a_{i,j}(n,v)$}}
+\newcommand{\funcoutcross}{\mbox{$o_{i,j}(n,v,l,\lambda)$}}
+
+\newcommand{\TSgx}{\mbox{${\cal T}_{S}(\xi,g)$}}
+\newcommand{\TAgx}{\mbox{${\cal T}_{A}(\xi,g)$}}
+\newcommand{\TOgxz}{\mbox{${\cal T}_{O}(\xi,\zeta,g)$}}
+

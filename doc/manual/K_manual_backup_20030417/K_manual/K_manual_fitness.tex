@@ -1,0 +1,99 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Fitness in K
+% (c) 2003 Douglas G. Scofield, d.scofield@umiami.edu
+% 
+%%%%%%
+
+%%%%%%
+\chapter{Fitness in \K}
+%%%%%%
+
+\REDO\  In \K, just as in nature, selection reduces proportions of less fit genotypes.  Fitness in \K\ is a function of the mutations carried in the load class \Lij.  In order to maintain the infinite population at constant sum $1$, the application of selection reduces the proportions of load classes below the population mean fitness and increases the proportions of load classes above the population mean fitness.
+
+In \K, fitness is a function of the load class and genotype in combination with any number of user-specified parameters.  Typically, the load class and parameters alone determine fitness and the genotype is considered to be fitness-neutral.
+
+In \K, fitness is a function of the load class-genotype and the configuration \KConfig, which contains the fitness parameters necessary to determine the fitness of load class-genotypes.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Specifying the fitness model}
+
+A fitness function in \K\ returns a \KScalar.
+
+\REDO\  Kondrashov's original formulation specified a fitness model that enabled threshold selection.
+\begin{equation}
+w_{i,j}=1-\left({\frac{1+dj}{k}}\right)^\alpha
+\end{equation}
+The numbers of heterozygous and homozygous mutations are specified by $i$ and $j$, respectively; individuals with $>k$ mutations died; $d$ specifies dominance with $d=2$ equal to codominance; and $\alpha=1$, $2$, and $\inf$ correspond to linear, intermediate and threshold selection, respectively ((Kondrashov 1985)).
+
+\REDO\  For the moment, \K\ does not provide Kondrashov's fitness function.  Instead, it provides a familiar fitness function parameterized by selection coefficient $s\in(0,1)$ and dominance $h\in(0,1)$.
+\begin{equation}
+w_{i,j}=(1-hs)^{i}(1-s)^{j}
+\end{equation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Precomputed fitness}
+
+For computational efficiency, \K\ automatically calculates fitnesses for all \Lijg\ and stores these values in \lstinline{K->fitness_precomputed[i][j][g]}.  The function \lstinline{fitness(K,i,j,g)} returns the corresponding element of this array.
+
+Precomputed fitness values are established as a consequence of calling the function \lstinline{initialize_model_state()} just prior to starting the model.  All relevant members of \KK\ must have values prior to this time.  The use of precomputed fitness values is appropriate for the fitness functions supplied with \K.  The function \lstinline{fitness_computed(K,i,j,g)} may be used to bypass the precomputed values and calculate fitness directly.
+
+If you define a fitness function that may determine different fitness values for identical \Lijg\ at different times during model execution, then you must decide which of the following cases applies:
+\begin{enumerate}
+	\item Fitness values may change one to several discrete times; or
+	\item Fitness values may change many times. 
+\end{enumerate}
+If your fitness function fits case (1), then you should identify times during model execution at which to recompute the precomputed values in \lstinline{K->fitness_precomputed}.  Make sure all relevant members of \KK\ have been updated, and then call the function \lstinline{initiate_fitness_precomputed()}.
+\begin{lstlisting}[gobble=4]
+    /*
+    ** First, change all relevant members of K (e.g., K->fit_s 
+    ** and K->fit_h) and then recompute the values.
+    */
+    K->fit_s = 0.80;  /* decrease the selection coefficient */
+    initiate_fitness_precomputed(K);
+\end{lstlisting}
+
+If your fitness function instead fits case (2), then you must disable the use of precomputed fitness values by telling \K\ to directly compute fitness every time a fitness value is required.  This is {\em much} more computationally intensive, so please make sure that case (1) does not apply before doing this.  The use of precomputed fitness values is disabled by calling the function \lstinline{must_compute_fitness_function()} and passing the registered value of the fitness function (which was probably stored in \lstinline{K->fitness_function)} as the sole argument:
+\begin{lstlisting}[gobble=4]
+    must_compute_fitness_function(K->fitness_function);
+\end{lstlisting}
+After doing this, the function \lstinline{fitness(K,i,j,g)} is operationally identical to the function \lstinline{fitness_computed(K,i,j,g)}.  There is currently no mechanism to return to precomputed fitness values once \lstinline{must_compute_fitness_function()} has been called.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Defining your own fitness function}
+
+In the source code of \K, fitness functions share a common interface.  The first argument is always the active \KConfig\ \KK, the second and third arguments are both \KInt\ and specify the number of heterozygous and homozygous mutations, respectively, in the load class of interest, and the fourth argument specifies the genotype of interest and is also \KInt.  Once the fitness value is computed from the load class and genotype arguments together with any parameters from \KConfig\ \KK, the fitness value returned as a \KScalar.
+
+Because fitness functions share a common interface, you can easily define your own fitness function and incorporate it into \K.
+
+Within the body of the fitness function, fitness is calculated using the load class and genotype arguments along with any members of \KK\ (e.g., \lstinline{K->fit_s}, \lstinline{K->fit_h}) that are being used as parameters.  The fitness is computed as a \KScalar\ and returned as the function value.
+\begin{lstlisting}[gobble=4]
+    KScalar  myfitnessfunction  (KConfig K, KInt i, KInt j, KInt g)
+    {
+        KScalar w;       /* w will hold the computed fitness */
+        KScalar t1, t2;  /* for holding intermediate values */
+        /*
+        ** The example fitness function is the multiplicative
+        ** fitness function $w_{i,j}=(1-hs)^{i}(1-s)^{j}$.
+        **
+        ** The C function pow(a,b) computes $a^b$.
+        */
+        t1 = pow((1 - K->fit_h*K->fit_s), i);
+        t2 = pow((1 - K->fit_s), j);
+        w = t1 * t2;
+        return w;
+    }
+\end{lstlisting}
+In order to use your fitness function it must be registered with \K.  This is done prior to the start of the model run, generally within \lstinline{main()}.  In the declarations section you must provide a {\em function prototype} that describes your fitness function.  Note that the function prototype is identical to the first line of the function definition, but does not have a function body and ends with a semicolon '\lstinline{;}'.    Note that because a fitness function has a specific order and type of arguments and returns the same type of value, all fitness function prototypes will be identical except for the name of the function.  
+\begin{lstlisting}[gobble=4]
+    KScalar  myfitnessfunction  (KConfig K, KInt i, KInt j, KInt g);
+\end{lstlisting}
+To use your fitness function, call the function \lstinline{register_fitness_function()} and pass the name of your fitness function as the sole argument.  You then must tell \K\ to use your registered fitness function by assigning the value returned by \lstinline{register_fitness_function()} to \lstinline{K->fitness_function}.  Don't forget to assign values to the members of \KK\ that your fitness function requires.
+\begin{lstlisting}[gobble=4]
+    /* Register the fitness function */
+    K->fitness_function = register_fitness_function(myfitnessfunction);
+    /* Set the members of K that are used by myfitnessfunction() */
+    K->fit_s = 0.95;  /* E.g., highly recessive sublethal mutations*/
+    K->fit_h = 0.02;
+\end{lstlisting}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

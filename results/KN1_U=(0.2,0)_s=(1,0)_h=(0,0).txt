@@ -1,0 +1,7 @@
+generations	S	A	O	U_0	fitness_function_0	fit_s_0	fit_h_0	U_1	fitness_function_1	fit_s_1	fit_h_1	mean_lethals_0	var_lethals_0	var_mean_lethals_0	mean_lethals_1	var_lethals_1	var_mean_lethals_1	w_self	w_apomixis	w_outcross	w_popmean	IBD	S_secondary
+  281	0	0	1	0.2	multiplicative	1	0	0	multiplicative	0	0	36.6424	31.6848	0	0	513.067	227012	442.461	43.8717	17.7634	0	0	482.589
+  282	0.1	0	0.9	0.2	multiplicative	1	0	0	multiplicative	0	0	36.642	31.6857	0	0	513.062	227008	442.457	43.8717	17.7637	5.86841e-06	5.11025e-05	482.589
+  284	0.2	0	0.8	0.2	multiplicative	1	0	0	multiplicative	0	0	36.6415	31.6868	0	0	513.056	227002	442.452	43.8717	17.764	1.32064e-05	0.000115002	482.588
+  288	0.3	0	0.7	0.2	multiplicative	1	0	0	multiplicative	0	0	36.6408	31.6881	0	0	513.048	226996	442.445	43.8717	17.7644	2.26448e-05	0.000197193	482.588
+  292	0.4	0	0.6	0.2	multiplicative	1	0	0	multiplicative	0	0	36.6399	31.6899	0	0	513.038	226987	442.437	43.8717	17.765	3.52365e-05	0.000306842	482.587
+  300	0.5	0	0.5	0.2	multiplicative	1	0	0	multiplicative	0	0	36.6387	31.6925	0	0	513.023	226974	442.425	43.8716	17.7658	5.28782e-05	0.000460468	482.586

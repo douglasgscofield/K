@@ -1,0 +1,21 @@
+%%%%%% Header file for each chapter of the K manual
+%
+\usepackage{amsmath}  %% AMS math macros
+\usepackage{graphicx} %% for handling EPS etc.
+\usepackage{longtable}
+\setcounter{LTchunksize}{100}  % for the longtable package
+\topmargin -1.5cm        % read Lamport p.163
+\oddsidemargin -0.04cm   % read Lamport p.163
+\evensidemargin -0.04cm  % same as oddsidemargin but for left-hand pages
+\textwidth 16.59cm
+\textheight 21.94cm 
+% \pagestyle{empty}       % Uncomment if don't want page numbers
+\parskip 7.2pt           % sets spacing between paragraphs
+% \parindent 0pt		  % sets leading space for paragraphs
+\renewcommand{\baselinestretch}{2}  %% double space
+% \usepackage[pdftex]{genealogy}
+%
+\numberwithin{equation}{section}  %% equation numbering
+%
+%
+\input{K_macros.tex}

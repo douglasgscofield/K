@@ -1,0 +1,423 @@
+% K Manual
+% (c) 2003 Douglas G. Scofield, d.scofield@umiami.edu
+% 
+
+\newcommand{\K}{{\bf K}}      % The name of this package
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter[\K: Modeling genetic load]{\K: A platform for modeling the population dynamics of genetic load}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%% Macros
+%
+%
+\newcommand{\REDO}{{\bf {\em REDO!}}}
+%
+\newcommand{\ProbDist}[2]{\mbox{{\bf #1}$(#2)$}}
+\newcommand{\Order}[1]{\mbox{$\text{{\bf O}}(#1)$}}  % the O() expressions of algorithm time
+\newcommand{\genotype}[2]{\mbox{$({#1}{#2})$}}
+% This generates a code fragment
+% \newcommand{\Kcode}[1]{\mbox{{\tt #1}}}
+\newcommand{\Kcode}[1]{{\tt #1}}
+% This generates command-line-style entries
+\newcommand{\Cmdline}[1]{{\tt #1}}
+% These generate \tt-style code for a KConfig member access: K->#1[#2][#3][#4]
+\newcommand{\KK}{\mbox{{\tt K}}}  % the name of the 'master' KConfig
+\newcommand{\Kmember}[1]{\mbox{{\tt K->#1}}}
+\newcommand{\Kmemberi}[2]{\mbox{{\tt K->#1[{\it #2}\/]}}}
+\newcommand{\Kmemberij}[3]{\mbox{{\tt K->#1[{\it #2}\/][{\it #3}\/]}}}
+\newcommand{\Kmemberijk}[4]{\mbox{{\tt K->#1[{\it #2}\/][{\it #3}\/][{\it #4}\/]}}}
+\newcommand{\KScalar}{\mbox{\tt KScalar}}
+\newcommand{\KInt}{\mbox{\tt KInt}}
+\newcommand{\KArray}{\mbox{\tt KArray}}
+\newcommand{\KConfig}{\mbox{\tt KConfig}}
+
+\newcommand{\izero}{\mbox{$i_0$\/}}
+\newcommand{\jzero}{\mbox{$j_0$\/}}
+\newcommand{\ione}{\mbox{$i_1$\/}}
+\newcommand{\jone}{\mbox{$j_1$\/}}
+\newcommand{\nzero}{\mbox{$n_0$\/}}
+\newcommand{\none}{\mbox{$n_1$\/}}
+\newcommand{\Lijij}{\mbox{$L($\izero,\jzero,\ione,\jone$)$}}
+\newcommand{\Mizero}{\mbox{$M_{i_0}$\/}}
+\newcommand{\Mjzero}{\mbox{$M_{j_0}$\/}}
+\newcommand{\Mione}{\mbox{$M_{i_1}$\/}}
+\newcommand{\Mjone}{\mbox{$M_{j_1}$\/}}
+\newcommand{\wnested}{\mbox{$w_{i_0\/,j_0\/,i_1\/,j_1\/}$}}
+\newcommand{\meanwnested}{\mbox{$\bar{w}_{01}$}}
+
+\newcommand{\gami}{\mbox{$f_{i}$}}
+\newcommand{\gammalei}{\mbox{$f_{i}^{\text{\Male}}$}}
+\newcommand{\gamfemalei}{\mbox{$f_{i}^{\text{\Female}}$}}
+\newcommand{\gammalek}{\mbox{$f_{k}^{\text{\Male}}$}}
+\newcommand{\gamfemalek}{\mbox{$f_{k}^{\text{\Female}}$}}
+\newcommand{\gammaleik}{\mbox{$f_{i-k}^{\text{\Male}}$}}
+\newcommand{\gamfemaleik}{\mbox{$f_{i-k}^{\text{\Female}}$}}
+
+\newcommand{\gamii}{\mbox{$f_{i_0,i_1}$}}
+\newcommand{\gammaleii}{\mbox{$f_{i_0,i_1}^{\text{\Male}}$}}
+\newcommand{\gamfemaleii}{\mbox{$f_{i_0,i_1}^{\text{\Female}}$}}
+\newcommand{\gammalekk}{\mbox{$f_{k_0,k_1}^{\text{\Male}}$}}
+\newcommand{\gamfemalekk}{\mbox{$f_{k_0,k_1}^{\text{\Female}}$}}
+\newcommand{\gammaleikik}{\mbox{$f_{i_0-k_0,i_1-k_1}^{\text{\Male}}$}}
+\newcommand{\gamfemaleikik}{\mbox{$f_{i_0-k_0,i_1-k_1}^{\text{\Female}}$}}
+\newcommand{\gammalekik}{\mbox{$f_{k_0,i_1-k_1}^{\text{\Male}}$}}
+\newcommand{\gamfemalekik}{\mbox{$f_{k_0,i_1-k_1}^{\text{\Female}}$}}
+\newcommand{\gammaleikk}{\mbox{$f_{i_0-k_0,k_1}^{\text{\Male}}$}}
+\newcommand{\gamfemaleikk}{\mbox{$f_{i_0-k_0,k_1}^{\text{\Female}}$}}
+
+\newcommand{\Mi}{\mbox{$M_{i}$}}
+\newcommand{\Mj}{\mbox{$M_{j}$}}
+\newcommand{\Mg}{\mbox{$M_{g}$}}
+\newcommand{\xijg}{\mbox{$x_{i,j}(g)$}}
+\newcommand{\xijgprev}{\mbox{$x_{(prev)i,j}(g)$}}
+\newcommand{\xijij}{\mbox{$x_{i_0\/,j_0\/,i_1\/,j_1\/}$}}
+\newcommand{\xpijg}{\mbox{$x'_{i,j}(g)$}}
+\newcommand{\xpij}{\mbox{$x'_{i,j}$}}
+\newcommand{\xpnv}{\mbox{$x'_{n,v}$}}
+\newcommand{\xpijij}{\mbox{$x'_{i_0\/,j_0\/,i_1\/,j_1\/}$}}
+\newcommand{\xpnvnv}{\mbox{$x'_{n_0\/,v_0\/,n_1\/,v_1\/}$}}
+\newcommand{\xppsijg}{\mbox{$x''_{(S)i,j}(g)$}}
+\newcommand{\xppaijg}{\mbox{$x''_{(A)i,j}(g)$}}
+\newcommand{\xppoijg}{\mbox{$x''_{(O)i,j}(g)$}}
+\newcommand{\xppijg}{\mbox{$x''_{i,j}(g)$}}
+\newcommand{\xppij}{\mbox{$x''_{i,j}$}}
+\newcommand{\xppsijij}{\mbox{$x''_{(S)i_0\/,j_0\/,i_1\/,j_1\/}$}}
+\newcommand{\xppaijij}{\mbox{$x''_{(A)i_0\/,j_0\/,i_1\/,j_1\/}$}}
+\newcommand{\xppoii}{\mbox{$x''_{(O)i_0\/,i_1\/}$}}
+\newcommand{\xppijij}{\mbox{$x''_{i_0\/,j_0\/,i_1\/,j_1\/}$}}
+\newcommand{\Xijij}{\mbox{$X_{i_0\/,j_0\/,i_1\/,j_1\/}$}}
+\newcommand{\Xijg}{\mbox{$X_{i,j}(g)$}}
+\newcommand{\Xij}{\mbox{$X_{i,j}$}}
+\newcommand{\xij}{\mbox{$x_{i,j}$}}
+\newcommand{\Lij}{\mbox{$L(i,j)$}}                %  L(i,j)   load class across genotypes
+\newcommand{\LCG}[3]{\mbox{$L(#1,#2;#3$)}}
+\newcommand{\Lgij}{\mbox{$L(i,j;g)$}}             %  L(i,j;g) load class by genotype
+\newcommand{\Lijg}{\mbox{$L(i,j;g)$}}             %  L(i,j;g) load class by genotype
+\newcommand{\Lnv}{\mbox{$L(n,v)$}}                %  L(n,v)   load class across genotypes
+\newcommand{\Lxnv}{\mbox{$L(n,v;\xi)$}}           %  L(xi;n,v) load class by genotype
+\newcommand{\Lllam}{\mbox{$L(l,\lambda)$}}        %  L(l,lambda)   load class across genotypes
+\newcommand{\Lzllam}{\mbox{$L(l,\lambda;\zeta)$}} %  L(zeta;l,lambda) load class by genotype
+\newcommand{\Sg}{\mbox{$S(g)$}}
+\newcommand{\DSg}{\mbox{${\cal D}_{S}(g)$}}
+\newcommand{\Ag}{\mbox{$A(g)$}}
+\newcommand{\DAg}{\mbox{${\cal D}_{A}(g)$}}
+\newcommand{\Og}{\mbox{$O(g)$}}
+\newcommand{\RSOg}{\mbox{${\cal R}_{SO}(g)$}}
+\newcommand{\RAOg}{\mbox{${\cal R}_{AO}(g)$}}
+\newcommand{\ROOg}{\mbox{${\cal R}_{OO}(g)$}}
+\newcommand{\ROPg}{\mbox{${\cal R}_{OP}(g)$}}
+
+\newcommand{\Ffemale}{\mbox{$F_{fem}$}}
+\newcommand{\Fmale}{\mbox{$F_{male}$}}
+\newcommand{\betaij}{\mbox{$\beta_{i,j}$}}
+\newcommand{\gammaij}{\mbox{$\gamma_{i,j}$}}
+\newcommand{\alphaij}{\mbox{$\alpha_{i,j}$}}
+\newcommand{\rhoij}{\mbox{$\rho_{i,j}$}}
+
+\newcommand{\betanv}{\mbox{$\beta_{n,v}$}}
+\newcommand{\gammanv}{\mbox{$\gamma_{n,v}$}}
+\newcommand{\alphanv}{\mbox{$\alpha_{n,v}$}}
+\newcommand{\rhollam}{\mbox{$\rho_{l,\lambda}$}}
+
+\newcommand{\SOijg}{\mbox{$SO_{i,j}(g)$}}
+\newcommand{\AOijg}{\mbox{$AO_{i,j}(g)$}}
+\newcommand{\OOijg}{\mbox{$OO_{i,j}(g)$}}
+\newcommand{\OPijg}{\mbox{$OP_{i,j}(g)$}}
+
+\newcommand{\SOnvx}{\mbox{$SO_{n,v}(\xi)$}}
+\newcommand{\AOnvx}{\mbox{$AO_{n,v}(\xi)$}}
+\newcommand{\OOnvx}{\mbox{$OO_{n,v}(\xi)$}}
+\newcommand{\OPllamz}{\mbox{$OP_{l,\lambda}(\zeta)$}}
+
+\newcommand{\funcself}{\mbox{$s_{i,j}(n,v)$}}
+\newcommand{\funcapomixis}{\mbox{$a_{i,j}(n,v)$}}
+\newcommand{\funcoutcross}{\mbox{$o_{i,j}(n,v,l,\lambda)$}}
+
+\newcommand{\funcselfnested}{\mbox{$s_{i_0\/,j_0\/,i_1\/,j_1\/}(n_0\/,v_0\/,n_1\/,v_1\/)$}}
+\newcommand{\funcapomixisnested}{\mbox{$a_{i_0\/,j_0\/,i_1\/,j_1\/}(n_0\/,v_0\/,n_1\/,v_1\/)$}}
+\newcommand{\funcoutcrossnested}{\mbox{$o_{i_0\/,j_0\/,i_1\/,j_1\/}(n_0\/,v_0\/,l_0,\lambda_0,n_1\/,v_1\/,l_1,\lambda_1)$}}
+
+\newcommand{\TSgx}{\mbox{${\cal T}_{S}(\xi,g)$}}
+\newcommand{\TAgx}{\mbox{${\cal T}_{A}(\xi,g)$}}
+\newcommand{\TOgxz}{\mbox{${\cal T}_{O}(\xi,\zeta,g)$}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Brief overview of \protect{\citet{Kondrashov:1985:5375}}}
+
+\subsection{Reproduction}
+Although for efficiency reasons \K\ does not use \citeauthor{Kondrashov:1985:5375}'s \citeyearpar{Kondrashov:1985:5375} described implementation of mating, functions to do so are provided for interested users.  Note that because of other implementation differences described in blah blah blah, load class proportions will not match those produced with Kondrashov's implementation.  The functions described in Subsection blah blah blah may be used to get load class proportions consistent with Kondrashov's implementation.  {\em Caution: Though these functions have been tested, they have not been as well tested as the default implementation.}
+
+A Kondrashov-style implementation of mating would result in a model loop as follows:
+\begin{lstlisting}[gobble=4,escapechar=|]
+    while (! is_equilibrium(K)) {
+        compute_mutation(K);
+        compute_auxiliary_values_kondrashov(K);
+        compute_self_progeny_kondrashov(K);
+        compute_apomixis_progeny_kondrashov(K);
+        compute_outcross_progeny_kondrashov(K);
+        compute_summed_progeny(K);
+        compute_fitness(K);
+        compute_adults_nextgen(K);
+    }
+\end{lstlisting}
+Note that other Kondrashov features, such as the fitness function in Equation \eqref{eqn:kondrashovfitness}, are also available for the user who wishes to duplicate Kondrashov's implementation as closely as possible.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Specifying the mating system}
+
+\REDO\  \K\ extends Kondrashov's implementation by allowing both selfed and apomictic progeny.  Each genotype $g$ is assigned mating system parameters as described in Table~\ref{tab:matingparameters}.
+
+%%%%%% Table for base/default mating system
+\begin{table}
+	\begin{center}
+	  {\small
+		\begin{tabular}{@{}l|c|c|l@{}}
+mating system parameter			&	\K       				&	Kondrashov		& \K\ source code     \\
+\hline %-------------------------------
+\hline %-------------------------------
+selfing rate								& \Sg							& $z_\kappa$		&	\Kmemberi{S}{genotype}  \\
+pollen discount to selfing	& \DSg						& $y_\kappa$		& \Kmemberi{D\_S}{genotype} \\
+apomixis rate								& \Ag							& ---     			& \Kmemberi{A}{genotype}   \\
+pollen discount to apomixis	& \DAg						& ---     			& \Kmemberi{D\_A}{genotype} \\
+outcrossing rate						& $\Og=1-\Sg-\Ag$	& $1-z_\kappa$	&	\Kmemberi{O}{genotype} \\
+		\end{tabular}
+		}
+	\end{center}
+	\caption{Parameters used to express the mating system}
+	\label{tab:matingparameters}
+\end{table}
+
+\REDO\   The effects of mating system parameters on resource levels available for production of gametes are described in Table~\ref{tab:kondrashov:matingresources}.  Note that for a given genotype $g$, $\RSOg+\RAOg+\ROOg+\ROPg=1$.  If there is no pollen discount (see Subsection {\em whichever}) the resources devoted to ovules and pollen are equivalent and equal to $0.5$.  The \K\ implementation stores precomputed values for each genotype as indicated.  Each model iteration, resources are distributed among genotypes within a load class according to equations related to those published by Kondrashov.
+
+%%%%%% Table of expressions for base/default mating system resources
+\begin{table}
+	\begin{center}
+	  {\small
+		\begin{tabular}{@{}l|c|c|l@{}}
+Gamete pool 			&	\K	                 & Expression    & \K\ source code \\
+\hline %-------------------------------
+\hline %-------------------------------
+Selfed ovules			&	\RSOg & $\frac{1}{2}(\Sg+\DSg\Sg)$ & \Kmemberi{rsrc\_SO}{genotype} \\
+Apomictic ovules	&	\RAOg & $\frac{1}{2}(\Ag+\DAg\Ag)$ & \Kmemberi{rsrc\_AO}{genotype} \\
+Outcrossed ovules	&	\ROOg & $\frac{1}{2}\Og$ 					 & \Kmemberi{rsrc\_OO}{genotype} \\
+Outcross pollen		&	\ROPg & $\frac{1}{2}(1-\DSg\Sg-\DAg\Ag)$ & \Kmemberi{rsrc\_OP}{genotype} \\
+		\end{tabular}
+		}
+	\end{center}
+	\caption{Resources available for gamete pools}
+	\label{tab:kondrashov:matingresources}
+\end{table}
+
+A number of auxiliary values used during the computation of reproduction are listed in Table~\ref{tab:kondrashov:auxiliaries}.  The divided sections of the table describe progressively lower levels of resource usage.  The values of the first section describe gender resource usage for the entire model population; note that $\Ffemale+\Fmale=1$.  The values of the following section describe resources used per load class \Lij.  Each value represents the proportion of each gender's resources used by all members of load class \Lij\ for that gamete pool; as such, $\sum_{i}{\sum_{j}{(\gammaij+\alphaij+\betaij)}}=1$ and $\sum_{i}{\sum_{j}{\rhoij}}=1$.  The portion of {\em total} resources devoted to a gamete pool in load class \Lij\ is $\gammaij\cdot\Ffemale$, etc.  The auxiliary values of the final section describe resources used per genotype-load class \Lgij.  The values specify the proportion of each \Lgij's resources devoted to a gamete pool.  Note that $\sum_{g}{\SOijg}=1$, $\sum_{g}{\AOijg}=1$, $\sum_{g}{\OPijg}=1$ and $\sum_{g}{\OPijg}=1$.  The portion of {\em total} resources devoted to, e.g., selfed ovules by load class-genotype \Lgij\ is $\SOijg\cdot\gammaij\cdot\Ffemale$.  Other quantities may be found in a similar fashion.
+
+Note that when the amount of resources devoted to a gamete pool is zero as a consequence of rate of selfing, apomixis or outcrossing, the denominator in the expressions for \SOijg, etc.\ is zero.  At such times, these expressions not defined, and the values of \Kmemberijk{SO}{i}{j}{genotype}, etc.\ within \K\ source code are set to zero.
+
+The \K\ function \lstinline{compute_auxiliary_values()} must be called each generation to recompute these values prior to the production of all progeny.
+
+%%%%%% Table of expressions for auxiliary variables required to compute resource usage
+\begin{table}
+	\begin{center}
+	  {\small
+		\begin{tabular}{@{}p{1.9in}|c|c|l@{}}
+Resource Usage             & \K            & Expression       & \K\ source code \\
+\hline %-------------------------------
+\hline %-------------------------------
+Total to ovules & \Ffemale & $\sum_{g}{ \sum_{i}{ \sum_{j}{ \xpijg \cdot } } }$ & \Kmember{F\_female} \\
+                           &              & $\cdot [\RSOg+\RAOg+\ROOg]$ &  \\
+%
+Total to pollen & \Fmale   & $1-\Ffemale$ & \Kmember{F\_male} \\
+\hline %-------------------------------
+Proportion of \Ffemale\ to \Lij\ selfed ovules & \gammaij & $\Ffemale^{-1}\sum_{g}{\xpijg\cdot\RSOg}$ & \Kmemberij{gamma}{i}{j} \\
+%
+Proportion of \Ffemale\ to \Lij\ apomictic ovules	& \alphaij & $\Ffemale^{-1}\sum_{g}{\xpijg\cdot\RAOg}$ & \Kmemberij{alpha}{i}{j}   \\
+%
+Proportion of \Ffemale\ to \Lij\ outcross ovules & \betaij  & $\Ffemale^{-1}\sum_{g}{\xpijg\cdot\ROOg}$ & \Kmemberij{beta}{i}{j}  \\
+%
+Proportion of \Fmale\ to \Lij\ outcross pollen & \rhoij   & $\Fmale^{-1}\sum_{g}{\xpijg\cdot\ROPg}$   & \Kmemberij{rho}{i}{j}  \\ 
+\hline %-------------------------------
+Proportion of \gammaij\ to \Lgij\ selfed ovules & \SOijg   & $\frac{\xpijg\cdot\RSOg}{\sum_{g}{\xpijg\cdot\RSOg}}$ & \Kmemberijk{SO}{i}{j}{genotype}  \\
+%
+Proportion of \alphaij\ to \Lgij\ apomictic ovules & \AOijg   & $\frac{\xpijg\cdot\RAOg}{\sum_{g}{\xpijg\cdot\RAOg}}$ & \Kmemberijk{AO}{i}{j}{genotype}  \\
+%
+Proportion of \betaij\ to \Lgij\ outcross ovules & \OOijg   & $\frac{\xpijg\cdot\ROOg}{\sum_{g}{\xpijg\cdot\ROOg}}$ & \Kmemberijk{OO}{i}{j}{genotype}  \\
+%
+Proportion of \rhoij\ to \Lgij\ outcross pollen & \OPijg   & $\frac{\xpijg\cdot\ROPg}{\sum_{g}{\xpijg\cdot\ROPg}}$ & \Kmemberijk{OP}{i}{j}{genotype}  \\
+		\end{tabular}
+		}
+	\end{center}
+	\caption{Auxiliary values used for reproductive resource computations in \K.}
+	\label{tab:kondrashov:auxiliaries}
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Load class and genotype mating functions}
+
+Note that $\binom{n}{i}$ indicates the value of the corresponding binomial coefficient. % equal to the number of unique groups of size $i$ that can be drawn from a group of size $n$. 
+
+%%%%%% Equations for determining load class L(i,j) representation in matings of L(n,v) and L(l,lambda)
+\begin{align}
+\label{eq:kondrashov:s}
+\funcself &=
+  \begin{cases}
+    \binom{n}{i}\binom{n-i}{j-v}\cdot\left({\frac{1}{2}}\right)^{2n-i} & \text{$i\in(0,n)$, $j\in(v,v + n)$, $i+j \leq n+v$} \\
+    0                                                                  & \text{otherwise.} 
+  \end{cases} \\
+\label{eq:kondrashov:a}
+\funcapomixis &= 
+  \begin{cases}
+    1 & \text{$i=n$, $j=v$} \\
+    0 & \text{otherwise.}  
+  \end{cases} \\
+\label{eq:kondrashov:o}
+\funcoutcross &=
+  \begin{cases}
+    \binom{n+l}{i-v-\lambda}\cdot\left({\frac{1}{2}}\right)^{n+l} & \text{$v+\lambda \leq i \leq n+l+v+\lambda$, $j=0$} \\
+    0                                                             & \text{otherwise.} 
+  \end{cases} 
+\end{align}
+
+%%%%%% Functions for determining load class L(i,j) representation in matings of L(n,v) and L(l,lambda)
+\begin{table}
+	\begin{center}
+	  {\small
+		\begin{tabular}{@{}p{2.5in}|c|c|l@{}}
+Mating type & \K & Expression & \K\ source code \\
+\hline %-------------------------------
+\hline %-------------------------------
+\Lij\ progeny from selfing by $L(n,v)$ & \funcself & Eq. \eqref{eq:kondrashov:s} & {\tt s\_self({\it i}\/,{\it j}\/,{\it n}\/,{\it v}\/)} \\
+%
+\Lij\ progeny from apomixis by $L(n,v)$ & \funcapomixis & Eq. \eqref{eq:kondrashov:a} & {\tt a\_apomixis({\it i}\/,{\it j}\/,{\it n}\/,{\it v}\/)} \\
+%
+\Lij\ progeny from outcross $L(n,v) \times L(l,\lambda)$ & \funcoutcross & Eq. \eqref{eq:kondrashov:o} & {\tt o\_outcross({\it i}\/,{\it j}\/,{\it n}\/,{\it v}\/,{\it l}\/,$\lambda$\/)} \\
+		\end{tabular}
+		}
+	\end{center}
+	\caption[Load class mating functions]{Effects of mating on progeny load class.}
+  \label{tab:matingK:matingloadclasses}
+\end{table}
+
+Now we define how the genotypes behave during mating.  We will find proportion of progeny in genotype $g$ resulting from selfing, apomixis, and outcrossing involving genotypes $\xi$ and $\zeta$.  Recall that loci determining the genotype are not linked to loci determining the load class.  Any association between genotype and load class can result from identity disequilibrium \citep{Haldane:1949:10243} but not as a result of linkage.  Thus, the functions that describe genotype matings are wholly independent of load class.  In \K, functions for genotype mating are called (surprise!)\ {\em genotype mating functions}\/, and are indicated with the script $\mathcal{T}$.  See Table~\ref{tab:matingK:matinggenotypes}.  An experimenter may decide to add more alleles or mating loci, or create linkage among mating loci, or create linkage between mating loci and load classes.  These cases have not yet been considered here.
+
+%%%%%% Functions for determining genotype representation in matings of all genotypes
+\begin{table}
+	\begin{center}
+	  {\small
+		\begin{tabular}{@{}l|c|l@{}}
+Genotype mating & \K & \K\ source code \\
+\hline %-------------------------------
+\hline %-------------------------------
+$g$ progeny from selfing by $\xi$ & \TSgx & {\tt K->trfm\_S[$\xi$\/][{\it g}\/]}
+\\
+$g$ progeny from apomixis by $\xi$ & \TAgx & {\tt K->trfm\_A[$\xi$\/][{\it g}\/]}
+\\
+$g$ progeny from outcross \mbox{$\xi\times\zeta$} & \TOgxz & {\tt K->trfm\_O[$\xi$\/][$\zeta$\/][{\it g}\/]}
+		\end{tabular}
+		}
+	\end{center}
+	\caption[Genotype transformations]{Functions used to determine proportions of genotypes among progeny produced by various matings.  Note that transformations in \K\ source code use an array reference rather than a function call.}
+  \label{tab:matingK:matinggenotypes}
+\end{table}
+
+Here we assume that the genotype is determined by one biallelic locus, thus there are three genotypes which we will indicate as $G_{1}=\genotype{A_1}{A_1}$, $G_{2}=\genotype{A_1}{A_2}$, and $G_{3}=\genotype{A_2}{A_2}$.  The transformation functions are easily derived from standard Mendelian laws.  For now, in \K\ source code the function {\tt set\_transform\_default(K)} is the only function available to modify transformations, and it sets the transformations as specified in Table~\ref{tab:matingK:stdtransformations}.
+
+%%%%%% Standard transformations for genotypes
+	\begin{center}
+\begin{table}
+\begin{tabular}{ccc}  % to set up a 1 x 3 array to display 3 tables
+% selfing transformation matrix
+\begin{tabular}{c|c|c}
+\multicolumn{3}{c}{$g$ from} \\
+\multicolumn{3}{c}{selfing by $\xi$}         \\
+\hline %-------------------------------
+       & $G_1$ & $(\begin{smallmatrix}1&0&0\end{smallmatrix})$ \\
+ $\xi$ & $G_2$ & $(\begin{smallmatrix}\frac{1}{4}&\frac{1}{2}&\frac{1}{4}\end{smallmatrix})$ \\
+       & $G_3$ & $(\begin{smallmatrix}0&0&1\end{smallmatrix})$
+\end{tabular}
+&  % end of leftmost table element
+% apomixis transformation matrix
+\begin{tabular}{c|c|c}
+\multicolumn{3}{c}{$g$ from} \\
+\multicolumn{3}{c}{apomixis by $\xi$}         \\
+\hline %-------------------------------
+       & $G_1$ & $(\begin{smallmatrix}1&0&0\end{smallmatrix})$ \\
+ $\xi$ & $G_2$ & $(\begin{smallmatrix}0&1&0\end{smallmatrix})$ \\
+       & $G_3$ & $(\begin{smallmatrix}0&0&1\end{smallmatrix})$
+\end{tabular}
+&  % end of center tabular element
+% outcross transformation matrix
+\begin{tabular}{c|c|ccc}
+\multicolumn{2}{c|}{$g$ from}        & \multicolumn{3}{c}{$\zeta$} \\
+                                           \cline{3-5} %----------------
+\multicolumn{2}{c|}{outcross $\xi\times\zeta$}  & $G_1$ & $G_2$ & $G_3$ \\
+\hline %-------------------------------
+                   &       $G_1$           & 
+$(\begin{smallmatrix}1&0&0\end{smallmatrix})$ &
+$(\begin{smallmatrix}\frac{1}{2}&\frac{1}{2}&0\end{smallmatrix})$ &
+$(\begin{smallmatrix}0&1&0\end{smallmatrix})$ \\
+       $\xi$       &       $G_2$           & 
+$(\begin{smallmatrix}\frac{1}{2}&\frac{1}{2}&0\end{smallmatrix})$ &
+$(\begin{smallmatrix}\frac{1}{4}&\frac{1}{2}&\frac{1}{4}\end{smallmatrix})$ &
+$(\begin{smallmatrix}0&\frac{1}{2}&\frac{1}{2}\end{smallmatrix})$ \\
+                   &       $G_3$           & 
+$(\begin{smallmatrix}0&1&0\end{smallmatrix})$ &
+$(\begin{smallmatrix}0&\frac{1}{2}&\frac{1}{2}\end{smallmatrix})$ &
+$(\begin{smallmatrix}0&0&1\end{smallmatrix})$
+\end{tabular}
+% end of rightmost tabular element
+\end{tabular}
+\caption[Standard transformations]{Standard transformations of a single biallelic locus as described in the text.  Note that each submatrix represents the resulting proportion of $g$ that ends up in each genotype $(\begin{smallmatrix}G_1&G_2&G_3\end{smallmatrix})$, and that the proportions in each submatrix sums to $1$.}
+\label{tab:matingK:stdtransformations}
+\end{table}
+\end{center}
+
+Note that if as a consequence of the rates specified in Table~\ref{tab:matingparameters} any of equations \eqref{eq:matingK:xppsijg}, \eqref{eq:matingK:xppaijg} or \eqref{eq:matingK:xppoijg} are undefined, then all values of each such equation are defined to be $0$.
+
+%%%%%% Functions for determining total L(g;i,j) representation in matings of all genotype load classes
+\begin{align}
+\label{eq:kondrashov:xppsijg}
+\xppsijg &= 
+\sum_{n}{
+							\sum_{v}{
+								\gammanv \funcself \cdot
+									\sum_{\xi}{
+										\SOnvx \TSgx
+									}
+						}}
+    \\
+\label{eq:kondrashov:xppaijg}
+\xppaijg &= \sum_{n}{
+							\sum_{v}{
+								\alphanv \funcapomixis \cdot
+									\sum_{\xi}{
+										\AOnvx \TAgx
+									}
+						}}
+    \\
+\begin{split}
+\label{eq:kondrashov:xppoijg}
+\xppoijg &= \sum_{n}{
+							\sum_{v}{
+								\sum_{l}{
+									\sum_{\lambda}{
+										\betanv \rhollam \funcoutcross 
+						}}}} \cdot \\
+				&\quad \cdot	\sum_{\xi}{
+												\sum_{\zeta}{
+													\OOnvx \OPllamz \cdot \TOgxz
+											}}
+\end{split}
+\end{align}
+
+Total progeny frequencies are the sum of the selfed, apomictic and outcrossed progeny:
+\begin{equation}
+\xppijg = \xppsijg + \xppaijg + \xppoijg
+\end{equation}
+
+The \K\ functions \Kcode{compute\_self\_progeny(K)}, 
+\Kcode{compute\_apomixis\_progeny(K)}, \\
+\Kcode{compute\_outcross\_progeny(K)} and \Kcode{compute\_summed\_progeny(K)} implement these equations.
+
+\subsection{Kondrashov's pollen discounting}
+
+\K's concept of pollen discount follows Kondrashov's implementation.  Kondrashov's pollen discount is a form of resource reallocation, in which resources for male fitness equal to the discount terms \DSg\Sg\ and \DAg\Ag\ are reallocated to uniparental female fitness.  Outcross female fitness remains unchanged.  To implement pollen discount {\it a la} Holsinger, Doug has to think about this a bit more.
+

@@ -1,0 +1,72 @@
+% Implementation of mating systems in K
+% (c) 2003 Douglas G. Scofield, d.scofield@umiami.edu
+% 
+%
+%%%%%%
+%\documentclass[11pt,twoside,letterpaper,fleqn]{report}
+\documentclass[12pt,twoside,letterpaper,fleqn]{report}
+\pagestyle{headings}      % headings only, which is fine
+% \pagestyle{empty}       % Uncomment for no header nor footer
+\topmargin -0.5in  % one inch less than distance b/w top edge of paper and top of head
+\headsep 0.5in     % distance b/w head and body of page
+\oddsidemargin 0.25in   % one inch less than distance from left edge to left text margin on right-handed pages
+\evensidemargin 0in  % one inch less than distance from right edge to right text margin on left-handed pages
+\textwidth 6.25in   % normal width of text on a page
+\textheight 8.5in  % normal height of the body of a page
+% \parskip 15pt       %7.2pt    % sets spacing between paragraphs
+% \parindent 0pt		  % sets leading space for paragraphs
+%
+\usepackage{amsmath}   % AMS math macros
+\numberwithin{equation}{section}  % equation numbering
+\usepackage{graphicx}  % for handling EPS etc.
+\usepackage{longtable} % for tables that span more than one page
+\setcounter{LTchunksize}{100}  % for the longtable package
+\usepackage{verbatim}  % for \begin{comment} \end{comment}
+\usepackage{setspace}  % for singlespacing and doublespacing
+\usepackage{listings}  % for including source code
+\lstset{               % parameters to be used for source code listing
+	language=C,
+	basicstyle=\small\ttfamily,
+	commentstyle=\small\ttfamily,
+	basewidth=0.5em,
+	lineskip=-0.2pt,
+	xleftmargin=0.5in,
+  float=[h],
+  aboveskip=\bigskipamount,
+  belowskip=\bigskipamount,
+	mathescape=true}
+
+%\usepackage[pdftex]{genealogy}
+
+\input{K_manual_macros}
+%\includeonly{K_manual_mating_systems}
+\includeonly{K_manual_fitness,K_manual_source_code_style}
+%\includeonly{K_manual_fitness}
+%\includeonly{K_manual_source_code_style}
+%\includeonly{K_manual_model_parameters}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{\K \\ \  \\ A system for modeling the population dynamics of genetic load \\ \  \\ Based on an original model by Alexei Kondrashov}
+\author{Douglas G. Scofield\thanks{Supported by grants from the NSF and the Department of Biology, University of Miami} \\ Department of Biology \\ University of Miami}
+\date{\today}
+%\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\singlespacing
+%\tableofcontents
+%\listoftables
+\doublespacing
+%\listoffigures
+\include{K_manual_introduction}
+\include{K_manual_mating_systems}
+\include{K_manual_fitness}
+\include{K_manual_model_parameters}
+\include{K_manual_debugging_guide}
+\include{K_manual_source_code_style}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bibliography{K_manual}
+\bibliographystyle{apalike}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

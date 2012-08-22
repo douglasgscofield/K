@@ -1,0 +1,51 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Introduction to K
+% (c) 2003 Douglas G. Scofield, d.scofield@umiami.edu
+% 
+%%%%%%
+
+%%%%%%
+\chapter{Introduction to \K}
+%%%%%%
+
+\REDO\  \K\ is an infinite-population, infinite-loci modeling platform designed for the study of recurrent mutation and its interaction with mating system.  \K\ is based on the model first developed by Kondrashov \cite{Kondrashov:1985:5375} and expanded upon by many authors since \cite{Charlesworth:1991:5336}.
+
+Kondrashov's \cite{Kondrashov:1985:5375} model is novel in that it does not explicitly consider genomes or mutations, although Heller and Maynard Smith ((1979. Does Muller's Ratchet work with selfing? Genetical Research 32:289-293)) used a similar implementation, according to Charlesworth et al. \cite{Charlesworth:1991:5336}.  Individuals of the population have a genome consisting of two parts:
+\begin{itemize}
+	\item A {\em load} portion subject to recurrent mutation that only has a fitness effect; and
+	\item A {\em genotype} portion that determines mating characteristics, etc.\ and is not subject to mutation.
+\end{itemize}
+Mutations occur at rate $U$ per diploid genome per generation and independent mutations are never identical, thus new mutation only increases $i$, never $j$.  Another consequence of independence of loci occurs during production of zygotes.  When an outcrossed zygote is produced from the union of two haploid gametes carrying $m$ and $n$ mutations, respectively, the new outcrossed zygote carries $m+n$ heterozygous mutations and $0$ homozygous mutations.  Zygotes can only contain loci homozygous for mutations if they are produced through selfing, the union of gametes produced by the same individual.  Homozygous mutant loci occur in selfed zygotes at the Mendelian rate of 0.25 per heterozygous locus.  Identity by descent other than that occurring via selfing within a single generation is not possible.  Thus this model cannot be used for finite or non-panmictic populations.
+
+The population is described by proportional membership in load class-genotypes \Lijg\, where $i\in(0,\Mi)$ and $j\in(0,\Mj)$ describe the load portion of the genome and $g$ is the corresponding genotype of the genotype portion of the genome.  Note that in the discussion that follows, the notation \Lij\ indicates a general statement about the load class containing i heterozygous mutations and j homozygous mutations and applies to all load class-genotypes belonging to that load class.  Do I need to say something about the notations for the results of each stage, e.g., \xpijg?
+
+An analysis that does not consider selfing (that is, that examines outcrossing and/or apomixis) will never encounter homozygous mutations.  Kondrashov ((1985)) provides representative formulae.  Here I will assume the need to keep track of both allelic states.
+
+The model cannot be solved analytically ((Kondrashov 1985)).  Instead, the model is specified in a computer program and allowed to iterate until convergence to equilibrium is determined numerically.  Equilibrium may be obtained within a few hundred generations, depending upon initial conditions ((Charlesworth et al, 1990)).
+
+The sequence of steps performed, with the notation to be used here for the \Lijg\ proportions resulting from each step, is:
+\begin{enumerate}
+	\item reproductive adults (\xijg)
+	\item mutation (\xpijg)
+	\item reproduction (\xppijg)
+	\begin{enumerate}
+		\item production of selfed progeny (\xppsijg)
+		\item production of apomictic progeny (\xppaijg)
+		\item production of outcrossed progeny (\xppoijg)
+	\end{enumerate}
+	\item selection against progeny (\Xijg)
+	\item next generation of reproductive adults (\xijg, \xijgprev)
+\end{enumerate}
+
+Model execution times may be long because of the need for repeated matrix operations to determine membership in each \Lgij\ resulting from each step.  Convergence analysis as a shortcut to equilibrium might be possible, but has not yet been attempted ((M. Morgan, personal communication)).  Several algorithms in the model have execution time and space requirements of at least \Order{\Mi^2\times\Mj^2}, thus it is critical not to choose \Mi\ and \Mj\ that are unnecessarily large.  Later in this paper I will (a) sketch a possible approach to convergence analysis and (b) present some rules of thumb for choosing \Mj\ and \Mj.
+
+\Lij\ and \Lgij\ are the ways we say it!
+
+\section{Choosing \Mi\ and \Mj}
+The values of \Mi\ and \Mj\ are chosen based upon classical expectations for frequencies of heterozygous and homozygous deleterious alleles under selection, such that membership in classes where $i>\Mi$ or $j>\Mj$ is not possible.  For example, values of \Mi\ must be greater if mutations have both low dominance and low selective effect, while values of \Mj\ may be very low for highly recessive lethal mutations.  Due to selection, there is no strict requirement that $\Mj=\Mi$ as would be expected for neutral mutations.  I know of one implementation where $\Mi=200$ and $\Mj=40$.  Neither Kondrashov ((1985)) nor Charlesworth et al. ((1990)) explicitly note the need to determine \Mi\ and \Mj.
+
+%%%%%%
+\section{Load classes and load class-genotypes}
+%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

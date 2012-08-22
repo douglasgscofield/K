@@ -1,0 +1,24 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Debugging Guide for K
+% (c) 2003 Douglas G. Scofield, d.scofield@umiami.edu
+% 
+%%%%%%
+
+%%%%%%
+\chapter{Debugging Guide for \K}
+%%%%%%
+
+\REDO\  \K\ is a complex system, and as such it is only to be expected that modifications or new implementations of model portions will have problems or 'bugs' that will need to be found and corrected.  This chapter is a guide to resolving these problems and to the facilities provided within \K\ to assist in resolving these problems.
+
+\section{Reproduction}
+
+\subsection{Diagnostics relevant to problems with reproduction}
+
+\subsection{Progeny proportions}
+
+If the integrity of functions described in section~\ref{sec:matingK:matingfunctions} for determining \Lijg\ of progeny resulting from matings, then variation in load class genotypes may be unnecessarily complicating the diagnosis of the problem.  It would be better to start with a highly simplified adult \Lijg\ to reduce the load classes of progeny that can be produced.  The first step is to disable the mutation process.  This can be done by either commenting out references to the method \Kcode{compute\_mutation(K)} or by specifying the diagnostic switch \Kcode{DEBUG\_DISABLE\_MUTATION} (see section~[whatever] for the specification of diagnostic switches).  Then, new adult load classes must be specified.  First, use \Kcode{fill\_KArray(K,K->x,0.0)} to set all adult \Lijg\ to zero.  Then, specify \Lijg\ proportions that may help to resolve the problem.  For example, to examine what appears to be a basic problem with \Kcode{o\_outcross()}, place all adults in load class \LCG{1}{0}{0} with \Kcode{K->x[1][0][0]=1.0}.  Then execute the model and examine \Lijg\ of progeny produced.
+
+Remember that the sum of adult \Lijg\ must equal \Kcode{1} prior to reproduction; this can be verified by checking that \Kcode{(sum\_KArray(K,K->x)==1.0)} or by specifying the diagnostic switch \Kcode{DEBUG\_NORMALIZATION}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

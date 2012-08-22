@@ -1,0 +1,29 @@
+% Instructions for running Kondrashov's 1985 model in K
+% (c) 2003 Douglas G. Scofield, d.scofield@umiami.edu
+% 
+%
+%%%%%%
+\documentstyle[12pt]{article}
+%
+%%%%%% double space
+\renewcommand{\baselinestretch}{2}
+%
+%%%%%%
+\begin{document}
+Kondrashov's equations (2) on p. 640 describe haploid and apomictic operations:
+\begin{eqnarray}
+% Kondrashov 1985 p. 640 equation (2) q''[i]
+q''_{i,j} & = & \sum\limits_n {\sum\limits_l {\beta _n } } \rho _l b_i (n,l) + \sum\limits_n {\gamma _n s_i (n) } \label{eq:k1985:k2a} \\
+% Kondrashov 1985 p. 640 equation (2) x''[i](k)
+x''_i (\kappa ) & = & (q''_i )^{ - 1} \cdot \label{eq:k1985:k2b} \\
+ & & \cdot \sum\limits_n {\sum\limits_l {\beta _n } } \rho _l b_i (n,l)\sum\limits_\xi  {\sum\limits_\zeta  {g_n (\xi )h_l  \cdot R_\kappa  (\xi ,\zeta )} }  + \nonumber \\
+ &  & + \sum\limits_n {\gamma _n s_i (n)} \sum\limits_\xi  {a_n (\xi )T_\kappa  (\xi )} \nonumber
+\end{eqnarray}
+Corresponding diploid equations are
+\begin{eqnarray}
+q''_{i,j} & = & \sum\limits_n {\sum\limits_v {\sum\limits_l {\sum\limits_\lambda  {\beta _{n,v} } } } } \rho _{l,\lambda } b_{i,j} (n,v,l,\lambda ) + \sum\limits_n {\sum\limits_v {\gamma _{n,v} s_{i,j} (n,v)} } \label{eq:k1985:2a} \\
+x''_{i,j} (\kappa ) & = & (q''_{i,j}) ^{ - 1} \cdot \label{eq:k1985:2b} \\
+ &  & \cdot \sum\limits_n {\sum\limits_v {\sum\limits_l {\sum\limits_\lambda  {\beta _{n,v} } } } } \rho _{l,\lambda } b_{i,j} (n,v,l,\lambda )\sum\limits_\xi  {\sum\limits_\zeta  {g_{n,v} (\xi )h_{l,\lambda }  \cdot R_\kappa  (\xi ,\zeta )} } \nonumber + \\
+ &  & + \sum\limits_n {\sum\limits_v {\gamma _{n,v} s_{i,j} (n,v)} } \sum\limits_\xi  {a_{n,v} (\xi )T_\kappa  (\xi )} \nonumber
+\end{eqnarray}
+\end{document}

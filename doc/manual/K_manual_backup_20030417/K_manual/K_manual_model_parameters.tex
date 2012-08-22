@@ -1,0 +1,48 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Model parameters as named in K and in Kondrashov's original 1985 paper
+% (c) 2003 Douglas G. Scofield, d.scofield@umiami.edu
+%
+%%%%%%
+
+\chapter{Model parameters in \K}
+
+%%%%%%
+
+Model parameters as used in \K\ and in Kondrashov (1985).  \dag\/Kondrashov did not model the coexistence selfing and apomixis, and used the same parameter names for the rate and discount of each.
+
+\begin{footnotesize}
+\label{tab:modelparameters}
+\begin{longtable}{p{2in}|c|c|c|l}
+\caption{Model parameters in \K} \\
+Model Parameter			        &	\K              	&	Kondrashov		& Value modified & \K\ source code       \\ \hline
+\endfirsthead
+\caption{Model parameters in \K\ (continued)} \\
+Model Parameter			        &	\K              	&	Kondrashov		& Value modified & \K\ source code       \\ \hline
+\endhead
+Genotype designation	      & $g, \xi, \zeta$	& $\kappa, \xi, \zeta$	& various & {\tt g}, {\tt gg}, {\tt xi}, {\tt zeta}, {\em etc.} \\
+Selfing rate								& \Sg							& $z_\kappa$		& model start &	\Kmemberi{S}{genotype}   \\
+Pollen discount to selfing	& \DSg						& $y_\kappa$		& model start &  \Kmemberi{D\_S}{genotype} \\
+apomixis rate								& \Ag							& $z_\kappa$\dag 	&	model start & \Kmemberi{A}{genotype}   \\
+Pollen discount to apomixis	& \DAg						& $y_\kappa$\dag	& model start & \Kmemberi{D\_A}{genotype} \\
+Outcrossing rate						& \Og							& not named   	&	model start &	\Kmemberi{O}{genotype} \\
+Resources for selfed ovules & \RSOg           & not named			& model start &	\Kmemberi{rsrc\_SO}{genotype} \\
+Resources for apomictic ovules & \RAOg        & not named			& model start &	\Kmemberi{rsrc\_AO}{genotype} \\
+Resources for outcrossed ovules & \ROOg       & not named			& model start &	\Kmemberi{rsrc\_OO}{genotype} \\
+Resources for outcrossed pollen & \ROPg       & not named			& model start &	\Kmemberi{rsrc\_OP}{genotype} \\
+Total resources used for ovules	& \Ffemale				&	\Ffemale			& each generation & \Kmember{F\_female} \\
+Total resources used for pollen	& \Fmale					&	\Fmale				& each generation & \Kmember{F\_male} \\
+Proportion of \Ffemale\ resources used for \Lij\ selfed ovules	&	\gammaij	&	\gammaij			& each generation & \Kmemberij{gamma}{i}{j} \\
+Proportion of \Ffemale\ resources used for \Lij\ apomictic ovules	&	\alphaij	&	\alphaij	& each generation & \Kmemberij{alpha}{i}{j} \\
+Proportion of \Ffemale\ resources used for \Lij\ outcross ovules	&	\betaij	&	\betaij				& each generation & \Kmemberij{beta}{i}{j} \\
+Proportion of \Fmale\ resources used for \Lij\ outcross pollen	&	\rhoij	&	\rhoij				& each generation & \Kmemberij{rho}{i}{j} \\
+Proportion of \gammaij\ used for \Lgij\ selfed ovules &	\SOijg	&	$a_{i,j}(\kappa)$\dag	& each generation & \Kmemberijk{SO}{genotype}{i}{j} \\
+Proportion of \alphaij\ used for \Lgij\ apomictic ovules &	\AOijg	&	$a_{i,j}(\kappa)$\dag	& each generation & \Kmemberijk{AO}{genotype}{i}{j} \\
+Proportion of \betaij\ used for \Lgij\ outcross ovules &	\OOijg	&	$g_{i,j}(\kappa)$	& each generation & \Kmemberijk{OO}{genotype}{i}{j} \\
+Proportion of \rhoij\ used for \Lgij\ outcross pollen &	\OPijg	&	$h_{i,j}(\kappa)$	& each generation & \Kmemberijk{OP}{genotype}{i}{j} \\
+\end{longtable}
+\end{footnotesize}
+
+Note to Doug: consider sorting this table by parameter name, and changing the columns around.  Also note the typesetting disaster that is the table caption.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -1,0 +1,13 @@
+generations	S	A	O	U_0	fitness_function_0	fit_s_0	fit_h_0	U_1	fitness_function_1	fit_s_1	fit_h_1	mean_lethals_0	var_lethals_0	var_mean_lethals_0	mean_lethals_1	var_lethals_1	var_mean_lethals_1	w_self	w_apomixis	w_outcross	w_popmean	IBD	S_secondary
+  80	0	0	1	1	multiplicative	1	0	0	multiplicative	0	0	40.6941	26.1881	0	0	557.635	267254	479.264	43.8717	17.7634	0	0	482.589
+  80	0.1	0	0.9	1	multiplicative	1	0	0	multiplicative	0	0	40.6941	26.1883	0	0	557.635	267254	479.263	43.8717	17.7635	1.50827e-06	1.31341e-05	482.589
+  80	0.2	0	0.8	1	multiplicative	1	0	0	multiplicative	0	0	40.694	26.1886	0	0	557.634	267253	479.263	43.8717	17.7636	3.39371e-06	2.95526e-05	482.589
+  80	0.3	0	0.7	1	multiplicative	1	0	0	multiplicative	0	0	40.6939	26.189	0	0	557.633	267252	479.262	43.8717	17.7637	5.81801e-06	5.06636e-05	482.589
+  80	0.4	0	0.6	1	multiplicative	1	0	0	multiplicative	0	0	40.6939	26.1894	0	0	557.632	267251	479.261	43.8717	17.7638	9.05069e-06	7.8814e-05	482.588
+  81	0.5	0	0.5	1	multiplicative	1	0	0	multiplicative	0	0	40.6937	26.1901	0	0	557.63	267250	479.26	43.8717	17.764	1.35769e-05	0.000118229	482.588
+generations	S	A	O	U_0	fitness_function_0	fit_s_0	fit_h_0	U_1	fitness_function_1	fit_s_1	fit_h_1	mean_lethals_0	var_lethals_0	var_mean_lethals_0	mean_lethals_1	var_lethals_1	var_mean_lethals_1	w_self	w_apomixis	w_outcross	w_popmean	IBD	S_secondary
+  81	0.6	0	0.4	1	multiplicative	1	0	0	multiplicative	0	0	40.6935	26.1911	0	0	557.628	267247	479.258	43.8717	17.7643	2.03676e-05	0.000177363	482.588
+  81	0.7	0	0.3	1	multiplicative	1	0	0	multiplicative	0	0	40.6932	26.1928	0	0	557.624	267244	479.254	43.8717	17.7648	3.16885e-05	0.000275946	482.587
+  82	0.8	0	0.2	1	multiplicative	1	0	0	multiplicative	0	0	40.6926	26.1962	0	0	557.616	267236	479.247	43.8716	17.7658	5.43421e-05	0.000473218	482.586
+  85	0.9	0	0.1	1	multiplicative	1	0	0	multiplicative	0	0	40.6906	26.2064	0	0	557.592	267213	479.227	43.8715	17.7689	0.000122399	0.00106588	482.583
+* 501	1	0	0	1	multiplicative	1	0	0	multiplicative	0	0	1	1	0	0	3.80195e-19	2	5.26046e+18	3.27712	8.007	9.98016	0.0201576	1.11064e-19
