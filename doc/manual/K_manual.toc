@@ -6,7 +6,7 @@
 \contentsline {section}{\numberline {2.1}Precomputed mutation terms}{16}
 \contentsline {chapter}{\numberline {3}Reproduction}{17}
 \contentsline {section}{\numberline {3.1}Load class mating functions}{17}
-\contentsline {section}{\numberline {3.2}Genotype mating functions}{18}
+\contentsline {section}{\numberline {3.2}Genotype mating functions}{19}
 \contentsline {section}{\numberline {3.3}Net effect of mating}{19}
 \contentsline {chapter}{\numberline {4}Fitness}{21}
 \contentsline {section}{\numberline {4.1}Specifying the fitness model}{21}
@@ -14,9 +14,9 @@
 \contentsline {section}{\numberline {4.3}Defining a new fitness function}{24}
 \contentsline {chapter}{\numberline {5}Using nested mutation classes}{26}
 \contentsline {section}{\numberline {5.1}Mutation in nested models}{27}
-\contentsline {section}{\numberline {5.2}Reproduction in nested models}{27}
+\contentsline {section}{\numberline {5.2}Reproduction in nested models}{28}
 \contentsline {section}{\numberline {5.3}Fitness and selection in nested models}{29}
-\contentsline {section}{\numberline {5.4}Data structures for a nested model}{30}
+\contentsline {section}{\numberline {5.4}Data structures for a nested model}{31}
 \contentsline {section}{\numberline {5.5}Initiating and running a nested model}{31}
 \contentsline {chapter}{\numberline {6}Model parameters in {\bf K}}{33}
 \contentsline {chapter}{\numberline {7}Debugging Guide for {\bf K}}{38}

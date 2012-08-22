@@ -1,3 +1,46 @@
-This is BibTeX, Version 0.99cThe top-level auxiliary file: C:\Documents and Settings\DouglasScofield\Desktop\K\K\doc\manual\K_manual.aux
+This is BibTeX, Version 0.99d (TeX Live 2011)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: K_manual.aux
 The style file: authordatedgs.bst
 Database file #1: K_manual.bib
+You've used 8 entries,
+            2441 wiz_defined-function locations,
+            634 strings with 5818 characters,
+and the built_in function-call counts, 3453 in all, are:
+= -- 336
+> -- 106
+< -- 28
++ -- 30
+- -- 30
+* -- 306
+:= -- 551
+add.period$ -- 32
+call.type$ -- 8
+change.case$ -- 52
+chr.to.int$ -- 8
+cite$ -- 8
+duplicate$ -- 128
+empty$ -- 273
+format.name$ -- 44
+if$ -- 713
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 8
+newline$ -- 43
+num.names$ -- 24
+pop$ -- 46
+preamble$ -- 1
+purify$ -- 60
+quote$ -- 0
+skip$ -- 119
+stack$ -- 0
+substring$ -- 280
+swap$ -- 24
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 64
+warning$ -- 0
+while$ -- 24
+width$ -- 0
+write$ -- 106

@@ -6,19 +6,10 @@
 #define     binomial_K_VALS         (MAX_MI)
 #define     binomial_N_VALS         (binomial_K_VALS * 2)
 
-void init_math(
-	void);
-KScalar pow_half(
-	KInt n);
-KScalar lnpow_half(
-	KInt n);
-KScalar factorial(
-	KInt n);
-KScalar lnfactorial(
-	KInt n);
-KScalar binomial(
-	KInt n,
-	KInt k);
-KScalar lnbinomial(
-	KInt n,
-	KInt k);
+void        init_math               (void);
+KScalar     pow_half                (KInt n);
+KScalar     lnpow_half              (KInt n);
+KScalar     factorial               (KInt n);
+KScalar     lnfactorial             (KInt n);
+KScalar     binomial                (KInt n, KInt k);
+KScalar     lnbinomial              (KInt n, KInt k);

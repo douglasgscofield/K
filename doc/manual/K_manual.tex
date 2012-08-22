@@ -262,8 +262,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\title{\K \\ \  \\ A system for modeling the population dynamics of multilocus mutation load \\ \  \\ Based on an original model by Alexei Kondrashov}
-\author{Douglas G. Scofield\thanks{Supported by grants from the NSF and the Department of Biology, University of Miami} \\ Department of Biology \\ Indiana University}
+\title{\K \\ \  \\ A system for modeling the population dynamics of multilocus mutation load, \\ \  \\ based on a model originally developed by Alexei Kondrashov}
+\author{Douglas G. Scofield\thanks{Supported by grants from the NSF and the Department of Biology, University of Miami} \\ Department of Plant Physiology \\ Ume\aa\ University, Ume\aa, Sweden}
 \date{\today}
 \maketitle
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -274,7 +274,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The basic structure of the \K\ software package is described.  \K\ may be used to construct models, based on the description of \citet{Kondrashov:1985:5375}, that may be used to study the population dynamics of multilocus mutation load.  \K\ is designed to allow the relatively easy reproduction of newer models based on \citeauthor{Kondrashov:1985:5375}'s original description.  \K\ also facilitates the construction of new extensions to these models, through the use of novel fitness functions, different sequences of per-generation events, and the specification of additional model parameters.  Furthermore, \K\ allows the construction of models based on two mutation classes.  \K\ is covered by the Gnu Public License and will be placed in the {\tt SourceForge.net} open-source project repository.
+The basic structure of the \K\ software package is described.  \K\ may be used
+to construct models, based on the description of \citet{Kondrashov:1985:5375},
+that may be used to study the population dynamics of multilocus mutation load.
+\K\ is designed to allow the relatively easy reproduction of newer models based
+on \citeauthor{Kondrashov:1985:5375}'s original description.  \K\ also
+facilitates the construction of new extensions to these models, through the use
+of novel fitness functions, different sequences of per-generation events, and
+the specification of additional model parameters.  Furthermore, \K\ allows the
+construction of models based on two mutation classes.  \K\ is covered by the
+Gnu Public License and will be placed in the {\tt SourceForge.net} open-source
+project repository.
 
 \clearpage
 
@@ -292,26 +302,74 @@ The basic structure of the \K\ software package is described.  \K\ may be used t
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\K\ is a software package designed to enable the study of mutation-selection balance and the population dynamics of genetic load.  \K\ is based on an iterative, deterministic model described by \citet{Kondrashov:1985:5375}, and possibly derived from \citet{Heller:1979:10277}.  The original model has been expanded upon by several authors since \citep[e.g.,][and others]{Charlesworth:1990:5337, Lande:1994:5345, Muirhead:1997:5426, Morgan:2001:5443}.  \K\ is designed so that each of these previous models may be easily reproduced.
+\K\ is a software package designed to enable the study of mutation-selection
+balance and the population dynamics of genetic load.  \K\ is based on an
+iterative, deterministic model described by \citet{Kondrashov:1985:5375}, and
+possibly derived from \citet{Heller:1979:10277}.  The original model has been
+expanded upon by several authors since \citep[e.g.,][and
+others]{Charlesworth:1990:5337, Lande:1994:5345, Muirhead:1997:5426,
+Morgan:2001:5443}.  \K\ is designed so that each of these previous models may
+be easily reproduced.
 
-In the infinite-population model of \citet{Kondrashov:1985:5375}, genomes are represented by an infinite number of unlinked diploid {\em load loci}, with mutation carried by each having an identical effect on fitness.  Populations are represented by proportional membership within {\em load classes} \Lij, within which individuals carry $i$ heterozygous mutations and $j$ homozygous mutations.  Changes in load class membership due to mutation and reproduction are based upon probabilistic expectations from Poisson and binomial distributions, respectively.  Changes in load class membership due to selection are based upon differences in relative fitness.  The model is run until an equilibrium distribution of load class membership is reached, or until it is apparent that an equilibrium will not be reached within a preset number of model generations using the current model configuration.
+In the infinite-population model of \citet{Kondrashov:1985:5375}, genomes are
+represented by an infinite number of unlinked diploid {\em load loci}, with
+mutation carried by each having an identical effect on fitness.  Populations
+are represented by proportional membership within {\em load classes} \Lij,
+within which individuals carry $i$ heterozygous mutations and $j$ homozygous
+mutations.  Changes in load class membership due to mutation and reproduction
+are based upon probabilistic expectations from Poisson and binomial
+distributions, respectively.  Changes in load class membership due to selection
+are based upon differences in relative fitness.  The model is run until an
+equilibrium distribution of load class membership is reached, or until it is
+apparent that an equilibrium will not be reached within a preset number of
+model generations using the current model configuration.
 
-Load classes may be subdivided according to {\em functional genotype}, which is determined by one to several loci unlinked to the load loci and without a direct effect on fitness.  The functional genotype is generally defined to control characteristics of the mating system.  Several studies have used this model to explore the consequences of associations between fitness, as determined by load classes, and functional genotypes \citep[and others]{Kondrashov:1985:5375, Charlesworth:1990:5337}.  ``Genotype'' in the traditional sense is thus represented by two parts:
-\begin{itemize}
-	\item A {\em load class} portion subject to recurrent mutation that only has a fitness effect; and
-	\item A {\em functional} portion that determines mating characteristics, etc.\ and is not subject to mutation.
-\end{itemize}
-Here, the load class is indicated by subscripts on symbols $x_{i,j}$ and the functional genotype by Greek letters in parentheses, e.g.\ \xijg.
+Load classes may be subdivided according to {\em functional genotype}, which is
+determined by one to several loci unlinked to the load loci and without a
+direct effect on fitness.  The functional genotype is generally defined to
+control characteristics of the mating system.  Several studies have used this
+model to explore the consequences of associations between fitness, as
+determined by load classes, and functional genotypes \citep[and
+others]{Kondrashov:1985:5375, Charlesworth:1990:5337}.  ``Genotype'' in the
+traditional sense is thus represented by two parts: \begin{itemize} \item A
+{\em load class} portion subject to recurrent mutation that only has a fitness
+effect; and \item A {\em functional} portion that determines mating
+characteristics, etc.\ and is not subject to mutation.  \end{itemize} Here, the
+load class is indicated by subscripts on symbols $x_{i,j}$ and the functional
+genotype by Greek letters in parentheses, e.g.\ \xijg.
 
-Mutations are assumed to always be unique.  As a result, new mutation only increases the number of heterozygous mutations in a population and does not affect the number of homozygous mutations.  Similarly, identity by descent other than that caused by selfing within a generation is not possible.  When an outcrossed zygote is formed from the union of two haploid gametes carrying $m$ and $n$ mutations, respectively, the new outcrossed zygote carries $m+n$ heterozygous mutations and $0$ homozygous mutations.  The distribution of zygotes produced via selfing by individuals carrying $i$ heterozygous mutations and $j$ homozygous mutations is more complex (see Equation~[\ref{eq:Kreproduction:s}]).
+Mutations are assumed to always be unique.  As a result, new mutation only
+increases the number of heterozygous mutations in a population and does not
+affect the number of homozygous mutations.  Similarly, identity by descent
+other than that caused by selfing within a generation is not possible.  When an
+outcrossed zygote is formed from the union of two haploid gametes carrying $m$
+and $n$ mutations, respectively, the new outcrossed zygote carries $m+n$
+heterozygous mutations and $0$ homozygous mutations.  The distribution of
+zygotes produced via selfing by individuals carrying $i$ heterozygous mutations
+and $j$ homozygous mutations is more complex (see
+Equation~[\ref{eq:Kreproduction:s}]).
 
-The population is described by proportional membership in load class-genotypes \Lijg\, where $i\in(0,\Mi)$ and $j\in(0,\Mj)$ describe the load portion of the genome and $\gamma$ is the corresponding genotype of the genotype portion of the genome.  Note that in the discussion that follows, the notation \Lij\ indicates a general statement about the load class containing $i$ heterozygous mutations and $j$ homozygous mutations and applies to all load class-genotypes belonging to that load class.  Similar notational conventions will be used for other model terms.
+The population is described by proportional membership in load class-genotypes
+\Lijg\, where $i\in(0,\Mi)$ and $j\in(0,\Mj)$ describe the load portion of the
+genome and $\gamma$ is the corresponding genotype of the genotype portion of
+the genome.  Note that in the discussion that follows, the notation \Lij\
+indicates a general statement about the load class containing $i$ heterozygous
+mutations and $j$ homozygous mutations and applies to all load class-genotypes
+belonging to that load class.  Similar notational conventions will be used for
+other model terms.
 
 An analysis that does not consider selfing (that is, that examines outcrossing and/or apomixis) will never encounter homozygous mutations.  \citet{Kondrashov:1985:5375} provides representative formulae.  Here I will assume the need to keep track of both allelic states.
 
-The model cannot be solved analytically \citep{Kondrashov:1985:5375}, although simplified recursion equations are available in \citet{Schultz:1995:541}.  Instead, the model is specified in a computer program and allowed to iterate until convergence to equilibrium is determined numerically.  Equilibrium may be obtained within a few hundred generations, depending upon initial conditions \citep{Charlesworth:1990:5337}.
+The model cannot be solved analytically \citep{Kondrashov:1985:5375}, although
+simplified recursion equations are available in \citet{Schultz:1995:541}.
+Instead, the model is specified in a computer program and allowed to iterate
+until convergence to equilibrium is determined numerically.  Equilibrium may be
+obtained within a few hundred generations, depending upon initial conditions
+\citep{Charlesworth:1990:5337}.
 
-The sequence of steps performed, with the notation to be used here for the \Lijg\ proportions resulting from each step, is:
+The sequence of steps performed, with the notation to be used here for the
+\Lijg\ proportions resulting from each step, is:
+
 \begin{enumerate}
 	\item reproductive adults, \xijg
 	\item mutation, \xpijg
@@ -330,15 +388,40 @@ The sequence of steps performed, with the notation to be used here for the \Lijg
 \section{Choosing \Mi\ and \Mj}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Model execution times may be long because of the need for repeated matrix operations to determine membership in each \Lgij\ resulting from each step.  Convergence analysis as a shortcut to equilibrium might be possible \citetext{M. Morgan, pers.\ comm.}, but has not yet been attempted.  Several algorithms in the model have baseline execution time and space requirements of at least \Order{\Mi^2\times\Mj^2}, thus it is critical not to choose \Mi\ and \Mj\ that are unnecessarily large.  %Later in this paper I will (a) sketch a possible approach to convergence analysis and (b) present some rules of thumb for choosing \Mj\ and \Mj.
+Model execution times may be long because of the need for repeated matrix
+operations to determine membership in each \Lgij\ resulting from each step.
+Convergence analysis as a shortcut to equilibrium might be possible
+\citetext{M. Morgan, pers.\ comm.}, but has not yet been attempted.  Several
+algorithms in the model have baseline execution time and space requirements of
+at least \Order{\Mi^2\times\Mj^2}, thus it is critical not to choose \Mi\ and
+\Mj\ that are unnecessarily large.  
 
-The values of \Mi\ and \Mj\ should be chosen based upon classical expectations for frequencies of heterozygous and homozygous deleterious alleles under selection, such that membership in classes where $i>\Mi$ or $j>\Mj$ is highly unlikely.  For example, values of \Mi\ must be greater if mutations have both low dominance and low selective effect, while values of \Mj\ may be very low for highly recessive lethal mutations.  Due to selection, there is no strict requirement that $\Mj=\Mi$ as would be expected for neutral mutations.  One implementation known to the author uses $\Mi=200$ and $\Mj=40$.  Neither \citet{Kondrashov:1985:5375} nor \citet{Charlesworth:1990:5337} explicitly note the need to determine \Mi\ and \Mj.
+%Later in this paper I will (a) sketch a possible approach to convergence analysis and (b) present some rules of thumb for choosing \Mj\ and \Mj.
+
+
+The values of \Mi\ and \Mj\ should be chosen based upon classical expectations
+for frequencies of heterozygous and homozygous deleterious alleles under
+selection, such that membership in classes where $i>\Mi$ or $j>\Mj$ is highly
+unlikely.  For example, values of \Mi\ must be greater if mutations have both
+low dominance and low selective effect, while values of \Mj\ may be very low
+for highly recessive lethal mutations.  Due to selection, there is no strict
+requirement that $\Mj=\Mi$ as would be expected for neutral mutations.  One
+implementation known to the author uses $\Mi=200$ and $\Mj=40$.  Neither
+\citet{Kondrashov:1985:5375} nor \citet{Charlesworth:1990:5337} explicitly note
+the need to determine \Mi\ and \Mj.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Initiating and running \K}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\sloppy The start of a \K\ session begins with the creation and initiation of the \KConfig\ structure (typically named \KK).  Below, \lstinline{initiate_Kconfig()} creates a \KConfig\ structure, and the subsequent statements create the arrays describing the load classes, fill in the per-diploid genome per generation mutation rate, fitness function, and fitness parameters desired, as well as reproductive parameters such as selfing rate.
+\sloppy The start of a \K\ session begins with the creation and initiation of
+the \KConfig\ structure (typically named \KK).  Below,
+\lstinline{initiate_Kconfig()} creates a \KConfig\ structure, and the
+subsequent statements create the arrays describing the load classes, fill in
+the per-diploid genome per generation mutation rate, fitness function, and
+fitness parameters desired, as well as reproductive parameters such as selfing
+rate.
+
 \begin{C}[gobble=4]
     KConfig K;
     K = initiate_KConfig();
@@ -350,12 +433,19 @@ The values of \Mi\ and \Mj\ should be chosen based upon classical expectations f
     K->S = 0.0;
     set_repro(K, K->S, 0.0);
 \end{C}
-Once the \KK\ structure is initialized, a number of subsequent initialization steps are accomplished using a single function.
+
+Once the \KK\ structure is initialized, a number of subsequent initialization
+steps are accomplished using a single function.
+
 \begin{C}[gobble=4]
     initiate_model_state(K);
 \end{C}
 
-Once the model state is ready, then execution of the model begins.  Because this is an iterative model that is declared finished when a suitable equilibrium is approached, model execution occurs within a loop that checks for equilibrium at each iteration.
+Once the model state is ready, then execution of the model begins.  Because
+this is an iterative model that is declared finished when a suitable
+equilibrium is approached, model execution occurs within a loop that checks for
+equilibrium at each iteration.
+
 \begin{C}[gobble=4]
     compute_adults_initial(K);
     while (! is_equilibrium(K)) {
@@ -374,9 +464,21 @@ Once the model state is ready, then execution of the model begins.  Because this
         normalize_KArray(K, K->x);
     }
 \end{C}
-Each of the stages creates results in a separate array that is part of \KK, and these arrays are recycled each generation.  Descriptions of the operations occurring within most of these functions are given below.  \K\ assumes that the order of execution (and thus preferences for use of arrays in \KK) is identical to that used in \citet{Charlesworth:1990:5337}; \K\ provides the \lstinline{compute} functions that implement these assumptions.  However, these stages may be performed in any order.  For example, if as in \citet{Muirhead:1997:5426} additional cycles of mutation were desired prior to sexual reproduction, then calls to the function \lstinline{apply_mutation()} would follow (or replace) the call to \lstinline{compute_mutation()}.
 
-Following the attainment of equilibrium, statistics are computed from the contents of the arrays. 
+Each of the stages creates results in a separate array that is part of \KK, and
+these arrays are recycled each generation.  Descriptions of the operations
+occurring within most of these functions are given below.  \K\ assumes that the
+order of execution (and thus preferences for use of arrays in \KK) is identical
+to that used in \citet{Charlesworth:1990:5337}; \K\ provides the
+\lstinline{compute} functions that implement these assumptions.  However, these
+stages may be performed in any order.  For example, if as in
+\citet{Muirhead:1997:5426} additional cycles of mutation were desired prior to
+sexual reproduction, then calls to the function \lstinline{apply_mutation()}
+would follow (or replace) the call to \lstinline{compute_mutation()}.
+
+Following the attainment of equilibrium, statistics are computed from the
+contents of the arrays. 
+
 \begin{C}[gobble=4]
     stats_all(K);
     stats_print(K);
@@ -385,12 +487,27 @@ Following the attainment of equilibrium, statistics are computed from the conten
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Duplicating results from published studies}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-The above model initiation and execution, with appropriate modifications to mutation parameters, may be easily used to duplicate published results.  For example, \citet{Lande:1994:5345} examined the equilibrium consequences of high mutation rate to highly recessive lethal alleles and found patterns important to other areas of my research \citet[e.g.\ ][]{Scofield:2006:10745}.  By using parameters identical to those used by \citeauthor{Lande:1994:5345}, identical results were achieved (Figures~\ref{fig:k_lssh0}, \ref{fig:k_lssh02}).
+
+The above model initiation and execution, with appropriate modifications to
+mutation parameters, may be easily used to duplicate published results.  For
+example, \citet{Lande:1994:5345} examined the equilibrium consequences of high
+mutation rate to highly recessive lethal alleles and found patterns important
+to other areas of my research \citet[e.g.\ ][]{Scofield:2006:10745}.  By using
+parameters identical to those used by \citeauthor{Lande:1994:5345}, identical
+results were achieved (Figures~\ref{fig:k_lssh0}, \ref{fig:k_lssh02}).
 
 \begin{figure}
 \begin{center}
 \includegraphics[height=4in,clip=]{k_lssh0_bb}
-\caption[Recreation of \citet{Lande:1994:5345}, Figure~2]{Duplicate of the results reported by \citet{Lande:1994:5345} in their Figure~2, for selection coefficient $s=1.0$ and dominance $h=0.0$ at the given mutation rate and range of selfing rates.  The sudden drop in inbreeding depression at a primary selfing rate of 1 visible in panel (b) is an artifact of the method used to compute inbreeding depression.  As is apparent in panel (d), this does not reflect rapid changes in mean population fitness.}
+
+\caption[Recreation of \citet{Lande:1994:5345}, Figure~2]{Duplicate of the
+results reported by \citet{Lande:1994:5345} in their Figure~2, for selection
+coefficient $s=1.0$ and dominance $h=0.0$ at the given mutation rate and range
+of selfing rates.  The sudden drop in inbreeding depression at a primary
+selfing rate of 1 visible in panel (b) is an artifact of the method used to
+compute inbreeding depression.  As is apparent in panel (d), this does not
+reflect rapid changes in mean population fitness.}
+
 \label{fig:k_lssh0}
 \end{center}
 \end{figure}
@@ -398,7 +515,12 @@ The above model initiation and execution, with appropriate modifications to muta
 \begin{figure}
 \begin{center}
 \includegraphics[height=4in,clip=]{k_lssh02_bb}
-\caption[Recreation of \citet{Lande:1994:5345}, Figure~3]{Duplicate of the results of \citet{Lande:1994:5345} in their Figure~3, for selection coefficient $s=1.0$ and dominance $h=0.02$ at the given mutation rate and range of selfing rates.  The same caution applies for panel (b) as in Figure~\ref{fig:k_lssh0}.}
+
+\caption[Recreation of \citet{Lande:1994:5345}, Figure~3]{Duplicate of the
+results of \citet{Lande:1994:5345} in their Figure~3, for selection coefficient
+$s=1.0$ and dominance $h=0.02$ at the given mutation rate and range of selfing
+rates.  The same caution applies for panel (b) as in Figure~\ref{fig:k_lssh0}.}
+
 \label{fig:k_lssh02}
 \end{center}
 \end{figure}
@@ -410,7 +532,18 @@ The above model initiation and execution, with appropriate modifications to muta
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-In \K\ each new mutation is assumed to be unique.  Therefore, each new mutation increases the number of heterozygous mutations in the population and does not affect the number of homozygous mutations.  The mutation rate $U$ is per-diploid genome, per-generation, and is taken to specify the mean of a Poisson distribution \ProbDist{Poi}{U} specifying the distribution of the number of new mutations {\cite[and many others]{Kondrashov:1985:5375,Charlesworth:1990:5337}.  The proportion of load class $L_{n,j}$ that is moved to load class \Lij\ (where $n \le i$) as a result of mutation is equal to the probability that $i-n$ mutations occur, and is thus the value of the $i-n$-th term of \ProbDist{Poi}{U}.  The total proportion of the population in \xpijg\ after mutation is:
+In \K\ each new mutation is assumed to be unique.  Therefore, each new mutation
+increases the number of heterozygous mutations in the population and does not
+affect the number of homozygous mutations.  The mutation rate $U$ is
+per-diploid genome, per-generation, and is taken to specify the mean of a
+Poisson distribution \ProbDist{Poi}{U} specifying the distribution of the
+number of new mutations {\cite[and many
+others]{Kondrashov:1985:5375,Charlesworth:1990:5337}.  The proportion of load
+class $L_{n,j}$ that is moved to load class \Lij\ (where $n \le i$) as a result
+of mutation is equal to the probability that $i-n$ mutations occur, and is thus
+the value of the $i-n$-th term of \ProbDist{Poi}{U}.  The total proportion of
+the population in \xpijg\ after mutation is:
+
 \begin{equation}\label{eq:mut:fullequation}
     \xpijg = 
     \begin{cases}
@@ -418,16 +551,26 @@ In \K\ each new mutation is assumed to be unique.  Therefore, each new mutation 
         \xijg & U = 0
     \end{cases}
 \end{equation}
-There is currently no provision for specifying an alternative mutation function as there is for fitness (section~\ref{section:definingfitnessfunction}).
+
+There is currently no provision for specifying an alternative mutation function
+as there is for fitness (section~\ref{section:definingfitnessfunction}).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Precomputed mutation terms}
 \label{section:precomputedmutation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-For computational efficiency, \K\ automatically calculates values for each term $t\in(0,\Mi)$ of \ProbDist{Poi}{U}, where $t=i-n$ as in equation~\eqref{eq:mut:fullequation}, and stores these values in the array \lstinline{K->mut_term[t]}.  The function \lstinline{mut_term(K,t)} returns the corresponding element of this array.
+For computational efficiency, \K\ automatically calculates values for each term
+$t\in(0,\Mi)$ of \ProbDist{Poi}{U}, where $t=i-n$ as in
+equation~\eqref{eq:mut:fullequation}, and stores these values in the array
+\lstinline{K->mut_term[t]}.  The function \lstinline{mut_term(K,t)} returns the
+corresponding element of this array.
 
-\sloppy Precomputed mutation values are established as a consequence of calling the function \lstinline{initiate_model_state()} just prior to starting the model.  The mutation rate \lstinline{K->U} must have the desired value prior to this time.  The function \lstinline{mut_term_computed(K,x)} may be used to bypass the precomputed values and calculate the mutation term directly.
+\sloppy Precomputed mutation values are established as a consequence of calling
+the function \lstinline{initiate_model_state()} just prior to starting the
+model.  The mutation rate \lstinline{K->U} must have the desired value prior to
+this time.  The function \lstinline{mut_term_computed(K,x)} may be used to
+bypass the precomputed values and calculate the mutation term directly.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -436,15 +579,25 @@ For computational efficiency, \K\ automatically calculates values for each term 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The structure of \K's modeling of reproduction reflects the independence of the load class and genotype.  {\em Mating functions} define the result of different types of matings for both load classes and functional genotypes.  The membership in load classes following reproduction depends upon the mating functions for load classes and functional genotypes involved, the population rate of the mating system involved, and membership in load classes involved in matings.
+The structure of \K's modeling of reproduction reflects the independence of the
+load class and genotype.  {\em Mating functions} define the result of different
+types of matings for both load classes and functional genotypes.  The
+membership in load classes following reproduction depends upon the mating
+functions for load classes and functional genotypes involved, the population
+rate of the mating system involved, and membership in load classes involved in
+matings.
 
-The mating functions for selfing and apomixis reflect the fact that just one parental genotype is involved in the production of progeny.  The mating functions for outcrossing, on the other hand, require two parental genotypes.
+The mating functions for selfing and apomixis reflect the fact that just one
+parental genotype is involved in the production of progeny.  The mating
+functions for outcrossing, on the other hand, require two parental genotypes.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Load class mating functions}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Load class mating functions for selfing and apomixis follow \citet{Kondrashov:1985:5375}:
+Load class mating functions for selfing and apomixis follow
+\citet{Kondrashov:1985:5375}:
+
 \begin{equation}
 \label{eq:Kreproduction:s}
 \funcself =
@@ -462,7 +615,16 @@ Load class mating functions for selfing and apomixis follow \citet{Kondrashov:19
     \end{cases}
 \end{equation}
 
-For outcrossing, the modification of \citet{Charlesworth:1990:5337} is used, as it is much more efficient than the function given in \citet{Kondrashov:1985:5375}.  Note, though, that there are typographical errors in \citeauthor{Charlesworth:1990:5337}'s Equation~(3).  This method first forms pools of haploid male and female gametes, and the proportion of available female gametes is weighted by the outcrossing rate.  A function for production of gametes with functional genotypes is required, as is a function for production of functional genotypes for zygotes formed from two genotyped gametes:
+For outcrossing, the modification of \citet{Charlesworth:1990:5337} is used, as
+it is much more efficient than the function given in
+\citet{Kondrashov:1985:5375}.  Note, though, that there are typographical
+errors in \citeauthor{Charlesworth:1990:5337}'s Equation~(3).  This method
+first forms pools of haploid male and female gametes, and the proportion of
+available female gametes is weighted by the outcrossing rate.  A function for
+production of gametes with functional genotypes is required, as is a function
+for production of functional genotypes for zygotes formed from two genotyped
+gametes:
+
 \begin{align}
 \label{eq:Kreproduction:gametes}
 \gami    &= \begin{cases}
@@ -475,7 +637,9 @@ For outcrossing, the modification of \citet{Charlesworth:1990:5337} is used, as 
 \gamfemalei &= \Og \cdot \gami \\
 \gammalei &= \gami
 \end{align}
+
 Zygotes are formed by matings among male and female gametes:
+
 \begin{equation}
 \label{eq:Kreproduction:zygotes}
 \xppoig = \frac{1}{2} \sum_{k=0}^{i}{\gamfemalek\gammaleik+\gamfemaleik\gammalek}
@@ -485,13 +649,28 @@ Zygotes are formed by matings among male and female gametes:
 \section{Genotype mating functions}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The genotype mating functions shown in Table~\ref{tab:matingK:stdtransformations} likewise follow \citet{Kondrashov:1985:5375}.  For the outcrossed genotype mating function \TOgab, the resulting genotype $\gamma_i$ is the Mendelian product of both parents' genotypes.
+The genotype mating functions shown in
+Table~\ref{tab:matingK:stdtransformations} likewise follow
+\citet{Kondrashov:1985:5375}.  For the outcrossed genotype mating function
+\TOgab, the resulting genotype $\gamma_i$ is the Mendelian product of both
+parents' genotypes.
 
-The tables described here apply to genotypes determined by a single diploid locus.  Alternative genotype mating functions may be easily defined that determine these genotypes based on other assumptions (e.g., more than one locus).
+The tables described here apply to genotypes determined by a single diploid
+locus.  Alternative genotype mating functions may be easily defined that
+determine these genotypes based on other assumptions (e.g., more than one
+locus).
 
 %%%%%% Standard transformations for genotypes
 \begin{table}
-\topcaption[Mating functions based upon perfect Mendelian segregation for functional genotypes controlled by a single biallelic locus]{Mating functions based upon perfect Mendelian segregation for functional genotypes controlled by a single biallelic locus as described in the text.  Note that for \TSgx\ and \TAgx\ each submatrix represents the resulting proportion of the progeny that carry each functional genotype $(\gamma_1\ \gamma_2\ \gamma_3)$, and that the proportions in each submatrix sum to $1$.}
+
+\topcaption[Mating functions based upon perfect Mendelian segregation for
+functional genotypes controlled by a single biallelic locus]{Mating functions
+based upon perfect Mendelian segregation for functional genotypes controlled by
+a single biallelic locus as described in the text.  Note that for \TSgx\ and
+\TAgx\ each submatrix represents the resulting proportion of the progeny that
+carry each functional genotype $(\gamma_1\ \gamma_2\ \gamma_3)$, and that the
+proportions in each submatrix sum to $1$.}
+
 \label{tab:matingK:stdtransformations}
 \begin{center}
 \begin{tabular}{c@{\extracolsep{0.5in}}cc}  % to set up a 1 x 3 array to display 3 tables
@@ -529,7 +708,8 @@ The tables described here apply to genotypes determined by a single diploid locu
 \section{Net effect of mating}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Note that each genotype $\gamma_i$ may have its own selfing, apomixis and outcrossing rate $S(\gamma_i)$, $A(\gamma_i)$, and $O(\gamma_i)$, respectively.
+Note that each genotype $\gamma_i$ may have its own selfing, apomixis and
+outcrossing rate $S(\gamma_i)$, $A(\gamma_i)$, and $O(\gamma_i)$, respectively.
 
 %%%%%% Functions for determining total L(g;i,j) representation in matings of all genotype load classes
 \begin{align}
@@ -562,7 +742,10 @@ Note that each genotype $\gamma_i$ may have its own selfing, apomixis and outcro
 		}
 	}
 \end{align}
-Total progeny frequencies are simply the sum of the proportions of selfed, apomictic and outcrossed progeny:
+
+Total progeny frequencies are simply the sum of the proportions of selfed,
+apomictic and outcrossed progeny:
+
 \begin{equation}
 \xppijg = 
 \begin{cases}
@@ -598,7 +781,14 @@ Total progeny frequencies are simply the sum of the proportions of selfed, apomi
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-In \K, just as in nature, selection reduces proportions of less fit genotypes.  Fitness in \K\ is typically a function of the mutations carried in the load class \Lij, together with any user-specified parameters carried in the \KConfig\ structure \KK.  In order to maintain the infinite population at constant sum $1$, the application of selection reduces the proportions of load classes below the population mean fitness and increases the proportions of load classes above the population mean fitness.  Fitness may also be dependent upon the genotype $\gamma$, but this has not typically been considered.
+In \K, just as in nature, selection reduces proportions of less fit genotypes.
+Fitness in \K\ is typically a function of the mutations carried in the load
+class \Lij, together with any user-specified parameters carried in the
+\KConfig\ structure \KK.  In order to maintain the infinite population at
+constant sum $1$, the application of selection reduces the proportions of load
+classes below the population mean fitness and increases the proportions of load
+classes above the population mean fitness.  Fitness may also be dependent upon
+the genotype $\gamma$, but this has not typically been considered.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -611,16 +801,27 @@ In \K, just as in nature, selection reduces proportions of less fit genotypes.  
 \begin{equation}\label{eqn:kondrashovfitness}
 \omega_{i,j}=1-\left({\frac{1+dj}{k}}\right)^\alpha.
 \end{equation}
-The numbers of heterozygous and homozygous mutations are specified by $i$ and $j$, respectively; individuals with $>k$ mutations died; $d$ specifies dominance with $d=2$ equal to codominance; and $\alpha=1$, $2$, and $\infty$ correspond to linear, intermediate and threshold selection, respectively.
 
-At the moment, \K\ does not provide Kondrashov's fitness function.  Instead, it provides the familiar multiplicative fitness function parameterized by selection coefficient $s\in(0,1)$ and dominance $h\in(0,1)$.  The fitness of a given genotype is thus:
+The numbers of heterozygous and homozygous mutations are specified by $i$ and
+$j$, respectively; individuals with $>k$ mutations died; $d$ specifies
+dominance with $d=2$ equal to codominance; and $\alpha=1$, $2$, and $\infty$
+correspond to linear, intermediate and threshold selection, respectively.
+
+At the moment, \K\ does not provide Kondrashov's fitness function.  Instead, it
+provides the familiar multiplicative fitness function parameterized by
+selection coefficient $s\in(0,1)$ and dominance $h\in(0,1)$.  The fitness of a
+given genotype is thus:
+
 \begin{equation}\label{eq:fitnessmultiplicative}
 \omega_{i,j}=(1-hs)^{i}(1-s)^{j}.
 \end{equation}
+
 Mean population fitness is determined by:
+
 \begin{equation}\label{eq:meanfitness}
 \bar{\omega}=\frac{\sum_i{\sum_j{\omega_{i,j}\xppij}}}{\sum_i{\sum_j{\xppij}}}
 \end{equation}
+
 and is returned by the function \lstinline{mean_fitness(K,K->xpp)}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -628,16 +829,36 @@ and is returned by the function \lstinline{mean_fitness(K,K->xpp)}.
 \label{section:precomputedfitness}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-For computational efficiency, \K\ automatically calculates fitnesses for all \Lijg\ and stores these values in the array \lstinline{K->fitness_precomputed}.  The function\linebreak \lstinline{fitness(K,i,j,g)} returns the corresponding element of this array.
+For computational efficiency, \K\ automatically calculates fitnesses for all
+\Lijg\ and stores these values in the array \lstinline{K->fitness_precomputed}.
+The function\linebreak \lstinline{fitness(K,i,j,g)} returns the corresponding
+element of this array.
 
-Precomputed fitness values are established as a consequence of calling the function \lstinline{initiate_model_state()} just prior to starting the model.  All relevant members of \KK\ must have values prior to this time.  The use of precomputed fitness values is appropriate for the fitness functions supplied with \K.  The function \lstinline{fitness_computed(K,i,j,g)} may be used to bypass the precomputed values and calculate fitness directly.
+Precomputed fitness values are established as a consequence of calling the
+function \lstinline{initiate_model_state()} just prior to starting the model.
+All relevant members of \KK\ must have values prior to this time.  The use of
+precomputed fitness values is appropriate for the fitness functions supplied
+with \K.  The function \lstinline{fitness_computed(K,i,j,g)} may be used to
+bypass the precomputed values and calculate fitness directly.
 
-If a fitness function is defined (section~\ref{section:definingfitnessfunction}) that may determine different fitness values for identical \Lijg\ at different times during model execution, then it must be determined which of the following cases applies:
+If a fitness function is defined
+(section~\ref{section:definingfitnessfunction}) that may determine different
+fitness values for identical \Lijg\ at different times during model execution,
+then it must be determined which of the following cases applies:
+
 \begin{enumerate}
 	\item\label{fitness:fewchanges} Fitness values may change one to several discrete times; or
 	\item\label{fitness:manychanges} Fitness values may change many times. 
 \end{enumerate}
-If case (\ref{fitness:fewchanges}) fits, then points should be identified during model execution at which precomputed values in \lstinline{K->fitness_precomputed} should be recomputed.  At these times, all relevant members of \KK\ should be updated, and then the function \lstinline{initiate_fitness_precomputed()} is called.  The fitness function itself may be changed at this time by changing the value of \lstinline{K->fitness_function}:
+
+If case (\ref{fitness:fewchanges}) fits, then points should be identified
+during model execution at which precomputed values in
+\lstinline{K->fitness_precomputed} should be recomputed.  At these times, all
+relevant members of \KK\ should be updated, and then the function
+\lstinline{initiate_fitness_precomputed()} is called.  The fitness function
+itself may be changed at this time by changing the value of
+\lstinline{K->fitness_function}:
+
 \begin{C}[gobble=4,escapechar=|]
     if ( |{\it fitness values must change}| ) {
         /*
@@ -648,20 +869,43 @@ If case (\ref{fitness:fewchanges}) fits, then points should be identified during
         initiate_fitness_precomputed(K);
     }
 \end{C}
-If the fitness function instead fits case (\ref{fitness:manychanges}), then the use of precomputed fitness values must be disabled by telling \K\ to directly compute fitness every time a fitness value is required.  This is more computationally intensive.  The use of precomputed fitness values is disabled by calling the function \lstinline{must_compute_fitness_function()} and passing the registered value of the fitness function (which was stored in \lstinline{K->fitness_function)} as the sole argument:
+
+If the fitness function instead fits case (\ref{fitness:manychanges}), then the
+use of precomputed fitness values must be disabled by telling \K\ to directly
+compute fitness every time a fitness value is required.  This is more
+computationally intensive.  The use of precomputed fitness values is disabled
+by calling the function \lstinline{must_compute_fitness_function()} and passing
+the registered value of the fitness function (which was stored in
+\lstinline{K->fitness_function)} as the sole argument:
+
 \begin{C}[gobble=4]
     /* Force computation of fitness every time */
     must_compute_fitness_function(K->fitness_function);
 \end{C}
-After doing this, the function \lstinline{fitness(K,i,j,g)} is operationally identical to the function \lstinline{fitness_computed(K,i,j,g)}.  There is currently no mechanism to return to precomputed fitness values once \lstinline{must_compute_fitness_function()} has been called.
+
+After doing this, the function \lstinline{fitness(K,i,j,g)} is operationally
+identical to the function \lstinline{fitness_computed(K,i,j,g)}.  There is
+currently no mechanism to return to precomputed fitness values once
+\lstinline{must_compute_fitness_function()} has been called.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Defining a new fitness function\label{section:definingfitnessfunction}}
 
-In \K, fitness functions share a common interface.  The first argument is always the active \KConfig\ \KK, the second and third arguments are both \KInt\ and specify the number of heterozygous and homozygous mutations, respectively, in the load class of interest, and the fourth argument specifies the genotype of interest and is also \KInt.  Once the fitness value is computed from the load class and genotype arguments together with any parameters from \KConfig\ \KK, the fitness value returned as a \KScalar.
+In \K, fitness functions share a common interface.  The first argument is
+always the active \KConfig\ \KK, the second and third arguments are both \KInt\
+and specify the number of heterozygous and homozygous mutations, respectively,
+in the load class of interest, and the fourth argument specifies the genotype
+of interest and is also \KInt.  Once the fitness value is computed from the
+load class and genotype arguments together with any parameters from \KConfig\
+\KK, the fitness value returned as a \KScalar.
 
-Because fitness functions share a common interface, a new fitness function may be easily defined and incorporated into \K.
-Within the body of the fitness function, fitness is calculated using the load class and genotype arguments along with any members of \KK\ (e.g.\ \lstinline{K->fit_s} and \lstinline{K->fit_h}) that are being used as parameters.  The fitness is computed as a \KScalar\ and returned as the function value:
+Because fitness functions share a common interface, a new fitness function may
+be easily defined and incorporated into \K.  Within the body of the fitness
+function, fitness is calculated using the load class and genotype arguments
+along with any members of \KK\ (e.g.\ \lstinline{K->fit_s} and
+\lstinline{K->fit_h}) that are being used as parameters.  The fitness is
+computed as a \KScalar\ and returned as the function value:
+
 \begin{C}[gobble=4,mathescape=true,escapechar=|]
     KScalar  newfitnessfunction  (KConfig K, KInt i, KInt j, KInt g)
     {
@@ -679,7 +923,23 @@ Within the body of the fitness function, fitness is calculated using the load cl
         return w;
     }
 \end{C}
-In order to use a new fitness function it must be registered.  This is done prior to the start of the model run, generally within \lstinline{main()}.  In the declarations section the new fitness function is described with a {\em function prototype}.  A function prototype is identical to the first line of the function definition, but does not have a function body and ends with a semicolon `\lstinline{;}'.  All fitness function prototypes will be identical except for the name of the function.  Prior to use, a new fitness function is registered by calling the function \lstinline{register_fitness_function()}.  This function requires two arguments: the name of the new fitness function without parentheses, and a short character-string description.  \K\ uses the new fitness function once the value returned by \lstinline{register_fitness_function()} is assigned to \lstinline{K->fitness_function}.  Any members of \KK\ used by the new fitness function, e.g.\  \lstinline{K->fit_s}, must have values assigned prior to model execution:
+
+In order to use a new fitness function it must be registered.  This is done
+prior to the start of the model run, generally within \lstinline{main()}.  In
+the declarations section the new fitness function is described with a {\em
+function prototype}.  A function prototype is identical to the first line of
+the function definition, but does not have a function body and ends with a
+semicolon `\lstinline{;}'.  All fitness function prototypes will be identical
+except for the name of the function.  Prior to use, a new fitness function is
+registered by calling the function \lstinline{register_fitness_function()}.
+This function requires two arguments: the name of the new fitness function
+without parentheses, and a short character-string description.  \K\ uses the
+new fitness function once the value returned by
+\lstinline{register_fitness_function()} is assigned to
+\lstinline{K->fitness_function}.  Any members of \KK\ used by the new fitness
+function, e.g.\  \lstinline{K->fit_s}, must have values assigned prior to model
+execution:
+
 \begin{C}[gobble=4,escapechar=|]
     /* Function prototype for new fitness function within declarations */
     KScalar  newfitnessfunction  (KConfig K, KInt i, KInt j, KInt g);
@@ -700,11 +960,33 @@ In order to use a new fitness function it must be registered.  This is done prio
 \label{chapter:nested}
 %%%%%%
 
-\K\ provides the ability to simultaneously examine the consequences of the number of mutation classes $N_c > 1$ via {\em nesting}.  No published model has yet made use of this feature \citetext{but see Scofield, unpubl.}, and the extensions described here are entirely novel to \K.  As a result, this portion of \K\ has not been adequately tested.
+\K\ provides the ability to simultaneously examine the consequences of the
+number of mutation classes $N_c > 1$ via {\em nesting}.  No published model has
+yet made use of this feature \citetext{but see Scofield, unpubl.}, and the
+extensions described here are entirely novel to \K.  As a result, this portion
+of \K\ has not been adequately tested.
 
-Space and execution time with nesting scale at approximately \Order{[{reqs.\ of N_1}]^{N_c}}.  We will consider the case where $N_c = 2$, which represents a squaring of space and time requirements.  We make two further simplifications.  We will consider load classes only, not genotypes, and we will also lose some generality in the functions used for computing fitness.  Interested users may extend \K's implementation of nested mutation classes by following the examples given here and elsewhere in this document.
+Space and execution time with nesting scale at approximately \Order{[{reqs.\ of
+N_1}]^{N_c}}.  We will consider the case where $N_c = 2$, which represents a
+squaring of space and time requirements.  We make two further simplifications.
+We will consider load classes only, not genotypes, and we will also lose some
+generality in the functions used for computing fitness.  Interested users may
+extend \K's implementation of nested mutation classes by following the examples
+given here and elsewhere in this document.
 
-Each mutation class $c$ has its own mutation rate $U_c$, fitness function, and fitness coefficients.  Load classes are called \emph{nested load classes} and are represented by \Lijij, where $\izero\in(0,\Mizero)$ and $\jzero\in(0,\Mjzero)$ represent the number of heterozygous and homozygous mutations in the first mutation class and $\ione\in(0,\Mione)$ and $\jone\in(0,\Mjone)$ represent the number of heterozygous and homozygous mutations in the second mutation class.  The total number of nested load classes is $(\Mizero+1)(\Mjzero+1)(\Mione+1)(\Mjone+1)$.  Model operations are based upon the joint probability distribution of independent events in each mutation class, thus the probability of a mutation event, a reproduction event, etc.\ affecting \Lijij\ is the probability of the required events affecting each mutation class individually:
+Each mutation class $c$ has its own mutation rate $U_c$, fitness function, and
+fitness coefficients.  Load classes are called \emph{nested load classes} and
+are represented by \Lijij, where $\izero\in(0,\Mizero)$ and
+$\jzero\in(0,\Mjzero)$ represent the number of heterozygous and homozygous
+mutations in the first mutation class and $\ione\in(0,\Mione)$ and
+$\jone\in(0,\Mjone)$ represent the number of heterozygous and homozygous
+mutations in the second mutation class.  The total number of nested load
+classes is $(\Mizero+1)(\Mjzero+1)(\Mione+1)(\Mjone+1)$.  Model operations are
+based upon the joint probability distribution of independent events in each
+mutation class, thus the probability of a mutation event, a reproduction event,
+etc.\ affecting \Lijij\ is the probability of the required events affecting
+each mutation class individually:
+
 \begin{equation}
 Pr[\text{event in }\Lijij] = Pr[\text{event in }\Lijzero]\times Pr[\text{event in }\Lijone].
 \end{equation}
@@ -712,15 +994,32 @@ Pr[\text{event in }\Lijij] = Pr[\text{event in }\Lijzero]\times Pr[\text{event i
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Mutation in nested models}
 
-As in an unnested model, mutation increases the number of heterozygous mutations in the population and does not affect the number of homozygous mutations.  The mutation process for each mutation class $c$ is equivalent to the single-class process described in Chapter~\ref{chapter:mutation} determined by \ProbDist{Poi}{U_c}, thus mutation increases the population proportion in \Lijij\ at the expense of all $L(\nzero,\jzero,\none,\jone)$ where $\nzero\le\izero$ and $\none\le\ione$.  The total proportion of the population in \xpijij\ after mutation is thus:
+As in an unnested model, mutation increases the number of heterozygous
+mutations in the population and does not affect the number of homozygous
+mutations.  The mutation process for each mutation class $c$ is equivalent to
+the single-class process described in Chapter~\ref{chapter:mutation} determined
+by \ProbDist{Poi}{U_c}, thus mutation increases the population proportion in
+\Lijij\ at the expense of all $L(\nzero,\jzero,\none,\jone)$ where
+$\nzero\le\izero$ and $\none\le\ione$.  The total proportion of the population
+in \xpijij\ after mutation is thus:
+
 \begin{equation}\label{eq:nested:fullequation}
     \xpijij = \sum_{n_0=0}^{i_0}{\; \sum_{n_1=0}^{i_1}{x_{n_0,j_0,n_1,j_1} \cdot e^{-U_0} \frac{U_0^{[i_0-n_0]}}{(\izero-\nzero)!} \cdot e^{-U_1} \frac{U_1^{[i_1-n_1]}}{(\ione-\none)!}}}
 \end{equation}
-If $U_c=0$ then the corresponding term of \ProbDist{Poi}{U_c} is replaced with $1$ if $i_c-n_c=0$ and $0$ otherwise.
+
+If $U_c=0$ then the corresponding term of \ProbDist{Poi}{U_c} is replaced with
+$1$ if $i_c-n_c=0$ and $0$ otherwise.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Reproduction in nested models}
 
-As for mutation, reproduction in an nested model is a straightforward extension of the unnested model.  Because mutation classes are independent, results for each genotype are determined as the product of results for each mutation class.  Reproduction is by far the most time-consuming step in a nested model, so judicious implementation of the qualifying conditions on indices appended to each equation may speed execution by an order of magnitude or more:
+As for mutation, reproduction in an nested model is a straightforward extension
+of the unnested model.  Because mutation classes are independent, results for
+each genotype are determined as the product of results for each mutation class.
+Reproduction is by far the most time-consuming step in a nested model, so
+judicious implementation of the qualifying conditions on indices appended to
+each equation may speed execution by an order of magnitude or more:
+
 \begin{equation}
 \label{eq:nested:s}
 \begin{split}
@@ -738,7 +1037,11 @@ As for mutation, reproduction in an nested model is a straightforward extension 
     0 & \text{otherwise.}  
   \end{cases}
 \end{equation}
-Haploid gametes carry one copy of mutations from each mutation class.  As for the unnested model, the proportion of available female gametes is weighted by the outcrossing rate:
+
+Haploid gametes carry one copy of mutations from each mutation class.  As for
+the unnested model, the proportion of available female gametes is weighted by
+the outcrossing rate:
+
 \begin{align}
 \begin{split}
 \gamii   &= \sum_{v_0=0}^{i_0}{
@@ -753,7 +1056,9 @@ Haploid gametes carry one copy of mutations from each mutation class.  As for th
 \gamfemaleii &= O \cdot \gamii \\
 \gammaleii &= \gamii
 \end{align}
+
 Outcrossed zygotes are formed by matings among male and female gametes:
+
 \begin{equation}
 \label{eq:nested:zygotes}
 \begin{split}
@@ -765,7 +1070,9 @@ Outcrossed zygotes are formed by matings among male and female gametes:
     &   \qquad\qquad\qquad\quad \gamfemaleikk\gammalekik + \gamfemaleikik\gammalekk.
 \end{split}
 \end{equation}
+
 Adding up all progeny proportions gives:
+
 \begin{equation}
 \xppijij = 
 \begin{cases}
@@ -777,24 +1084,47 @@ Adding up all progeny proportions gives:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Fitness and selection in nested models}
 
-Fitness is determined for each mutation class as for an unnested model, and the fitness of a nested load class is the product of the fitness functions of the two mutation classes:
+Fitness is determined for each mutation class as for an unnested model, and the
+fitness of a nested load class is the product of the fitness functions of the
+two mutation classes:
+
 \begin{equation}
 \wnested = \omega_{i_0,j_0} \cdot \omega_{i_1,j_1}.
 \end{equation}
-For example, if a multiplicative fitness model is used for each mutation class then each mutation class has its own selection coefficient and dominance:
+
+For example, if a multiplicative fitness model is used for each mutation class
+then each mutation class has its own selection coefficient and dominance:
+
 \begin{equation}
 \wnested = (1-h_0 s_0)^{i_0}(1-s_0)^{j_0} \cdot (1-h_1 s_1)^{i_1}(1-s_1)^{j_1}.
 \end{equation}
-The computation of \wnested\ is a consequence of setting the fitness functions for the mutation classes; no more need be done by the user.  The computation of mean fitness with nested load classes \meanwnested\ is a straightforward extension of Equation~\eqref{eq:meanfitness}:
+
+The computation of \wnested\ is a consequence of setting the fitness functions
+for the mutation classes; no more need be done by the user.  The computation of
+mean fitness with nested load classes \meanwnested\ is a straightforward
+extension of Equation~\eqref{eq:meanfitness}:
+
 \begin{equation}\label{eq:meanfitnessnested}
 \meanwnested = \frac{\sum_{i_0}{\sum_{j_0}{\sum_{i_1}{\sum_{j_1}{\wnested\cdot\xppijij}}}}}
                {\sum_{i_0}{\sum_{j_0}{\sum_{i_1}{\sum_{j_1}{\xppijij}}}}}.
 \end{equation}
+
 This value is returned by the function \lstinline{mean_fitness_n()}.
 
-Fitness values are precomputed for each mutation class $c$\/ prior to the start of the model (see section~\ref{section:precomputedfitness}) and kept in the array \lstinline[language=C]{KN->fitness_precomputed[c][i][j]}.  The function \lstinline{fitness_n(KN,i0,j0,i1,j1)} uses this array to determine the fitness of the nested load class \Lijij.  Fitness values may be computed directly via \lstinline{fitness_computed_n()}.  Similar to unnested models, precomputed fitness values can be recomputed with \lstinline{initiate_fitness_precomputed_n()}; a call to this function will recompute fitness values for both mutation classes.  Direct computation of fitness values for each mutation class individually can be specified with \lstinline{must_compute_fitness_function_n()}.
+Fitness values are precomputed for each mutation class $c$\/ prior to the start
+of the model (see section~\ref{section:precomputedfitness}) and kept in the
+array \lstinline[language=C]{KN->fitness_precomputed[c][i][j]}.  The function
+\lstinline{fitness_n(KN,i0,j0,i1,j1)} uses this array to determine the fitness
+of the nested load class \Lijij.  Fitness values may be computed directly via
+\lstinline{fitness_computed_n()}.  Similar to unnested models, precomputed
+fitness values can be recomputed with
+\lstinline{initiate_fitness_precomputed_n()}; a call to this function will
+recompute fitness values for both mutation classes.  Direct computation of
+fitness values for each mutation class individually can be specified with
+\lstinline{must_compute_fitness_function_n()}.
 
 Selection is applied as for an unnested model:
+
 \begin{equation}\label{eq:selectionnested}
 \Xijij = \frac{\wnested\cdot\xppijij}{\meanwnested}
 \end{equation}
@@ -802,15 +1132,34 @@ Selection is applied as for an unnested model:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Data structures for a nested model}
 
-The basic structure of the nested model's data structures is very similar to the unnested model.  The load class array names are all identical, with a change in array shape to accommodate the nested load class \Lijij\ and the lack of genotype, e.g., \lstinline{KN->x[i0][j0][i1][j1]} and \lstinline{KN->xpp[i0][j0][i1][j1]}.  Most functions and datatypes used in a nested model are special versions named by adding the suffix ``\lstinline{_n}''. 
+The basic structure of the nested model's data structures is very similar to
+the unnested model.  The load class array names are all identical, with a
+change in array shape to accommodate the nested load class \Lijij\ and the lack
+of genotype, e.g., \lstinline{KN->x[i0][j0][i1][j1]} and
+\lstinline{KN->xpp[i0][j0][i1][j1]}.  Most functions and datatypes used in a
+nested model are special versions named by adding the suffix
+``\lstinline{_n}''. 
 
-The datatype \KConfign\ holds the parameters and data structures used in a nested model, and references to this datatype within \K\ use the name \KKN.  Changes from the \KConfig\ datatype used in unnested models reflect both the greater complexity of nested models and the simplified set of model options.
-Real-valued parameters that differ between mutation classes are of the \lstinline{KScalar_n} datatype, which is an array of \lstinline{KScalar} values, one per mutation class.  For example, in a nested model the mutation rate is modified using \lstinline{KN->U[0] = value0} for the zeroth mutation class and \lstinline{KN->U[1] = value1} for the first.
+The datatype \KConfign\ holds the parameters and data structures used in a
+nested model, and references to this datatype within \K\ use the name \KKN.
+Changes from the \KConfig\ datatype used in unnested models reflect both the
+greater complexity of nested models and the simplified set of model options.
+Real-valued parameters that differ between mutation classes are of the
+\lstinline{KScalar_n} datatype, which is an array of \lstinline{KScalar}
+values, one per mutation class.  For example, in a nested model the mutation
+rate is modified using \lstinline{KN->U[0] = value0} for the zeroth mutation
+class and \lstinline{KN->U[1] = value1} for the first.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Initiating and running a nested model}
 
-The initiation of a \K\ session with nested mutation classes looks very much like that for one mutation class.   except for the use of the \KConfign\ structure and the functions used are all special versions named by adding the suffix ``\lstinline{_n}''.  Also, all values $U_c$, $s_c$, etc.\ that are distinct between load classes are vectors declared as \lstinline{KScalar_n} or \lstinline{KInt_n}.
+The initiation of a \K\ session with nested mutation classes looks very much
+like that for one mutation class.   except for the use of the \KConfign\
+structure and the functions used are all special versions named by adding the
+suffix ``\lstinline{_n}''.  Also, all values $U_c$, $s_c$, etc.\ that are
+distinct between load classes are vectors declared as \lstinline{KScalar_n} or
+\lstinline{KInt_n}.
+
 \begin{C}[gobble=4]
     KConfig_n KN;
     KN = initiate_KConfig_n();
@@ -827,7 +1176,12 @@ The initiation of a \K\ session with nested mutation classes looks very much lik
     set_repro_n(KN, KN->S, 0.0);
     initiate_model_state_n(KN);
 \end{C}
-As for model initiation, running a \K\ session with nested mutation classes looks very much like that for one mutation class, except the \lstinline{KConfig} structure and the functions used are all special versions named by adding the suffix ``\lstinline{_n}''.
+
+As for model initiation, running a \K\ session with nested mutation classes
+looks very much like that for one mutation class, except the
+\lstinline{KConfig} structure and the functions used are all special versions
+named by adding the suffix ``\lstinline{_n}''.
+
 \begin{C}[gobble=4]
     compute_adults_initial_n(KN);
     while (! is_equilibrium_n(KN)) {
@@ -856,7 +1210,9 @@ As for model initiation, running a \K\ session with nested mutation classes look
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Model parameters in \K}
 
-Model parameters as used in \K\ and in Kondrashov (1985).  \dag\/Kondrashov did not model the coexistence selfing and apomixis, and used the same parameter names for the rate and discount of each.
+Model parameters as used in \K\ and in Kondrashov (1985).  \dag\/Kondrashov did
+not model the coexistence selfing and apomixis, and used the same parameter
+names for the rate and discount of each.
 
 \begin{landscape}
 
@@ -899,7 +1255,11 @@ Note to Doug: consider sorting this table by parameter name, and changing the co
 \chapter{Debugging Guide for \K}
 %%%%%%
 
-\REDO\  \K\ is a complex system, and as such it is only to be expected that modifications or new implementations of model portions will have problems or 'bugs' that will need to be found and corrected.  This chapter is a guide to resolving these problems and to the facilities provided within \K\ to assist in resolving these problems.
+\REDO\  \K\ is a complex system, and as such it is only to be expected that
+modifications or new implementations of model portions will have bugs that will
+need to be found and corrected.  This chapter is a guide to resolving these
+problems and to the facilities provided within \K\ to assist in resolving these
+problems.
 
 \section{Reproduction}
 
@@ -907,22 +1267,59 @@ Note to Doug: consider sorting this table by parameter name, and changing the co
 
 \subsection{Progeny proportions}
 
-If the integrity of functions described in Chapter~\ref{chapter:Kreproduction} for determining \Lijg\ of progeny resulting from matings, then variation in load class genotypes may be unnecessarily complicating the diagnosis of the problem.  It would be better to start with a highly simplified adult \Lijg\ to reduce the load classes of progeny that can be produced.  The first step is to disable the mutation process.  This can be done by either commenting out references to the function \lstinline{compute_mutation(K)} or by specifying the diagnostic switch \lstinline{DEBUG_DISABLE_MUTATION} (see subsection~[whatever] for the specification of diagnostic switches).  Then, new adult load classes must be specified.  First, use \lstinline{fill_KArray(K,K->x,0.0)} to set all adult \Lijg\ to zero.  Then, specify \Lijg\ proportions that may help to resolve the problem.  For example, to examine what appears to be a basic problem with \lstinline{o_outcross()}, place all adults in load class \LCG{1}{0}{0} with \lstinline{K->x[1][0][0]=1.0}.  Then execute the model and examine \Lijg\ of progeny produced.
+If the integrity of functions described in Chapter~\ref{chapter:Kreproduction}
+for determining \Lijg\ of progeny resulting from matings, then variation in
+load class genotypes may be unnecessarily complicating the diagnosis of the
+problem.  It would be better to start with a highly simplified adult \Lijg\ to
+reduce the load classes of progeny that can be produced.  The first step is to
+disable the mutation process.  This can be done by either commenting out
+references to the function \lstinline{compute_mutation(K)} or by specifying the
+diagnostic switch \lstinline{DEBUG_DISABLE_MUTATION} (see subsection~[whatever]
+for the specification of diagnostic switches).  Then, new adult load classes
+must be specified.  First, use \lstinline{fill_KArray(K,K->x,0.0)} to set all
+adult \Lijg\ to zero.  Then, specify \Lijg\ proportions that may help to
+resolve the problem.  For example, to examine what appears to be a basic
+problem with \lstinline{o_outcross()}, place all adults in load class
+\LCG{1}{0}{0} with \lstinline{K->x[1][0][0]=1.0}.  Then execute the model and
+examine \Lijg\ of progeny produced.
 
-Remember that the sum of adult \Lijg\ must equal \lstinline{1} prior to reproduction; this can be verified by checking that \lstinline{(sum_KArray(K,K->x)==1.0)} or by specifying the diagnostic switch \lstinline{DEBUG_NORMALIZATION}.
+Remember that the sum of adult \Lijg\ must equal \lstinline{1} prior to
+reproduction; this can be verified by checking that
+\lstinline{(sum_KArray(K,K->x)==1.0)} or by specifying the diagnostic switch
+\lstinline{DEBUG_NORMALIZATION}.
 
 \section{Decreasing execution time}
 
-There are two important rules to consider before attempting to decrease the execution time of a computer program:
+There are two important rules to consider before attempting to decrease the
+execution time of a computer program:
+
 \begin{enumerate}
 	\item \label{ruletoomuch} Be sure that the program is actually taking too much time, by your own definition.  If so, then ...
 	\item \label{rulefocus} Only work on those parts of the program that actually use a lot of time.
 \end{enumerate}
-If you don't follow these rules, you may find that you've either been trying to improve an already fast program, or that you've been making only minor improvements to a slow program.  If Rule~\ref{ruletoomuch} applies, first try compiling \K\ with compiler optimization turned on.  In Visual Studio on Windows, select the release build configuration via '\Cmdline{Build > Set Active Configuration ... > Win32 Release}'.  On Unix/Linux, type '\Cmdline{make opt}' or add the \Cmdline{-O3} option while compiling.
 
-If Rule~\ref{ruletoomuch} still applies after optimized compilation, then you can apply Rule~\ref{rulefocus} by identifying functions that take too much time.  In Visual Studio on Windows, I have no idea how to do this.  On Unix/Linux systems, the \Cmdline{gprof} utility will tell you exactly the information you require.  Type '\Cmdline{man gprof}' at a shell prompt for more information.
+If you don't follow these rules, you may find that you've either been trying to
+improve an already fast program, or that you've been making only minor
+improvements to a slow program.  If Rule~\ref{ruletoomuch} applies, first try
+compiling \K\ with compiler optimization turned on.  In Visual Studio on
+Windows, select the release build configuration via '\Cmdline{Build > Set
+Active Configuration ... > Win32 Release}'.  On Unix/Linux, type '\Cmdline{make
+opt}' or add the \Cmdline{-O3} option while compiling.
 
-Once you've identified functions that are too slow, first consider algorithmic improvements.  For example, the generation of outcross offspring via \citeauthor{Kondrashov:1985:5375}'s \citeyearpar{Kondrashov:1985:5375} function requires \Order{M_i^3 \times M_j^2} time to execute.  By modifying the outcrossing process to first produce gametes \Order{M_i^2 \times M_j} and then zygotes \Order{M_i^2} as did \citet{Charlesworth:1990:5337}, an increase in speed was obtained.
+If Rule~\ref{ruletoomuch} still applies after optimized compilation, then you
+can apply Rule~\ref{rulefocus} by identifying functions that take too much
+time.  In Visual Studio on Windows, I have no idea how to do this.  On
+Unix/Linux systems, the \Cmdline{gprof} utility will tell you exactly the
+information you require.  Type '\Cmdline{man gprof}' at a shell prompt for more
+information.
+
+Once you've identified functions that are too slow, first consider algorithmic
+improvements.  For example, the generation of outcross offspring via
+\citeauthor{Kondrashov:1985:5375}'s \citeyearpar{Kondrashov:1985:5375} function
+requires \Order{M_i^3 \times M_j^2} time to execute.  By modifying the
+outcrossing process to first produce gametes \Order{M_i^2 \times M_j} and then
+zygotes \Order{M_i^2} as did \citet{Charlesworth:1990:5337}, an increase in
+speed was obtained.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%

@@ -1,4 +1,9 @@
+.*.swp
 .DS_Store
 K
+Kn
 gitignore
 *.o
+.project
+.cproject
+q.log

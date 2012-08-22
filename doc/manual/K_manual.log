@@ -1,20 +1,29 @@
-This is pdfeTeX, Version 3.141592-1.30.6-2.2 (MiKTeX 2.5 Beta 12) (preloaded format=pdflatex 2006.7.9)  11 JAN 2007 10:34
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.8.26)  22 AUG 2012 16:37
 entering extended mode
-**C:/Documents*and*Settings/DouglasScofield/Desktop/K/K/doc/manual/K_manual.tex
-
-("C:\Documents and Settings\DouglasScofield\Desktop\K\K\doc\manual\K_manual.tex
-"
-LaTeX2e <2005/12/01>
-Babel <v3.8g> and hyphenation patterns for english, dumylang, nohyphenation, ge
-rman, ngerman, french, loaded.
-("C:\Program Files\MiKTeX 2.5\tex\latex\base\report.cls"
-Document Class: report 2005/09/16 v1.4f Standard LaTeX document class
-("C:\Program Files\MiKTeX 2.5\tex\latex\base\fleqn.clo"
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**K_manual.tex
+(./K_manual.tex
+LaTeX2e <2009/09/24>
+Babel <v3.8l> and hyphenation patterns for english, dumylang, nohyphenation, ge
+rman-x-2009-06-19, ngerman-x-2009-06-19, afrikaans, ancientgreek, ibycus, arabi
+c, armenian, basque, bulgarian, catalan, pinyin, coptic, croatian, czech, danis
+h, dutch, ukenglish, usenglishmax, esperanto, estonian, ethiopic, farsi, finnis
+h, french, galician, german, ngerman, swissgerman, monogreek, greek, hungarian,
+ icelandic, assamese, bengali, gujarati, hindi, kannada, malayalam, marathi, or
+iya, panjabi, tamil, telugu, indonesian, interlingua, irish, italian, kurmanji,
+ lao, latin, latvian, lithuanian, mongolian, mongolianlmc, bokmal, nynorsk, pol
+ish, portuguese, romanian, russian, sanskrit, serbian, serbianc, slovak, sloven
+ian, spanish, swedish, turkish, turkmen, ukrainian, uppersorbian, welsh, loaded
+.
+(/usr/local/texlive/2011/texmf-dist/tex/latex/base/report.cls
+Document Class: report 2007/10/19 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2011/texmf-dist/tex/latex/base/fleqn.clo
 File: fleqn.clo 1998/08/17 v1.1c Standard LaTeX option (flush left equations)
 \mathindent=\dimen102
 )
-("C:\Program Files\MiKTeX 2.5\tex\latex\base\size12.clo"
-File: size12.clo 2005/09/16 v1.4f Standard LaTeX file (size option)
+(/usr/local/texlive/2011/texmf-dist/tex/latex/base/size12.clo
+File: size12.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 )
 \c@part=\count79
 \c@chapter=\count80
@@ -29,48 +38,48 @@ File: size12.clo 2005/09/16 v1.4f Standard LaTeX file (size option)
 \belowcaptionskip=\skip42
 \bibindent=\dimen103
 )
-("C:\Program Files\MiKTeX 2.5\tex\latex\marvosym\marvosym.sty"
+(/usr/local/texlive/2011/texmf-dist/tex/latex/marvosym/marvosym.sty
 Package: marvosym 2006/05/11 v2.1 Martin Vogel's Symbols font definitions
 )
-("C:\Program Files\MiKTeX 2.5\tex\latex\ltxmisc\topcapt.sty"
+(/usr/local/texlive/2011/texmf-dist/tex/latex/ltxmisc/topcapt.sty
 Package: topcapt 2004/12/11 v1.2 Caption at top of float
 )
-("C:\Program Files\MiKTeX 2.5\tex\latex\epigraph\epigraph.sty"
-Package: epigraph 2002/10/22 v1.5a typesetting epigraphs
+(/usr/local/texlive/2011/texmf-dist/tex/latex/epigraph/epigraph.sty
+Package: epigraph 2009/09/02 v1.5c typesetting epigraphs
 \beforeepigraphskip=\skip43
 \afterepigraphskip=\skip44
 \epigraphwidth=\skip45
 \epigraphrule=\skip46
 )
-("C:\Program Files\MiKTeX 2.5\tex\latex\ltxmisc\url.sty"
+(/usr/local/texlive/2011/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip10
-Package: url 2005/06/27  ver 3.2  Verb mode for urls, etc.
+Package: url 2006/04/12  ver 3.3  Verb mode for urls, etc.
 )
-("C:\Program Files\MiKTeX 2.5\tex\latex\natbib\natbib.sty"
-Package: natbib 2006/03/22 7.3 (PWD)
+(/usr/local/texlive/2011/texmf-dist/tex/latex/natbib/natbib.sty
+Package: natbib 2010/09/13 8.31b (PWD, AO)
 \bibhang=\skip47
 \bibsep=\skip48
-LaTeX Info: Redefining \cite on input line 541.
+LaTeX Info: Redefining \cite on input line 694.
 \c@NAT@ctr=\count88
 )
-("C:\Program Files\MiKTeX 2.5\tex\latex\amsmath\amsmath.sty"
+(/usr/local/texlive/2011/texmf-dist/tex/latex/amsmath/amsmath.sty
 Package: amsmath 2000/07/18 v2.13 AMS math features
 \@mathmargin=\skip49
 
 For additional information on amsmath, use the `?' option.
-("C:\Program Files\MiKTeX 2.5\tex\latex\amsmath\amstext.sty"
+(/usr/local/texlive/2011/texmf-dist/tex/latex/amsmath/amstext.sty
 Package: amstext 2000/06/29 v2.01
 
-("C:\Program Files\MiKTeX 2.5\tex\latex\amsmath\amsgen.sty"
+(/usr/local/texlive/2011/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0
 \@emptytoks=\toks14
 \ex@=\dimen104
 ))
-("C:\Program Files\MiKTeX 2.5\tex\latex\amsmath\amsbsy.sty"
+(/usr/local/texlive/2011/texmf-dist/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d
 \pmbraise@=\dimen105
 )
-("C:\Program Files\MiKTeX 2.5\tex\latex\amsmath\amsopn.sty"
+(/usr/local/texlive/2011/texmf-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 1999/12/14 v2.01 operator names
 )
 \inf@bad=\count89
@@ -111,39 +120,46 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 568.
 LaTeX Info: Redefining \[ on input line 2666.
 LaTeX Info: Redefining \] on input line 2667.
 )
-("C:\Program Files\MiKTeX 2.5\tex\latex\graphics\graphicx.sty"
+(/usr/local/texlive/2011/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
 
-("C:\Program Files\MiKTeX 2.5\tex\latex\graphics\keyval.sty"
+(/usr/local/texlive/2011/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
 \KV@toks@=\toks19
 )
-("C:\Program Files\MiKTeX 2.5\tex\latex\graphics\graphics.sty"
-Package: graphics 2006/02/20 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+(/usr/local/texlive/2011/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
 
-("C:\Program Files\MiKTeX 2.5\tex\latex\graphics\trig.sty"
+(/usr/local/texlive/2011/texmf-dist/tex/latex/graphics/trig.sty
 Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
 )
-("C:\Program Files\MiKTeX 2.5\tex\latex\00miktex\graphics.cfg"
-File: graphics.cfg 2005/12/29 v1.2 MiKTeX 'graphics' configuration
+(/usr/local/texlive/2011/texmf-dist/tex/latex/latexconfig/graphics.cfg
+File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
 )
-Package graphics Info: Driver file: pdftex.def on input line 90.
+Package graphics Info: Driver file: pdftex.def on input line 91.
 
-("C:\Program Files\MiKTeX 2.5\tex\latex\graphics\pdftex.def"
-File: pdftex.def 2006/05/17 v0.03q Graphics/color for pdfTeX
+(/usr/local/texlive/2011/texmf-dist/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+
+(/usr/local/texlive/2011/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2010/04/08 v1.3 Providing info/warning/message (HO)
+)
+(/usr/local/texlive/2011/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2011/04/18 v1.20 LaTeX kernel commands for general use (HO)
+)
 \Gread@gobject=\count101
 ))
 \Gin@req@height=\dimen113
 \Gin@req@width=\dimen114
 )
-("C:\Program Files\MiKTeX 2.5\tex\latex\graphics\lscape.sty"
+(/usr/local/texlive/2011/texmf-dist/tex/latex/graphics/lscape.sty
 Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
 )
-("C:\Program Files\MiKTeX 2.5\tex\latex\setspace\setspace.sty"
+(/usr/local/texlive/2011/texmf-dist/tex/latex/setspace/setspace.sty
 Package: setspace 2000/12/01 6.7 Contributed and Supported LaTeX2e package
 
 Package: `setspace' 6.7 <2000/12/01>
-) ("C:\Program Files\MiKTeX 2.5\tex\latex\tools\longtable.sty"
+) (/usr/local/texlive/2011/texmf-dist/tex/latex/tools/longtable.sty
 Package: longtable 2004/02/01 v4.11 Multi-page Table package (DPC)
 \LTleft=\skip52
 \LTright=\skip53
@@ -161,13 +177,13 @@ Package: longtable 2004/02/01 v4.11 Multi-page Table package (DPC)
 \c@LT@chunks=\count106
 \LT@p@ftn=\toks20
 )
-("C:\Program Files\MiKTeX 2.5\tex\latex\tools\verbatim.sty"
+(/usr/local/texlive/2011/texmf-dist/tex/latex/tools/verbatim.sty
 Package: verbatim 2003/08/22 v1.5q LaTeX2e package for verbatim enhancements
 \every@verbatim=\toks21
 \verbatim@line=\toks22
 \verbatim@in@stream=\read1
 )
-("C:\Program Files\MiKTeX 2.5\tex\latex\listings\listings.sty"
+(/usr/local/texlive/2011/texmf-dist/tex/latex/listings/listings.sty
 \lst@mode=\count107
 \lst@gtempboxa=\box32
 \lst@token=\toks23
@@ -179,42 +195,39 @@ Package: verbatim 2003/08/22 v1.5q LaTeX2e package for verbatim enhancements
 \lst@width=\dimen118
 \lst@newlines=\count111
 \lst@lineno=\count112
-\c@lstlisting=\count113
 \lst@maxwidth=\dimen119
 
-("C:\Program Files\MiKTeX 2.5\tex\latex\listings\lstpatch.sty"
-File: lstpatch.sty 2004/10/17 1.3b (Carsten Heinz)
-)
-("C:\Program Files\MiKTeX 2.5\tex\latex\listings\lstmisc.sty"
-File: lstmisc.sty 2004/09/07 1.3 (Carsten Heinz)
-\c@lstnumber=\count114
-\lst@skipnumbers=\count115
+(/usr/local/texlive/2011/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2007/02/22 1.4 (Carsten Heinz)
+\c@lstnumber=\count113
+\lst@skipnumbers=\count114
 \lst@framebox=\box33
 )
-("C:\Program Files\MiKTeX 2.5\tex\latex\listings\listings.cfg"
-File: listings.cfg 2004/09/05 1.3 listings configuration
+(/usr/local/texlive/2011/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2007/02/22 1.4 listings configuration
 ))
-Package: listings 2004/10/17 1.3b (Carsten Heinz)
+Package: listings 2007/02/22 1.4 (Carsten Heinz)
 
-("C:\Program Files\MiKTeX 2.5\tex\latex\listings\lstlang1.sty"
+(/usr/local/texlive/2011/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2004/09/05 1.3 listings language file
 )
-("C:\Program Files\MiKTeX 2.5\tex\latex\listings\lstmisc.sty"
-File: lstmisc.sty 2004/09/07 1.3 (Carsten Heinz)
+(/usr/local/texlive/2011/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2007/02/22 1.4 (Carsten Heinz)
 )
-("C:\Program Files\MiKTeX 2.5\tex\latex\fancyvrb\fancyvrb.sty"
-Package: fancyvrb 1998/07/17
+(/usr/local/texlive/2011/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
+Package: fancyvrb 2008/02/07
 
-Style option: `fancyvrb' v2.6, with DG/SPQR fixes <1998/07/17> (tvz)
-\FV@CodeLineNo=\count116
+Style option: `fancyvrb' v2.7a, with DG/SPQR fixes, and firstline=lastline fix 
+<2008/02/07> (tvz)
+\FV@CodeLineNo=\count115
 \FV@InFile=\read2
 \FV@TabBox=\box34
-\c@FancyVerbLine=\count117
-\FV@StepNumber=\count118
+\c@FancyVerbLine=\count116
+\FV@StepNumber=\count117
 \FV@OutFile=\write3
+) (./K_manual.aux)
+\openout1 = `K_manual.aux'.
 
-No file fancyvrb.cfg.
-) (K_manual.aux)
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 263.
 LaTeX Font Info:    ... okay on input line 263.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 263.
@@ -227,55 +240,92 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 263.
 LaTeX Font Info:    ... okay on input line 263.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 263.
 LaTeX Font Info:    ... okay on input line 263.
- ("C:\Program Files\MiKTeX 2.5\tex\context\base\supp-pdf.tex"
-("C:\Program Files\MiKTeX 2.5\tex\context\base\supp-mis.tex"
-loading : Context Support Macros / Miscellaneous (2004.10.26)
-\protectiondepth=\count119
-\scratchcounter=\count120
-\scratchtoks=\toks24
+
+(/usr/local/texlive/2011/texmf-dist/tex/context/base/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count118
 \scratchdimen=\dimen120
-\scratchskip=\skip56
-\scratchmuskip=\muskip12
 \scratchbox=\box35
-\scratchread=\read3
-\scratchwrite=\write4
-\zeropoint=\dimen121
-\onepoint=\dimen122
-\onebasepoint=\dimen123
-\minusone=\count121
-\thousandpoint=\dimen124
-\onerealpoint=\dimen125
-\emptytoks=\toks25
-\nextbox=\box36
-\nextdepth=\dimen126
-\everyline=\toks26
-\!!counta=\count122
-\!!countb=\count123
-\recursecounter=\count124
+\nofMPsegments=\count119
+\nofMParguments=\count120
+\everyMPshowfont=\toks24
+\MPscratchCnt=\count121
+\MPscratchDim=\dimen121
+\MPnumerator=\count122
+\makeMPintoPDFobject=\count123
+\everyMPtoPDFconversion=\toks25
+) (/usr/local/texlive/2011/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2011/04/22 v0.16 Utilities of pdfTeX for LuaTeX (HO)
+
+(/usr/local/texlive/2011/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
 )
-loading : Context Support Macros / PDF (2004.03.26)
-\nofMPsegments=\count125
-\nofMParguments=\count126
-\MPscratchCnt=\count127
-\MPscratchDim=\dimen127
-\MPnumerator=\count128
-\everyMPtoPDFconversion=\toks27
-) [1
+(/usr/local/texlive/2011/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in PDF mode is detected.
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+(/usr/local/texlive/2011/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
 
-{psfonts.map}] [2
+(/usr/local/texlive/2011/texmf-dist/tex/latex/oberdiek/grfext.sty
+Package: grfext 2010/08/19 v1.1 Managing graphics extensions (HO)
 
-] (K_manual.toc [3
+(/usr/local/texlive/2011/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
+Package: kvdefinekeys 2011/04/07 v1.3 Defining keys (HO)
+))
+(/usr/local/texlive/2011/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2010/12/23 v3.10 Keyval support for LaTeX options (HO)
+
+(/usr/local/texlive/2011/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+Package: kvsetkeys 2011/04/07 v1.13 Key value parser (HO)
+
+(/usr/local/texlive/2011/texmf-dist/tex/generic/oberdiek/etexcmds.sty
+Package: etexcmds 2011/02/16 v1.5 Prefix for e-TeX command names (HO)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)))
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 452.
+
+(/usr/local/texlive/2011/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+\c@lstlisting=\count124
+
+[1
+
+{/usr/local/texlive/2011/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+[2
+
+] (./K_manual.toc [3
 
 
 ])
-\tf@toc=\write5
- [4] (K_manual.lot)
-\tf@lot=\write6
+\tf@toc=\write4
+\openout4 = `K_manual.toc'.
+
+ [4] (./K_manual.lot)
+\tf@lot=\write5
+\openout5 = `K_manual.lot'.
+
  [5
 
-] (K_manual.lof)
-\tf@lof=\write7
-[6
+] (./K_manual.lof)
+\tf@lof=\write6
+\openout6 = `K_manual.lof'.
+
+ [6
 
 ]
 Chapter 1.
@@ -286,44 +336,51 @@ Underfull \vbox (badness 1147) has occurred while \output is active []
 
 
 ]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 301.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 334.
 
 
-("C:\Program Files\MiKTeX 2.5\tex\latex\base\omscmr.fd"
+(/usr/local/texlive/2011/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 301.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 334.
  [8] [9] [10]
 LaTeX Font Info:    Font shape `OMS/cmr/m/it' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 348.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 431.
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 361.
- [11]
-<k_lssh0_bb.pdf, id=78, 351.3125pt x 296.10625pt>
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 451.
+
+[11] <k_lssh0_bb.pdf, id=51, 351.3125pt x 296.10625pt>
 File: k_lssh0_bb.pdf Graphic file (type pdf)
  <use k_lssh0_bb.pdf>
-<k_lssh02_bb.pdf, id=80, 351.3125pt x 296.10625pt>
+Package pdftex.def Info: k_lssh0_bb.pdf used on input line 501.
+(pdftex.def)             Requested size: 342.98663pt x 289.07999pt.
+
+<k_lssh02_bb.pdf, id=53, 351.3125pt x 296.10625pt>
 File: k_lssh02_bb.pdf Graphic file (type pdf)
  <use k_lssh02_bb.pdf>
-[12] [13 <k_lssh0_bb.pdf>] [14 <k_lssh02_bb.pdf>]
+Package pdftex.def Info: k_lssh02_bb.pdf used on input line 517.
+(pdftex.def)             Requested size: 342.98663pt x 289.07999pt.
+
+[12] [13 <./k_lssh0_bb.pdf>] [14 <./k_lssh02_bb.pdf>]
 Chapter 2.
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 7796) has occurred while \output is active []
 
  [15
 
 ]
 [16]
 Chapter 3.
-[17
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [17
 
 ]
-LaTeX Font Info:    Try loading font information for U+mvs on input line 477.
- ("C:\Program Files\MiKTeX 2.5\tex\latex\marvosym\umvs.fd")
-Underfull \vbox (badness 1189) has occurred while \output is active []
+LaTeX Font Info:    Try loading font information for U+mvs on input line 639.
 
- [18]
+(/usr/local/texlive/2011/texmf-dist/tex/latex/marvosym/umvs.fd) [18]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [19]
@@ -332,79 +389,80 @@ Chapter 4.
 [21
 
 ]
-Underfull \hbox (badness 1454) in paragraph at lines 631--632
+Underfull \hbox (badness 1454) in paragraph at lines 832--836
 \OT1/cmr/m/n/12 For com-pu-ta-tional ef-fi-ciency, \OT1/cmr/bx/n/12 K \OT1/cmr/
 m/n/12 au-to-mat-i-cally cal-cu-lates fit-nesses for all []
  []
 
 
-Underfull \hbox (badness 2680) in paragraph at lines 631--632
+Underfull \hbox (badness 2680) in paragraph at lines 832--836
 \OT1/cmr/m/n/12 and stores these val-ues in the ar-ray [][][]. The func-tion
  []
 
 [22]
-Underfull \hbox (badness 2205) in paragraph at lines 640--641
-\OT1/cmr/m/n/12 times, all rel-e-vant mem-bers of [] should be up-dated, and th
-en the func-tion
+Underfull \hbox (badness 1132) in paragraph at lines 854--861
+[]\OT1/cmr/m/n/12 If case (1[]) fits, then points should be iden-ti-fied dur-in
+g model ex-e-cu-tion at
  []
 
-LaTeX Font Info:    Try loading font information for OML+cmr on input line 644.
+LaTeX Font Info:    Try loading font information for OML+cmr on input line 865.
 
-("C:\Program Files\MiKTeX 2.5\tex\latex\base\omlcmr.fd"
+(/usr/local/texlive/2011/texmf-dist/tex/latex/base/omlcmr.fd
 File: omlcmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/it' in size <10.95> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 644.
- [23] [24] [25]
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 865.
+ [23] [24]
+[25]
 Chapter 5.
 [26
 
-] [27]
+]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [27]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [28]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 1292) has occurred while \output is active []
 
  [29]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [30]
-[31] [32]
+[30] [31] [32]
 Chapter 6.
 [33
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 878--878
+Underfull \hbox (badness 10000) in paragraph at lines 1234--1234
 []|\OT1/cmr/m/n/12 Resources for apomic-tic
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 879--879
+Underfull \hbox (badness 10000) in paragraph at lines 1235--1235
 []|\OT1/cmr/m/n/12 Resources for out-crossed
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 880--880
+Underfull \hbox (badness 10000) in paragraph at lines 1236--1236
 []|\OT1/cmr/m/n/12 Resources for out-crossed
  []
 
 
-Underfull \hbox (badness 5446) in paragraph at lines 881--881
+Underfull \hbox (badness 5446) in paragraph at lines 1237--1237
 []|\OT1/cmr/m/n/12 Total re-sources used for
  []
 
 
-Underfull \hbox (badness 5446) in paragraph at lines 882--882
+Underfull \hbox (badness 5446) in paragraph at lines 1238--1238
 []|\OT1/cmr/m/n/12 Total re-sources used for
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 884--884
+Underfull \hbox (badness 10000) in paragraph at lines 1240--1240
 \OT1/cmr/m/n/12 used for [] apomic-tic
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 886--886
+Underfull \hbox (badness 10000) in paragraph at lines 1242--1242
 []|\OT1/cmr/m/n/12 Proportion of [] re-
  []
 
@@ -418,42 +476,48 @@ Chapter 7.
 
 ] [39] [40]
 Chapter 8.
-(K_manual.bbl [41
+(./K_manual.bbl [41
 
 ] [42
 
-]) [43] (K_manual.aux) )
+]) [43] (./K_manual.aux) )
 (\end occurred inside a group at level 1)
 
-### simple group (level 1) entered at line 413 ({)
+### simple group (level 1) entered at line 540 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 4547 strings out of 95419
- 57234 string characters out of 1187299
- 160404 words of memory out of 1115976
- 7503 multiletter control sequences out of 60000
- 16665 words of font info for 58 fonts, out of 1000000 for 2000
- 14 hyphenation exceptions out of 8191
- 27i,20n,49p,1217b,1615s stack positions out of 5000i,500n,10000p,200000b,32768s
+ 5072 strings out of 493633
+ 70374 string characters out of 3143377
+ 191466 words of memory out of 3000000
+ 8276 multiletter control sequences out of 15000+200000
+ 16665 words of font info for 58 fonts, out of 3000000 for 9000
+ 831 hyphenation exceptions out of 8191
+ 38i,20n,49p,771b,1613s stack positions out of 5000i,500n,10000p,200000b,50000s
+</usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmbx12.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmbxti10.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmex10.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmmi10.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmmi12.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmmi6.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mmi8.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
+10.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12
+.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.p
+fb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb>
+</usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></u
+sr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl12.pfb></us
+r/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr
+/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/l
+ocal/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/loc
+al/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/loca
+l/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local
+/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/
+texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/t
+exlive/2011/texmf-dist/fonts/type1/public/marvosym/marvosym.pfb>
+Output written on K_manual.pdf (43 pages, 315482 bytes).
 PDF statistics:
- 222 PDF objects out of 300000
- 0 named destinations out of 300000
- 23 words of extra memory for PDF output out of 10000
-<C:/Program Files/MiKTeX 2.5/fonts/type1/bluesky/cm/cmbxti10.pf
-b><C:/Program Files/MiKTeX 2.5/fonts/type1/bluesky/cm/cmmi10.pfb><C:/Program Fi
-les/MiKTeX 2.5/fonts/type1/bluesky/cm/cmr6.pfb><C:/Program Files/MiKTeX 2.5/fon
-ts/type1/public/marvosym/marvosym.pfb><C:/Program Files/MiKTeX 2.5/fonts/type1/
-bluesky/cm/cmsy6.pfb><C:/Program Files/MiKTeX 2.5/fonts/type1/bluesky/cm/cmmi6.
-pfb><C:/Program Files/MiKTeX 2.5/fonts/type1/bluesky/cm/cmex10.pfb><C:/Program 
-Files/MiKTeX 2.5/fonts/type1/bluesky/cm/cmti10.pfb><C:/Program Files/MiKTeX 2.5
-/fonts/type1/bluesky/cm/cmtt10.pfb><C:/Program Files/MiKTeX 2.5/fonts/type1/blu
-esky/cm/cmsy8.pfb><C:/Program Files/MiKTeX 2.5/fonts/type1/bluesky/cm/cmsy10.pf
-b><C:/Program Files/MiKTeX 2.5/fonts/type1/bluesky/cm/cmti12.pfb><C:/Program Fi
-les/MiKTeX 2.5/fonts/type1/bluesky/cm/cmsl12.pfb><C:/Program Files/MiKTeX 2.5/f
-onts/type1/bluesky/cm/cmmi8.pfb><C:/Program Files/MiKTeX 2.5/fonts/type1/bluesk
-y/cm/cmmi12.pfb><C:/Program Files/MiKTeX 2.5/fonts/type1/bluesky/cm/cmtt12.pfb>
-<C:/Program Files/MiKTeX 2.5/fonts/type1/bluesky/cm/cmr8.pfb><C:/Program Files/
-MiKTeX 2.5/fonts/type1/bluesky/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.5/fonts/
-type1/bluesky/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.5/fonts/type1/bluesky/cm/
-cmr17.pfb><C:/Program Files/MiKTeX 2.5/fonts/type1/bluesky/cm/cmbx12.pfb>
-Output written on K_manual.pdf (43 pages, 238202 bytes).
+ 249 PDF objects out of 1000 (max. 8388607)
+ 173 compressed objects within 2 object streams
+ 0 named destinations out of 1000 (max. 500000)
+ 23 words of extra memory for PDF output out of 10000 (max. 10000000)
+
