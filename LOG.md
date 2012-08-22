@@ -1,7 +1,3 @@
-NOTE: Tasks for each date were performed in order from the date down.
----------------------------------------------------------------------
-
-==========
 2012/08/22
 ==========
 
@@ -19,26 +15,26 @@ My real interest here is in the nested mutation classes, and I'll get that
 working, finally, and bang out a little paper.  Then if all goes well I'll move
 on to incorporating mitotic mutation and look for the sieve.
 
-Practical issues related to development that I can recall just now include:
+**Practical issues related to development that I can recall just now include**
 
---- Make each mutation representation 'K' be a proper C++ class.  During
+-  --- Make each mutation representation 'K' be a proper C++ class.  During
 initial development I dummied that up while sticking with strict C, and the
 'translation' to C++ from the original C is basically nonexistent.  Is it worth
 doing?  I don't know, but I'll evaluate it.
 
---- Why don't I get proper fitness calculations at mutation rates of 0 and more
+-  --- Why don't I get proper fitness calculations at mutation rates of 0 and more
 importantly 1?  Things were trending nicely at e.g. 0.001 and 0.999, but then
 cratered.  This is a persistent issue that has bugged me for years whenever I
 remembered back to this project and I never tracked it down to my satisfaction.
 
---- Get nested classes working.  The simplest approach was originally suggested
+-  --- Get nested classes working.  The simplest approach was originally suggested
 by Stewart Schultz, and that is to have the most deleterious class be
 completely deleterious so that homozygotes need not be represented (they're all
 dead).
 
-Research issues:
+**Research issues**
 
---- Establish research questions for the initial work.  A natural place to go
+-  --- Establish research questions for the initial work.  A natural place to go
 is to fix the total mutation rate (say at 0.1/0.2, 0.5, 1.0, 2.0, and 5.0
 [going to high mutation rates is something I think is necessary to do]) and
 examine the dynamics of inbreeding depression as the relative proportion
@@ -48,62 +44,59 @@ mutations?  How does this interact with selfing rate, and with mutational
 characteristics?
 
 
-=======
+
 1/21/04
 =======
-  ---  Figure out the problem with sum_KArray_n() values from 1/16/04.
+-  --- Figure out the problem with sum_KArray_n() values from 1/16/04.
 
-=======
+
 1/16/04
 =======
-  -X- Results of test of [6][0][2][0]
+-  -X- Results of test of [6][0][2][0]
 
 The test passed, so at least the behavior is consistent following the changes.
 
-  -X- Why is sum_KArray_n() returning 2?
+-  -X- Why is sum_KArray_n() returning 2?  It's happening immediately after
+  compute_zygotes_n().  My guess is, that somehow we're not decreasing the
+proportions from the gametes like we're supposed to be doing.  Every other
+routine is well-behaved.  SOLVED!!  In apply_zygotes() we're dividing the
+zygote distribution by 2 because the Male and Female gamete distributions both
+sum to 1, and we're combining the M+F and the F+M contributions.  This was
+repeated in apply_zygotes_n(), but was wrong, because there we're combining the
+M[0]+F[0], M[0]+F[1], M[1]+F[0], and M[1]+F[1] contributions; all distributions
+sum to 1 here as well, so we must divide the zygote distribution by 4.
 
-It's happening immediately after compute_zygotes_n().  My guess is, that
-somehow we're not decreasing the proportions from the gametes like we're
-supposed to be doing.  Every other routine is well-behaved.  SOLVED!!  In
-apply_zygotes() we're dividing the zygote distribution by 2 because the Male
-and Female gamete distributions both sum to 1, and we're combining the M+F and
-the F+M contributions.  This was repeated in apply_zygotes_n(), but was wrong,
-because there we're combining the M[0]+F[0], M[0]+F[1], M[1]+F[0], and
-M[1]+F[1] contributions; all distributions sum to 1 here as well, so we must
-divide the zygote distribution by 4.
+-  -X- We should profile the [6][0][2][0] run on finn or adrienne.  Before I
+   start poking around in routines I'm not certain of.  I've added Kprof script
+to create Kpg, an executable that's compiled with -pg.  [WAS: Any way to speed
+up compute_gametes_n()?  It takes a while no matter what the parameter set.  So
+let's look into this...  apply_gametes_n() is the real culprit... Any way to
+speed up compute_mutation_n()?] Here's the first few lines of the gprof results
+on finn:
 
-  -X- We should profile the [6][0][2][0] run on finn or adrienne
-
-Before I start poking around in routines I'm not certain of.  I've added Kprof
-script to create Kpg, an executable that's compiled with -pg.  [WAS: Any way to
-speed up compute_gametes_n()?  It takes a while no matter what the parameter
-set.  So let's look into this...  apply_gametes_n() is the real culprit... Any
-way to speed up compute_mutation_n()?] Here's the first few lines of the gprof
-results on finn:
-
-  %   cumulative   self              self     total           
- time   seconds   seconds    calls  ms/call  ms/call  name    
- 97.22    519.93   519.93       24 21663.75 21672.50  apply_gametes_full_n
-  0.99    525.25     5.32       24   221.67   221.67  apply_zygotes_n
-  0.42    527.51     2.26       69    32.75    32.75  copy_KArray_n
-  0.27    528.98     1.47 14791887     0.00     0.00  fitness_n
-  0.22    530.13     1.15       47    24.47    24.47  sum_KArray_n
-  0.21    531.26     1.13 14791887     0.00     0.00  fitness_from_mfitness
-  0.18    532.21     0.95       23    41.30   207.66  apply_selection_n
-  0.15    532.99     0.78       23    33.91    58.38  normalize_KArray_n
-  0.14    533.74     0.75       24    31.25    86.57  cumulative_fitness_n
-  ...
+      %   cumulative   self              self     total           
+     time   seconds   seconds    calls  ms/call  ms/call  name    
+     97.22    519.93   519.93       24 21663.75 21672.50  apply_gametes_full_n
+      0.99    525.25     5.32       24   221.67   221.67  apply_zygotes_n
+      0.42    527.51     2.26       69    32.75    32.75  copy_KArray_n
+      0.27    528.98     1.47 14791887     0.00     0.00  fitness_n
+      0.22    530.13     1.15       47    24.47    24.47  sum_KArray_n
+      0.21    531.26     1.13 14791887     0.00     0.00  fitness_from_mfitness
+      0.18    532.21     0.95       23    41.30   207.66  apply_selection_n
+      0.15    532.99     0.78       23    33.91    58.38  normalize_KArray_n
+      0.14    533.74     0.75       24    31.25    86.57  cumulative_fitness_n
+      ...
 
 Thus, apply_gametes_full_n() is definitely a serious culprit, with all that
 self time.  And it's definitely within that routine, because if we look at its
 call graph:
 
------------------------------------------------
-              519.93    0.21      24/24          apply_gametes_n [2]
-[3]     97.3  519.93    0.21      24         apply_gametes_full_n [3]
-                0.16    0.03 3516552/3516552     lnbinomial [27]
-                0.02    0.00 1758276/1758276     lnpow_half [34]
------------------------------------------------
+    -----------------------------------------------
+                  519.93    0.21      24/24          apply_gametes_n [2]
+    [3]     97.3  519.93    0.21      24         apply_gametes_full_n [3]
+                    0.16    0.03 3516552/3516552     lnbinomial [27]
+                    0.02    0.00 1758276/1758276     lnpow_half [34]
+    -----------------------------------------------
 
 it's clear that its own code, and not called routines, is responsible for all
 that time.  Now that I look at that code, it's got to be the looping, because
@@ -137,78 +130,78 @@ speedup, because we have to do lots of nested loops, and the interior code is
 pretty streamlined.  Maybe we could remove some if() statements that produce
 debug code.
 
-  -X- Put the inclusion of IF_DEBUG in the above routine on an #if defined().
+-  -X- Put the inclusion of IF_DEBUG in the above routine on an #if defined().
 
 I added a TIMECRITICAL_INCLUDEDEBUG[_n] flag that is not defined by default.
 This can be a generally-used check.
 
 I'm going to do some speedups for apply_mutation[_n]().
 
-  -X- Keep from calling mut_term() and mut_term_n().
-  -X- Apply the is_lethal speedups here.
+-  -X- Keep from calling mut_term() and mut_term_n().
+-  -X- Apply the is_lethal speedups here.
 
 Also, 
 
-  -X- Speedups to apply_self_progeny_n().
+-  -X- Speedups to apply_self_progeny_n().
 
 Added TIMECRITICAL_INCLUDEDEBUG_n statement, and added is_lethals code.  I
 still need to do the TODO announced therein, with better loop control.
 
-  -X- Apply warnings near check_normalization_n() calls.
+-  -X- Apply warnings near check_normalization_n() calls.
 
 I made this to be a single general warning at the beginning.
 
 New profiling run doesn't reveal a speedup, at least for the no-mutation,
 no-selection case. :-(
 
-  -X- Results of test of [6][0][2][0]
+-  -X- Results of test of [6][0][2][0]
 
 Success!! So with the mods, the test passed.
 
 I've also modified the Kmake scripts to optimize with -O.
 
-  -X- Better loop control as described in apply_self_progeny_n().
+-  -X- Better loop control as described in apply_self_progeny_n().
 
 I've modified both apply_self_progeny[_n]() to remove all conditional
 statements checking i, j, n, v, etc.  There are no longer any continue or break
 conditions, nor os there the if() wrapper around the s_self_n() call.  It has
 all been accomplished by adjusting the values of the loop endpoints.
 
-  -X- Results of test of [6][0][2][0]
+-  -X- Results of test of [6][0][2][0]
 
 Success.  This is still not the bread-n-butter test that requires the
 production of selfed progeny... so...
 
-  -X- Do a LSS test with the one-class version, on adrienne.
+-  -X- Do a LSS test with the one-class version, on adrienne.
 
 FAILED!!!  Failed at h=0.  Now to back out the changes and see what it was.
 
-  -X- First, back out the use of the -O flag, see what that does.
+-  -X- First, back out the use of the -O flag, see what that does.
 
 No effect, good.
 
-  -X- Back out the loop controls on apply_self_progeny().
+-  -X- Back out the loop controls on apply_self_progeny().
 
 Success!!  When backing out the v loop controls, at both h=0 and h=0.02.  This
 is the problem, then, and backing out the is_lethal code in
 apply_self_progeny() and is_lethal code in apply_mutation() is not necessary.
 Now to narrow down the issue.
 
-  -X- Remove the (apparently redundant) extra loop check.
+-  -X- Remove the (apparently redundant) extra loop check.
 
 FAILED!!!  There may be an interaction with the is_lethal code, so
 
-  -X- Set the -nolethal flag and rerunning K.
+-  -X- Set the -nolethal flag and rerunning K.
 
 FAILED!!!  Plus, it takes a *ton* of time now.  In fact, it was about 100 to
 500 times slower.
 
-  -X- Restore the original loop controls on the v loop.
+-  -X- Restore the original loop controls on the v loop.
 
 Test passed after this.
 
-  -X- Make the appropriate changes to the two-class version.
-  -X- Test the two-class version with [6][0][2][0].
+-  -X- Make the appropriate changes to the two-class version.
+-  -X- Test the two-class version with [6][0][2][0].
 
 Success!!  At home now, this is my task for the evening.  And it's completed,
 it looks good.
@@ -220,18 +213,18 @@ no-mutation class, and have the second be a lethal with h=0 and h=0.02, to see
 if indeed the marginal distributions are identical to the single-class
 versions.
 
-  -X- Run test with U=1/0, s=1/0, h=0/0.
+-  -X- Run test with U=1/0, s=1/0, h=0/0.
 
 FAILED!!  See below.
 
-  --- What is the deal with those wacked sum_KArray_n() values?
+-  --- What is the deal with those wacked sum_KArray_n() values?
 
 They seem to be settling down as the number of generations increases, but
 honestly I don't get it.  I stopped the test, because a) the values seemed to
 be converging to ~40, and b) they're whacked to begin with! 
 
 
-=======
+
 1/15/04
 =======
 
@@ -279,20 +272,20 @@ I'll do is, make the sum_KArray() change in mean_fitness(), make the change to
 apply_self_progeny() to only create j>0 classes if the argument says so, and
 compute progeny at the very end only.
 
-  -X- sum_KArray change
+-  -X- sum_KArray change
 
 This was done by creating mean_fitness_allprogeny(), making the changes
 described above to that function, and calling that from apply_selection().
 mean_fitness() remains the same, as it is needed for other statistics
 computation.
 
-  -X- apply_self_progeny(), compute_self_progeny(), reproduction routines.
+-  -X- apply_self_progeny(), compute_self_progeny(), reproduction routines.
 
 These changes were done by adding a field K->createlethal, the value of this
 field is checked everywhere K->is_lethal is checked, and the creation is
 bypassed only if K->createlethal==0.  
 
-  -X- determine where to make modification so that stats will be sensible.
+-  -X- determine where to make modification so that stats will be sensible.
 
 This change was done by adding an extra section of code to main().  Once
 equilibrium is reached, we set K->createlethal=1 and then do every compute_*()
@@ -307,7 +300,7 @@ without the speedup.  Now to work this into the multi-class model.
 By the way, to turn off this mechanism, just disable the setting of
 K->is_lethal or KN->is_lethal[] in initial_model_state[_n]().
 
-  -X- Command-line option to disable the is_lethal mechanism.
+-  -X- Command-line option to disable the is_lethal mechanism.
 
 This option is -nolethal.
 
@@ -317,22 +310,22 @@ array, and do *not* set proportions directly in elements of a dedicated array
 for each mode of reproduction, as does the one-class model.  So, if we don't
 have anything to add, do nothing!  Don't zero the array entries.
 
-  -X- KN fields
-  -X- initiate_model_state_n()
-  -X- apply_self_progeny_n()
-  -X- apply_apomixis_progeny_n()
-  -X- apply_gametes_n()
+-  -X- KN fields
+-  -X- initiate_model_state_n()
+-  -X- apply_self_progeny_n()
+-  -X- apply_apomixis_progeny_n()
+-  -X- apply_gametes_n()
 
 At the same time as I applied this, I added the apply_gametes_full_n() and
 adjust_gametes_n() mechanism to the two-class model.
 
-  -X- mean_fitness_allprogeny_n()
-  -X- apply_selection_n()
-  -X- main() additional calls for stats
+-  -X- mean_fitness_allprogeny_n()
+-  -X- apply_selection_n()
+-  -X- main() additional calls for stats
 
 I have to review how stats are done here...
 
-  -X- check on stats generation, period
+-  -X- check on stats generation, period
 
 Also, two-class stats procedure may be wrong because they create progeny
 without subjecting them to selection...  That doesn't matter, because the
@@ -347,9 +340,9 @@ createlethal[] flag for the appropriate mutation class(es).
 Test the two-class model on our old favorite, the [6][0][2][0] no-selection
 no-mutation model, to see if everything remains consistent...
 
-  -X- Testing with [6][0][2][0]...  Passed, see 1/16/04.
-  -X- Wow, very strange that sum_KArray_n() returns 2.  Why???  Solved, see 1/16/04.
-  -X- Is mean_fitness computed correctly with two-class?  It appears so, but this has not been tested. 
+-  -X- Testing with [6][0][2][0]...  Passed, see 1/16/04.
+-  -X- Wow, very strange that sum_KArray_n() returns 2.  Why???  Solved, see 1/16/04.
+-  -X- Is mean_fitness computed correctly with two-class?  It appears so, but this has not been tested. 
 
 Also, we may be able to speed up apply_selection_n() in a way that we declined
 to for the single-class case.
@@ -364,10 +357,10 @@ mutation parameters to see what kinds of values their mean_hetloci etc. have.
 The results will help determine what sizes to make the classes for the
 two-class runs coming up.
 
-  --- Mutation class sizes with mildly deleterious mutations (s=0.1, h=0.3).
+-  --- Mutation class sizes with mildly deleterious mutations (s=0.1, h=0.3).
 
 
-=======
+
 1/14/04
 =======
 
@@ -400,22 +393,22 @@ DEBUG_EQUILIBRIUM and DEBUG_TRUNCATE as well.  I killed the finn and adrienne
 runs and restarted them via telnet from anna, as I'm planning on taking the
 laptop home for the evening.
 
-Issues for the future:
+**Issues for the future**
 
- --- One issue to keep an eye on, is that the number of mutation classes used
-is 200 hets, 40 homs for single-class, and 50 hets, 10 homs for two-class.
+-  --- One issue to keep an eye on, is that the number of mutation classes used
+   is 200 hets, 40 homs for single-class, and 50 hets, 10 homs for two-class.
 This speeds things up but will probably be too small for higher mutation rates
 with lower selection; let's see what happens with the above test runs.
 
-  -X- Now that S=0.99, we seem to be taking a long time in apply_mutation_n(),
-is there some way to speed those up?
+-  -X- Now that S=0.99, we seem to be taking a long time in apply_mutation_n(),
+   is there some way to speed those up?
 
-  -X- Now that S=0.99, we seem to be taking a long time in
-apply_self_progeny_n(), is there some way to speed those up?  Did a bunch of
+-  -X- Now that S=0.99, we seem to be taking a long time in
+   apply_self_progeny_n(), is there some way to speed those up?  Did a bunch of
 stuff on 1/16/04.
 
 
-=======
+
 1/13/04
 =======
 
@@ -443,7 +436,7 @@ at equilibrium appear to be equivalent to an independent non-nested equilibrium
 distribution for each 
 
 
-=======
+
 6/25/03
 =======
 
@@ -472,13 +465,13 @@ first call for the inbreeding depression calcs.  I'll change that, and see what
 happens.  Note also the difference in the interface between these, I have to
 remind myself what the fi, fj, fg args in the _stats(...) version mean.
 
-void        apply_gametes       (KConfig K, 
-                                 KVector1 mgam, KVector1 fgam,
-                                 KArray from)
-void        apply_gametes_stats (KConfig K, 
-                                 KVector1 mgam, KVector1 fgam,
-                                 KScalar fromval,
-                                 KInt fi, KInt fj, KInt fg)
+    void        apply_gametes       (KConfig K, 
+                                     KVector1 mgam, KVector1 fgam,
+                                     KArray from)
+    void        apply_gametes_stats (KConfig K, 
+                                     KVector1 mgam, KVector1 fgam,
+                                     KScalar fromval,
+                                     KInt fi, KInt fj, KInt fg)
 
 Now I remember, the fi, fj, fg args refer to the class from which we generate
 the resultant distributions.  So, I'll augment _stats(...) to use the whole
@@ -494,6 +487,6 @@ apply_gametes_full().  Standard model reproduction calls apply_gametes() just
 as before.  Now that I've run that, it doesn't work in the short example I've
 been loading. Why would that be?  It's a little too late to be worrying about
 it now, we're getting ready to land.  It's 12:32 am EST, 9:32 am Chico time,
-and I'm running on about 3 hrs sleep.  I can't wait to see Elsa :-)
+and I'm running on about 3 hrs sleep.
 
 
