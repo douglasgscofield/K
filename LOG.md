@@ -74,8 +74,9 @@ let's look into this...  `apply_gametes_n()` is the real culprit... Any way to
 speed up `compute_mutation_n()`?] Here's the first few lines of the gprof results
 on finn:
 
+~~~~~~
       %   cumulative   self              self     total           
-      time  seconds   seconds    calls  ms/call  ms/call  name    
+     time   seconds   seconds    calls  ms/call  ms/call  name    
       97.22   519.93   519.93       24 21663.75 21672.50  apply_gametes_full_n
       0.99    525.25     5.32       24   221.67   221.67  apply_zygotes_n
       0.42    527.51     2.26       69    32.75    32.75  copy_KArray_n
@@ -86,6 +87,7 @@ on finn:
       0.15    532.99     0.78       23    33.91    58.38  normalize_KArray_n
       0.14    533.74     0.75       24    31.25    86.57  cumulative_fitness_n
       ...
+~~~~~~
 
 Thus, `apply_gametes_full_n()` is definitely a serious culprit, with all that
 self time.  And it's definitely within that routine, because if we look at its
