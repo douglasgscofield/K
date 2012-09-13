@@ -34,4 +34,5 @@ void        set_debug               (int lvl);
 #define     DEBUG_FOLLOW_EQUILIBRIUM    9
 #define     DEBUG_GENERATIONS           10
 #define     DEBUG_LETHALS               11
+#define     DEBUG_TRUNCATE_DETAIL       12
 

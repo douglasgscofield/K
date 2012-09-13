@@ -1,5 +1,5 @@
 KScalar     sum_KArray              (KConfig K, KArray& A);
-KScalar     sum_KVector1        (KConfig K, KVector1& v);
+KScalar     sum_KVector1            (KConfig K, KVector1& v);
 KScalar     sum_KArray2             (KConfig K, KArray2& A);
 void        copy_KArray             (KConfig K, KArray& to, KArray& from) ;
 int         isOK_KArray             (KConfig K, KArray& a);

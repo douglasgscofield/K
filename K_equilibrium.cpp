@@ -48,15 +48,15 @@ int         diff_epsilon_KArray     (KConfig K, KArray& a1, KArray& a2,
 				}
 			}
 		}
-		printf("diff_epsilon_KArray: epsilon = %lg, max diff @ [%d][%d][%d] = %lg\n",
-			   epsilon, l, lam, zeta, maxdiff);
+		printf("%s: gen %d, epsilon = %lg, max diff [%d][%d][%d] = %lg\n",
+			   thisfunction, K->generation, epsilon, l, lam, zeta, maxdiff);
     }
     IF_DEBUG(DEBUG_EQUILIBRIUM) {
     	KInt n, v, xi;
 	    KInt l = 0, lam = 0, zeta = 0;
 	    KScalar diff, maxdiff = 0.0;
 		IF_DEBUG(DEBUG_EQUILIBRIUM_DETAIL) {
-			printf("diff_epsilon_KArray: BEGIN where (a1[][][]-a2[][][] != 0.0)\n");
+			printf("%s: BEGIN where (a1[][][]-a2[][][] != 0.0)\n", thisfunction);
             printf("i\tj\tg\tdiff\n");
         }
 		for (n=0; n < K->MI; n++) {
@@ -79,10 +79,10 @@ int         diff_epsilon_KArray     (KConfig K, KArray& a1, KArray& a2,
 			}
 		}
 		IF_DEBUG(DEBUG_EQUILIBRIUM_DETAIL) {
-			printf("diff_epsilon_KArray: END (a1[][][]-a2[][][] != 0.0)\n");
+			printf("%s: END (a1[][][]-a2[][][] != 0.0)\n", thisfunction);
         }
-		printf("diff_epsilon_KArray: epsilon = %lg, max diff @ [%d][%d][%d] = %lg\n",
-			   epsilon, l, lam, zeta, maxdiff);
+		printf("%s: epsilon = %lg, max diff @ [%d][%d][%d] = %lg\n",
+			   thisfunction, epsilon, l, lam, zeta, maxdiff);
 	}
     /* TODO: sort out whether these should be "<=" or "<" */
     for (i=0; i <= K->MI; i++) {

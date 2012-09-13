@@ -1,40 +1,6 @@
 #include "K.h"
 #include "Trajectory.h"
 
-/*
-** TODO: make multi-thread safe, remove usage of static arrays
-** TODO: generalize the mutation function like the fitness function; too much
-**       direct use of pois_term()
-** TODO: must streamline the use of precomputation; prevent fitness, math, etc.
-**       that could potentially access precomputed values.  Could the efficiency
-**       be increased as well?
-** TODO: rewrite so that 'genotype mating function' and 'load class mating function'
-**       are used.
-** TODO: find an alternative to 'load class-genotype'.
-** TODO: change genotype so it is zero-based and not 1-based; that's annoying
-** TODO: redo the whole initialization thing
-**          - genotype definitions
-**          - load classes
-**          - fitness model
-**          - fitness parameters
-** TODO: create K_K1985.c that contains routines to convert between my load 
-**       classes and Kondrashov's x & q
-** TODO: rewrite reproduction so that gametes are produced; I can still be
-**       true to Kondrashov's form of discount
-** TODO: add Holsinger-type pollen discount
-** TODO: Make s() [and new a()?] into dynamic methods of K (rather than
-**       being static methods of K as they are now) would allow for
-**       future expansion of what population selfing and apomixis means
-**       within the context of K, e.g., stochasticity in rates
-** TODO: fix stats for IBD with S=0 and S=1
-** TODO: rethink the whole interface to the Kondrashov, Charlesworth flavors
-** TODO: rethink methods required for model initiation and execution
-** TODO: add Morgan flavor
-** TODO: add Muirhead flavor
-** TODO: generalize number of genotype loci
-** TODO: can the general Kondrashov framework be generalized to assume
-**           that the mutations are drawn from a distribution???
-*/
 
 /*///////////////////////////////////////////////////////////////*/
 /*///////////////////////////////////////////////////////////////*/
@@ -78,21 +44,22 @@ int         main_unnested       (int argc, char* argv[])
         set_repro(K, K->S[0], 0.0, 0.0, 0.0);
     }
 
-    /* set_debug(DEBUG_LETHALS); /**/
-    /* set_debug(DEBUG_TRACE1); /**/
-    /* set_debug(DEBUG_TRACE2); /**/
-    /* set_debug(DEBUG_GENERATIONS); /**/
-    /* set_debug(DEBUG_FOLLOW_EQUILIBRIUM); /**/
-    /* set_debug(DEBUG_EQUILIBRIUM); /**/
-    /* set_debug(DEBUG_NORMALIZATION); /**/
-    /* set_debug(DEBUG_TRUNCATE); /**/
+    // set_debug(DEBUG_LETHALS);
+    // set_debug(DEBUG_TRACE1);
+    // set_debug(DEBUG_TRACE2);
+    // set_debug(DEBUG_GENERATIONS);
+    set_debug(DEBUG_FOLLOW_EQUILIBRIUM);
+    // set_debug(DEBUG_EQUILIBRIUM);
+    // set_debug(DEBUG_NORMALIZATION);
+    set_debug(DEBUG_TRUNCATE);
+    // set_debug(DEBUG_TRUNCATE_DETAIL);
 
     initiate_model_state(K);
 
     compute_adults_initial(K);
 
-    /* K->option_table = 1; /**/
-	/* K->load_savefile = 1; /**/
+    // K->option_table = 1;
+	// K->load_savefile = 1;
     if (K->load_savefile) {
         load_savefile(K, K->x);
     } else {
@@ -100,8 +67,8 @@ int         main_unnested       (int argc, char* argv[])
         K->x[10][0][0] = 1.0;
     }
 
-    /* fill_KArray(K, K->x, 0.0); */
-    /* K->x[20][0][0] = 1.0; */
+    // fill_KArray(K, K->x, 0.0);
+    // K->x[20][0][0] = 1.0;
     /* the above method leaves all adults in the population
     **     in one load class, L(0,0).  Now, we'll shift these
     **     around a little to examine the results of outcrossing */
@@ -111,11 +78,11 @@ int         main_unnested       (int argc, char* argv[])
         apply_mutation(K, temp, K->x);
         copy_KArray(K, K->x, temp);
     }
-    /**/
-    /*
-    printf("K --------------------------------------------------\n");
-    printf("U\ts\th\tS\n%lg\t%lg\t%lg\t%lg\n", K->U, K->fit_s, K->fit_h, K->S[0]);
-    /**/
+    */
+
+    // printf("K --------------------------------------------------\n");
+    // printf("U\ts\th\tS\n%lg\t%lg\t%lg\t%lg\n", K->U, K->fit_s, K->fit_h, K->S[0]);
+
     while (! is_equilibrium(K)) {
 
         if (K->generation > GENERATION_CUTOFF) {
@@ -153,9 +120,9 @@ int         main_unnested       (int argc, char* argv[])
             (void) is_equilibrium(K);
             printf("end of equilibrium check ---------------\n");
         }
-        /**/
+
         normalize_KArray(K, K->x);
-        /**/
+
         /*
         if (K->generation - 1 == 0) {
             trajectory.start(K, "trajectory.txt", "end_of_gen", 5);
@@ -164,13 +131,13 @@ int         main_unnested       (int argc, char* argv[])
             trajectory.check(K);
         }
         */
-        /*
-        dump_KArray(K, K->x, 100, 0, 0);
-        /**/
+
+        // dump_KArray(K, K->x, 100, 0, 0);
+
     }
-    /*
-    printf("\n");
-    /**/
+
+    // printf("\n");
+
 
     if (!K->option_nolethal && K->is_lethal) {
         /*
@@ -201,9 +168,8 @@ int         main_unnested       (int argc, char* argv[])
         trajectory.write(K);
         trajectory.stop();
     }
-    /*
-    dump_KArray(K, K->x, 10, 0, 0);
-    /**/
+
+    // dump_KArray(K, K->x, 10, 0, 0);
 
     //K->save_savefile = 1;
 	if (K->save_savefile) {

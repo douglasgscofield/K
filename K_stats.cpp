@@ -400,13 +400,13 @@ void        stats_muts      (KConfig K)
     KStats.var_totmuts = var_totmuts;
 }
 
-/*
-/* ///////////////////////////////////////////////////////////////**
+
+/* //////////////////////////////////////////////////////////////
 KScalar     stats_variance_lethals  (KConfig K)
-/*
-** Compute the variance of the number of lethal 
-** alleles carried by each adult plant.
-**
+
+// Compute the variance of the number of lethal
+// alleles carried by each adult plant.
+
 {
     const char* thisfunction = "stats_variance_lethals";
     KScalar variance_lethals, t1, t2, t3;
@@ -425,7 +425,7 @@ KScalar     stats_variance_lethals  (KConfig K)
     for (i=0; i <= K->MI; i++) {
         for (j=0; j <= K->MJ; j++) {
             for (g=0; g < K->genotypes; g++) {
-                /* keep a running sum-of-squares **
+                // keep a running sum-of-squares
                 t1 = (i + j*2) - KStats.mean_lethals;
                 t2 = t1 * t1;
                 t3 = K->x[i][j][g] * t2;

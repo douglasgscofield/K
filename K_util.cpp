@@ -96,7 +96,7 @@ void        truncate_KArray     (KConfig K, KArray& a, KScalar v)
     KInt num = 0;
     KScalar sum = 0.0;
     IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
-    IF_DEBUG(DEBUG_TRUNCATE) {
+    IF_DEBUG(DEBUG_TRUNCATE_DETAIL) {
         printf("%s: truncating values lower than v=%lg \n", 
 			   thisfunction, v);
     }
@@ -107,7 +107,7 @@ void        truncate_KArray     (KConfig K, KArray& a, KScalar v)
                     sum += v - a[i][j][g];
                     num++;
                     a[i][j][g] = 0.0;
-                    IF_DEBUG(DEBUG_TRUNCATE) {
+                    IF_DEBUG(DEBUG_TRUNCATE_DETAIL) {
                         printf("%s: truncated a[%d][%d][%d]\n",
                                thisfunction, i, j, g);
                     }
@@ -117,9 +117,7 @@ void        truncate_KArray     (KConfig K, KArray& a, KScalar v)
     }
     IF_DEBUG(DEBUG_TRUNCATE) {
         if (num > 0) {
-            printf("truncate_KArray: truncated %d elements\n", num);
-            printf("truncate_KArray: sum of truncated elements %lg\n",
-				   sum);
+            printf("%s: truncated %d elements, sum %lg\n", thisfunction, num, sum);
         }
     }
 }

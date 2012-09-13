@@ -1,3 +1,61 @@
+2012/08/31
+==========
+
+A host of TODOs from `K.cpp`, which contains `main_unnested()`.  Some of these
+repeat others from below but worth looking at.
+
+* TODO: make multi-thread safe, remove usage of static arrays
+
+* TODO: generalize the mutation function like the fitness function; too much
+  direct use of `pois_term()`
+
+* TODO: must streamline the use of precomputation; prevent fitness, math, etc.
+  that could potentially access precomputed values.  Could the efficiency be
+increased as well?
+
+* TODO: rewrite so that 'genotype mating function' and 'load class mating
+  function' are used.
+
+* TODO: find an alternative to 'load class-genotype'.
+
+* TODO: change genotype so it is zero-based and not 1-based; that's annoying
+
+* TODO: redo the whole initialization thing
+          - genotype definitions
+          - load classes
+          - fitness model
+          - fitness parameters
+
+* TODO: create `K_K1985.c` that contains routines to convert between my load
+  classes and Kondrashov's x & q
+
+* TODO: rewrite reproduction so that gametes are produced; I can still be true
+  to Kondrashov's form of discount
+
+* TODO: add Holsinger-type pollen discount
+
+* TODO: Make `s()` [and new `a()`?] into dynamic methods of K (rather than being
+  static methods of K as they are now) would allow for future expansion of what
+population selfing and apomixis means within the context of K, e.g.,
+stochasticity in rates
+
+* TODO: fix stats for IBD with S=0 and S=1
+
+* TODO: rethink the whole interface to the Kondrashov, Charlesworth flavors
+
+* TODO: rethink methods required for model initiation and execution
+
+* TODO: add Morgan flavor
+
+* TODO: add Muirhead flavor
+
+* TODO: generalize number of genotype loci
+
+* TODO: can the general Kondrashov framework be generalized to assume that the
+  mutations are drawn from a distribution???
+
+
+
 2012/08/22
 ==========
 

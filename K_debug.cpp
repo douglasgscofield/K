@@ -45,7 +45,7 @@ void        dump_KArray                 (KConfig K, KArray& a,
         mj = K->MJ;
     if (mg > K->genotypes || mg < 1)
         mg = K->genotypes;
-    printf("%s BEGIN KArray @ 0x%08x; max i=%d max j=%d max g=%d\n", 
+    printf("%s BEGIN KArray @ %p; max i=%d max j=%d max g=%d\n",
            thisfunction, a, mi, mj, mg);
     printf("i\tj\tg\ta[i][j][g]\n");
     for (i=0; i <= mi; i++) {
@@ -55,7 +55,7 @@ void        dump_KArray                 (KConfig K, KArray& a,
             }
         }
     }
-    printf("%s END for KArray a @ 0x%08x\n", thisfunction, a);
+    printf("%s END for KArray a @ %p\n", thisfunction, a);
 }
 
 /////////////////////////////////////////////////////////////////
@@ -78,10 +78,10 @@ void        dump_values_KArray      (KConfig K,
 void        dump_KArray_full            (KConfig K, KArray& a)
 {
     const char* thisfunction = "dump_KArray_full";
-    printf("%s BEGIN KArray @ 0x%08x; dump_KArray follows\n", 
+    printf("%s BEGIN KArray @ %p; dump_KArray follows\n",
            thisfunction, a);
     dump_KArray(K, a, K->MI, K->MJ, K->genotypes);
-    printf("%s END for KArray a @ 0x%08x\n", thisfunction, a);
+    printf("%s END for KArray a @ %p\n", thisfunction, a);
 }
 
 /////////////////////////////////////////////////////////////////
@@ -97,7 +97,7 @@ void        dump_KVector1               (KConfig K, KVector1& v,
         mi = K->MI;
     if (mg > K->genotypes || mg < 1)
         mg = K->genotypes;
-    printf("%s BEGIN KVector1 @ 0x%08x; max i=%d max g=%d\n", 
+    printf("%s BEGIN KVector1 @ %p; max i=%d max g=%d\n",
            thisfunction, v, mi, mg);
     printf("i\tg\tv[i] ...[g=0]\n");
     for (i=0; i <= mi; i++) {
@@ -105,17 +105,17 @@ void        dump_KVector1               (KConfig K, KVector1& v,
                 printf("%d\t%d\t%lg\n", i, g, v[i]);
         }
     }
-    printf("%s END for KVector1 v @ 0x%08x\n", thisfunction, v);
+    printf("%s END for KVector1 v @ %p\n", thisfunction, v);
 }
 
 /////////////////////////////////////////////////////////////////
 void        dump_KVector1_full          (KConfig K, KVector1& v)
 {
     const char* thisfunction = "dump_KVector1_full";
-    printf("%s BEGIN KArray @ 0x%08x; dump_KVector1 follows\n", 
+    printf("%s BEGIN KArray @ %p; dump_KVector1 follows\n",
            thisfunction, v);
     dump_KVector1(K, v, K->MI, K->genotypes);
-    printf("%s END for KVector1 v @ 0x%08x\n", thisfunction, v);
+    printf("%s END for KVector1 v @ %p\n", thisfunction, v);
 }
 
 /////////////////////////////////////////////////////////////////

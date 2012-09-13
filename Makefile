@@ -83,5 +83,7 @@ K: $(OBJ)
 Kn: $(OBJ) $(OBJN)
 	g++ $(OBJ) $(OBJN) -o "Kn" $(LIBS)
 
+$(OBJ):	$(HEAD)
+
 .cpp.o:	$(HEAD) $(HEADN)
 
