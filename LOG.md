@@ -1,5 +1,8 @@
+Project Log
+===========
+
 2012/08/31
-==========
+----------
 
 A host of TODOs from `K.cpp`, which contains `main_unnested()`.  Some of these
 repeat others from below but worth looking at.
@@ -57,7 +60,7 @@ stochasticity in rates
 
 
 2012/08/22
-==========
+----------
 
 It liiiives....  I'm resurrecting this project because there is still a need
 for solid modeling of deleterious mutation, especially at the genomic scale.
@@ -73,7 +76,7 @@ My real interest here is in the nested mutation classes, and I'll get that
 working, finally, and bang out a little paper.  Then if all goes well I'll move
 on to incorporating mitotic mutation and look for the sieve.
 
-**Practical issues related to development that I can recall just now include**
+### Practical issues related to development that I can recall just now include
 
 -  --- Make each mutation representation 'K' be a proper C++ class.  During
 initial development I dummied that up while sticking with strict C, and the
@@ -90,7 +93,7 @@ by Stewart Schultz, and that is to have the most deleterious class be
 completely deleterious so that homozygotes need not be represented (they're all
 dead).
 
-**Research issues**
+### Research issues
 
 -  --- Establish research questions for the initial work.  A natural place to go
 is to fix the total mutation rate (say at 0.1/0.2, 0.5, 1.0, 2.0, and 5.0
@@ -104,12 +107,14 @@ characteristics?
 
 
 1/21/04
-=======
+-------
+
 -  --- Figure out the problem with `sum_KArray_n()` values from 1/16/04.
 
 
 1/16/04
-=======
+-------
+
 -  -X- Results of test of [6][0][2][0]
 
 The test passed, so at least the behavior is consistent following the changes.
@@ -168,19 +173,21 @@ to be called 250000 times (50 * 10 * 50 * 10); instead, that indicates that
 it's been called 7.03 times that amount.  Could the runonce static flag not be
 working?  No, my head is not working.  The way the runonce loops are set up is:
 
-        for (v1=0; v1 <= KN->MI1; v1++) {
-            for (v0=0; v0 <= KN->MI0; v0++) {
-                for (n1=v1; n1 <= KN->MI1; n1++) {
-                    for (n0=v0; n0 <= KN->MI0; n0++) {
-                        t1 = lnbinomial(n0, v0);
-                        t2 = lnbinomial(n1, v1);
-                        t3 = lnpow_half(n0 + n1);
-                        t4 = exp(t1 + t2 + t3);
-                        p[n0][v0][n1][v1] = t4;
-                    }
-                }
+```C++
+for (v1=0; v1 <= KN->MI1; v1++) {
+    for (v0=0; v0 <= KN->MI0; v0++) {
+        for (n1=v1; n1 <= KN->MI1; n1++) {
+            for (n0=v0; n0 <= KN->MI0; n0++) {
+                t1 = lnbinomial(n0, v0);
+                t2 = lnbinomial(n1, v1);
+                t3 = lnpow_half(n0 + n1);
+                t4 = exp(t1 + t2 + t3);
+                p[n0][v0][n1][v1] = t4;
             }
         }
+    }
+}
+```
 
 Note that n1 and n0 do not start at 0, and are bounded by MI0 and MI1, not
 MJ-anything.  So, I screwed up... plus debugging proved me wrong.
@@ -286,7 +293,7 @@ be converging to ~40, and b) they're whacked to begin with!
 
 
 1/15/04
-=======
+-------
 
 It's taking a long time to converge on finn (1105 min so far), so I'm going to
 try some things to speed it up.  The first order of business, is going to be to
@@ -422,7 +429,7 @@ two-class runs coming up.
 
 
 1/14/04
-=======
+-------
 
 I should confirm the observation that marginals for the two-class are identical
 to the corresponding single-class; that would be expected, because of
@@ -470,7 +477,7 @@ stuff on 1/16/04.
 
 
 1/13/04
-=======
+-------
 
 Single-class confirmed against Lande-Schemske-Schultz paper,
 results/test_LSSdata.xls, for U=1, h=0 & h=0.02, s=1, S=0.01 .. 0.99.
@@ -498,7 +505,7 @@ distribution for each
 
 
 6/25/03
-=======
+-------
 
 On plane from St Louis to Miami, 1.5 hrs late
 
@@ -525,13 +532,15 @@ first call for the inbreeding depression calcs.  I'll change that, and see what
 happens.  Note also the difference in the interface between these, I have to
 remind myself what the fi, fj, fg args in the `_stats(...)` version mean.
 
-    void        apply_gametes       (KConfig K, 
-                                     KVector1 mgam, KVector1 fgam,
-                                     KArray from)
-    void        apply_gametes_stats (KConfig K, 
-                                     KVector1 mgam, KVector1 fgam,
-                                     KScalar fromval,
-                                     KInt fi, KInt fj, KInt fg)
+```C++
+void        apply_gametes       (KConfig K, 
+                                 KVector1 mgam, KVector1 fgam,
+                                 KArray from)
+void        apply_gametes_stats (KConfig K, 
+                                 KVector1 mgam, KVector1 fgam,
+                                 KScalar fromval,
+                                 KInt fi, KInt fj, KInt fg)
+```
 
 Now I remember, the fi, fj, fg args refer to the class from which we generate
 the resultant distributions.  So, I'll augment `_stats(...)` to use the whole
