@@ -12,29 +12,30 @@ SR="0.00 0.02 0.04 0.06 0.08 0.10 0.12 0.14 0.16 0.18 0.20 0.22 0.24 0.26 0.28 0
 
 #UU="0.5 1 1.5 2";
 UU="0.02 0.2 0.5 1 1.5 2";
+
 for U in $UU; do
-echo "for U=$U ...";
+    echo "for U=$U ...";
 
-h=0;
-N="${PREFIX}_U=${U}_s=${s}_h=${h}.txt";
-echo "creating file $N ...";
-./K.exe -tableheadingonly > $N;
-for i in $SR ; do
-    echo "U=$U s=$s h=$h S=$i ...";
-    ./K.exe -table -U $U -s $s -h $h -S $i >> $N;
-done
-echo "done";
-echo
+    h=0;
+    N="${PREFIX}_U=${U}_s=${s}_h=${h}.txt";
+    echo "creating file $N ...";
+    ./K -tableheadingonly > $N;
+    for i in $SR ; do
+        echo "U=$U s=$s h=$h S=$i ...";
+        ./K -table -U $U -s $s -h $h -S $i >> $N;
+    done
+    echo "done";
+    echo
 
-h=0.02;
-N="${PREFIX}_U=${U}_s=${s}_h=${h}.txt";
-echo "creating file $N ...";
-./K.exe -tableheadingonly > $N;
-for i in $SR ; do
-    echo "U=$U s=$s h=$h S=$i ...";
-    ./K.exe -table -U $U -s $s -h $h -S $i >> $N;
-done
-echo "done";
-echo
+    h=0.02;
+    N="${PREFIX}_U=${U}_s=${s}_h=${h}.txt";
+    echo "creating file $N ...";
+    ./K -tableheadingonly > $N;
+    for i in $SR ; do
+        echo "U=$U s=$s h=$h S=$i ...";
+        ./K -table -U $U -s $s -h $h -S $i >> $N;
+    done
+    echo "done";
+    echo
 
 done

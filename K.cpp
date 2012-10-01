@@ -48,10 +48,10 @@ int         main_unnested       (int argc, char* argv[])
     // set_debug(DEBUG_TRACE1);
     // set_debug(DEBUG_TRACE2);
     // set_debug(DEBUG_GENERATIONS);
-    set_debug(DEBUG_FOLLOW_EQUILIBRIUM);
+    // set_debug(DEBUG_FOLLOW_EQUILIBRIUM);
     // set_debug(DEBUG_EQUILIBRIUM);
     // set_debug(DEBUG_NORMALIZATION);
-    set_debug(DEBUG_TRUNCATE);
+    // set_debug(DEBUG_TRUNCATE);
     // set_debug(DEBUG_TRUNCATE_DETAIL);
 
     initiate_model_state(K);

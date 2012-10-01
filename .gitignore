@@ -7,3 +7,4 @@ gitignore
 .project
 .cproject
 q.log
+.metadata

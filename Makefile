@@ -1,3 +1,8 @@
+LIBS = -lm
+BIN  = K Kn
+CXXFLAGS = -g3
+CFLAGS = -g3
+CXX = g++
 
 OBJ  = K.o \
 	   K_cmdline.o \
@@ -32,6 +37,22 @@ HEAD = K.h \
 	   K_util.h \
 	   Trajectory.h
 
+all: K
+
+K: $(OBJ)
+	$(CXX) $(OBJ) -o "K" $(LIBS)
+
+Kn: $(OBJ) $(OBJN)
+	$(CXX) $(OBJ) $(OBJN) -o "Kn" $(LIBS)
+
+# $(OBJ):	$(HEAD)
+
+.cpp.o:	$(HEAD)
+
+clean:
+	rm -f $(OBJ) $(OBJN) $(BIN)
+
+
 OBJN = K_n.o \
 	   K_cmdline_n.o \
 	   K_debug_n.o \
@@ -62,28 +83,4 @@ HEADN = K_n.h \
 	   K_stats_n.h \
 	   K_util.h \
 	   Trajectory.h
-
-LIBS = -lm
-
-BIN  = K Kn
-
-CXXFLAGS = -g3
-
-CFLAGS = -g3
-
-all: K
-
-
-clean:
-	rm -f $(OBJ) $(OBJN) $(BIN)
-
-K: $(OBJ)
-	g++ $(OBJ) -o "K" $(LIBS)
-
-Kn: $(OBJ) $(OBJN)
-	g++ $(OBJ) $(OBJN) -o "Kn" $(LIBS)
-
-$(OBJ):	$(HEAD)
-
-.cpp.o:	$(HEAD) $(HEADN)
 
