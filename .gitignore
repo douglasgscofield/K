@@ -8,3 +8,4 @@ gitignore
 .cproject
 q.log
 .metadata
+local_results
