@@ -1,7 +1,8 @@
 LIBS = -lm
 BIN  = K Kn
-CXXFLAGS = -g3
-CFLAGS = -g3
+CXXFLAGS = -Wall -g3 -fno-inline
+CFLAGS = -Wall -g3
+LDFLAGS = -g3
 CXX = g++
 
 OBJ  = K.o \
@@ -40,10 +41,10 @@ HEAD = K.h \
 all: K
 
 K: $(OBJ)
-	$(CXX) $(OBJ) -o "K" $(LIBS)
+	$(CXX) $(LDFLAGS) $(OBJ) -o $@ $(LIBS)
 
 Kn: $(OBJ) $(OBJN)
-	$(CXX) $(OBJ) $(OBJN) -o "Kn" $(LIBS)
+	$(CXX) $(LDFLAGS) $(OBJ) $(OBJN) -o $@ $(LIBS) 
 
 # $(OBJ):	$(HEAD)
 
