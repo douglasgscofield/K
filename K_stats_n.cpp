@@ -15,7 +15,7 @@ void        stats_print_n           (KConfig_n KN)
 */
 {
     const char* thisfunction = "stats_print_n";
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     if (KN->option_table) {
         stats_print_table_n(KN);
     } else {
@@ -30,9 +30,9 @@ void        stats_print_table_n     (KConfig_n KN)
 */
 {
     const char* thisfunction = "stats_print_table_n";
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     /* stats_print_table_heading_n(KN); */
-    printf("%s %d\t%lg\t%lg\t%lg\t\
+    fprintf(stdout, "%s %d\t%lg\t%lg\t%lg\t\
 %lg\t%s\t%lg\t%lg\t\
 %lg\t%s\t%lg\t%lg\t\
 %lg\t%lg\t%lg\t\
@@ -86,8 +86,8 @@ void        stats_print_table_heading_n (KConfig_n KN)
 */
 {
     const char* thisfunction = "stats_print_table_heading_n";
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
-    printf("generations\tS\tA\tO\t\
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
+    fprintf(stdout, "generations\tS\tA\tO\t\
 U_0\tfitness_function_0\tfit_s_0\tfit_h_0\t\
 U_1\tfitness_function_1\tfit_s_1\tfit_h_1\t\
 mean_lethals_0\tvar_lethals_0\tvar_mean_lethals_0\t\
@@ -103,52 +103,52 @@ void        stats_print_verbose_n   (KConfig_n KN)
 {
     const char* thisfunction = "stats_print_verbose_n";
     KMutClass m;
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
-    printf("stats begin ========================================\n");
-    printf("generations = %d (out of %d max)\n", KN->generation, 
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
+    fprintf(stdout, "stats begin ========================================\n");
+    fprintf(stdout, "generations = %d (out of %d max)\n", KN->generation, 
            GENERATION_CUTOFF);
-    printf("S = %lg\n", KN->S);
-    printf("A = %lg\n", KN->A);
-    printf("O = %lg\n", KN->O);
-    printf("option_truncate = %d\n", KN->option_truncate);
-    printf("option_nolethal = %d\n", KN->option_nolethal);
-    printf("mutation classes = %d\n", KN->mutclasses);
+    fprintf(stdout, "S = %lg\n", KN->S);
+    fprintf(stdout, "A = %lg\n", KN->A);
+    fprintf(stdout, "O = %lg\n", KN->O);
+    fprintf(stdout, "option_truncate = %d\n", KN->option_truncate);
+    fprintf(stdout, "option_nolethal = %d\n", KN->option_nolethal);
+    fprintf(stdout, "mutation classes = %d\n", KN->mutclasses);
     for (m=0; m < KN->mutclasses; m++) {
-        printf("U[%d] = %lg\n", m, KN->U[m]);
-        printf("fitness function[%d] = %s\n", m,
+        fprintf(stdout, "U[%d] = %lg\n", m, KN->U[m]);
+        fprintf(stdout, "fitness function[%d] = %s\n", m,
                get_fitness_function_name(KN->fitness_function[m]));
-        printf("fit_s[%d] = %lg\n", m, KN->fit_s[m]);
-        printf("fit_h[%d] = %lg\n", m, KN->fit_h[m]);
+        fprintf(stdout, "fit_s[%d] = %lg\n", m, KN->fit_s[m]);
+        fprintf(stdout, "fit_h[%d] = %lg\n", m, KN->fit_h[m]);
     }
     for (m=0; m < KN->mutclasses; m++) {
-        printf("mean_hetloci[%d] = %lg\n", m,
+        fprintf(stdout, "mean_hetloci[%d] = %lg\n", m,
                KStats_n.mean_hetloci[m]);
-        printf("var_hetloci[%d] = %lg\n", m,
+        fprintf(stdout, "var_hetloci[%d] = %lg\n", m,
                KStats_n.var_hetloci[m]);
-        printf("mean_homloci[%d] = %lg\n", m,
+        fprintf(stdout, "mean_homloci[%d] = %lg\n", m,
                KStats_n.mean_homloci[m]);
-        printf("var_homloci[%d] = %lg\n", m,
+        fprintf(stdout, "var_homloci[%d] = %lg\n", m,
                KStats_n.var_homloci[m]);
-        printf("mean_totmuts[%d] = %lg\n", m,
+        fprintf(stdout, "mean_totmuts[%d] = %lg\n", m,
                KStats_n.mean_totmuts[m]);
-        printf("var_totmuts[%d] = %lg\n", m,
+        fprintf(stdout, "var_totmuts[%d] = %lg\n", m,
                KStats_n.var_totmuts[m]);
-        printf("var/mean totmuts[%d] = %lg\n", m,
+        fprintf(stdout, "var/mean totmuts[%d] = %lg\n", m,
                KStats_n.var_to_mean_totmuts_ratio[m]);
     }
-    printf("mean_fitness_self_progeny = %lg\n", 
+    fprintf(stdout, "mean_fitness_self_progeny = %lg\n", 
            KStats_n.mean_fitness_self_progeny);
-    printf("mean_fitness_apomixis_progeny = %lg\n", 
+    fprintf(stdout, "mean_fitness_apomixis_progeny = %lg\n", 
            KStats_n.mean_fitness_apomixis_progeny);
-    printf("mean_fitness_outcross_progeny = %lg\n", 
+    fprintf(stdout, "mean_fitness_outcross_progeny = %lg\n", 
            KStats_n.mean_fitness_outcross_progeny);
-    printf("population_mean_fitness = %lg\n", 
+    fprintf(stdout, "population_mean_fitness = %lg\n", 
            KStats_n.population_mean_fitness);
-    printf("inbreeding_depression = %lg\n", 
+    fprintf(stdout, "inbreeding_depression = %lg\n", 
            KStats_n.inbreeding_depression);
-    printf("secondary_selfing_rate = %lg\n", 
+    fprintf(stdout, "secondary_selfing_rate = %lg\n", 
            KStats_n.secondary_selfing_rate);
-    printf("stats end ========================================\n");
+    fprintf(stdout, "stats end ========================================\n");
 }
 
 /*///////////////////////////////////////////////////////////////*/
@@ -156,7 +156,7 @@ void        stats_all_n         (KConfig_n KN)
 {
     const char* thisfunction = "stats_all_n";
     KMutClass m;
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     if (KN->current_x != KN_CURRENT_X1) {
         char buf[200];
         sprintf(buf, "%s: wrong current x array = %d",
@@ -207,9 +207,9 @@ KScalar     stats_mean_fitness_self_progeny_n (KConfig_n KN)
 {
     const char* thisfunction = "stats_mean_fitness_self_progeny_n";
     KScalar wmean;
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     if (KN->S == 0.0) {
-        IF_DEBUG(DEBUG_TRACE1) printf("%s: S==0.0, self wmean=0.0\n", 
+        IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s: S==0.0, self wmean=0.0\n", 
                                       thisfunction);
         wmean = 0.0;
     } else {
@@ -230,9 +230,9 @@ KScalar     stats_mean_fitness_apomixis_progeny_n (KConfig_n KN)
 {
     const char* thisfunction = "stats_mean_fitness_apomixis_progeny_n";
     KScalar wmean;
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     if (KN->A == 0.0) {
-        IF_DEBUG(DEBUG_TRACE1) printf("%s: A==0.0, apomict wmean=0.0\n", 
+        IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s: A==0.0, apomict wmean=0.0\n", 
                                       thisfunction);
         wmean = 0.0;
     } else {
@@ -253,9 +253,9 @@ KScalar     stats_mean_fitness_outcross_progeny_n (KConfig_n KN)
 {
     const char* thisfunction = "stats_mean_fitness_outcross_progeny_n";
     KScalar wmean;
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     if (KN->O == 0.0) {
-        IF_DEBUG(DEBUG_TRACE1) printf("%s: O==0.0, outcross wmean=0.0\n", 
+        IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s: O==0.0, outcross wmean=0.0\n", 
                                       thisfunction);
         wmean = 0.0;
     } else {
@@ -293,7 +293,7 @@ KScalar     stats_inbreeding_depression_n   (KConfig_n KN)
 {
     const char* thisfunction = "stats_inbreeding_depression_n";
     KScalar ibd;
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     /* for each load class */
     /* compute fitnesses of selfed progeny */
     /* compute fitnesses of outcrossed progeny */
@@ -337,7 +337,7 @@ KScalar     stats_inbreeding_depression_old_n   (KConfig_n KN)
 {
     const char* thisfunction = "stats_inbreeding_depression_n";
     KScalar ibd;
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     /* compute fitnesses of selfed progeny */
     /* compute fitnesses of outcrossed progeny */
     /* compute inbreeding depression for each load class,
@@ -373,7 +373,7 @@ KScalar     stats_secondary_selfing_rate_n    (KConfig_n KN)
 {
     const char* thisfunction = "stats_secondary_selfing_rate_n";
     KScalar ans;
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     if (KStats_n.mean_fitness_self_progeny < 0.0 ||
         KStats_n.population_mean_fitness < 0.0) {
         char buf[200];
@@ -397,7 +397,7 @@ KScalar     stats_population_mean_fitness_n   (KConfig_n KN)
 {
     const char* thisfunction = "stats_mean_fitness";
     KScalar ans;
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     if (KStats_n.mean_fitness_self_progeny < 0.0 ||
         KStats_n.mean_fitness_apomixis_progeny < 0.0 ||
         KStats_n.mean_fitness_outcross_progeny < 0.0) {
@@ -423,7 +423,7 @@ void        stats_muts_n    (KConfig_n KN, KMutClass m)
     KScalar mean_hetloci, mean_homloci, mean_totmuts;
     KScalar var_hetloci, var_homloci, var_totmuts;
     KInt i0, j0, i1, j1, hetloci, homloci, totmuts;
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     mean_hetloci = 0.0;
     mean_homloci = 0.0;
     mean_totmuts = 0.0;

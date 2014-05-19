@@ -11,6 +11,10 @@
 /*///////////////////////////////////////////////////////////////*/
 int         main_unnested       (int argc, char* argv[])
 {
+    cerr << "K version: " << VERSION << endl;
+    cerr << "Reference: " << REFERENCE << endl;
+    cerr << "Compiled by: " << CXX_VERSION << endl;
+    cerr << "Compilation flags: " << CXXFLAGS << endl;
     const char* thisfunction = "main_unnested";
     KConfig K;
     KInt    MI =   500;
@@ -41,14 +45,14 @@ int         main_unnested       (int argc, char* argv[])
             fatal("Usage: K --help");
         }
 
-        set_repro(K, K->S[0], 0.0, 0.0, 0.0);
+        set_repro(K, K->S[0], 0.0, K->A[0], 0.0);
     }
 
     // set_debug(DEBUG_LETHALS);
     // set_debug(DEBUG_TRACE1);
     // set_debug(DEBUG_TRACE2);
     // set_debug(DEBUG_GENERATIONS);
-    // set_debug(DEBUG_FOLLOW_EQUILIBRIUM);
+    set_debug(DEBUG_FOLLOW_EQUILIBRIUM);
     // set_debug(DEBUG_EQUILIBRIUM);
     // set_debug(DEBUG_NORMALIZATION);
     // set_debug(DEBUG_TRUNCATE);
@@ -80,23 +84,23 @@ int         main_unnested       (int argc, char* argv[])
     }
     */
 
-    // printf("K --------------------------------------------------\n");
-    // printf("U\ts\th\tS\n%lg\t%lg\t%lg\t%lg\n", K->U, K->fit_s, K->fit_h, K->S[0]);
+    // fprintf(stderr, "K --------------------------------------------------\n");
+    // fprintf(stderr, "U\ts\th\tS\n%lg\t%lg\t%lg\t%lg\n", K->U, K->fit_s, K->fit_h, K->S[0]);
 
     while (! is_equilibrium(K)) {
 
         if (K->generation > GENERATION_CUTOFF) {
 			IF_DEBUG(DEBUG_GENERATIONS)
-				printf("exceeded GENERATION_CUTOFF=%d, stopping\n", GENERATION_CUTOFF);
+				fprintf(stderr, "exceeded GENERATION_CUTOFF=%d, stopping\n", GENERATION_CUTOFF);
 			IF_DEBUG(DEBUG_TRACE1)
-				printf("exceeded GENERATION_CUTOFF=%d, stopping\n", GENERATION_CUTOFF);
+				fprintf(stderr, "exceeded GENERATION_CUTOFF=%d, stopping\n", GENERATION_CUTOFF);
             break;
         }
 
-        IF_DEBUG(DEBUG_GENERATIONS)
-			printf("generation %d\n", K->generation);
+        if (DEBUG(DEBUG_GENERATIONS) || (K->progress && K->generation % K->progress == 0))
+			fprintf(stderr, "generation %d\n", K->generation);
         IF_DEBUG(DEBUG_TRACE1)
-			printf("generation %d\n", K->generation);
+			fprintf(stderr, "generation %d\n", K->generation);
 
         if (K->option_truncate)
             truncate_KArray(K, K->x, LOADCLASS_TRUNCATE);
@@ -112,13 +116,13 @@ int         main_unnested       (int argc, char* argv[])
         compute_adults_nextgen(K);
 
         IF_DEBUG(DEBUG_EQUILIBRIUM) {
-            printf("checking equilibrium at end of generation %d------------\n", 
+            fprintf(stderr, "checking equilibrium at end of generation %d------------\n", 
 				   K->generation - 1);
-            printf("dump of K->x[..][0][0]\n");
+            fprintf(stderr, "dump of K->x[..][0][0]\n");
             dump_KArray(K, K->x, K->MI, 0, 1);
-            printf("calling is_equilibrium(K) just to check...\n");
+            fprintf(stderr, "calling is_equilibrium(K) just to check...\n");
             (void) is_equilibrium(K);
-            printf("end of equilibrium check ---------------\n");
+            fprintf(stderr, "end of equilibrium check ---------------\n");
         }
 
         normalize_KArray(K, K->x);
@@ -136,7 +140,7 @@ int         main_unnested       (int argc, char* argv[])
 
     }
 
-    // printf("\n");
+    // fprintf(stderr, "\n");
 
 
     if (!K->option_nolethal && K->is_lethal) {
@@ -147,9 +151,9 @@ int         main_unnested       (int argc, char* argv[])
         */
         K->createlethal = 1;
         IF_DEBUG(DEBUG_LETHALS)
-            printf("%s: one more run, to get progeny arrays\n", thisfunction);
+            fprintf(stderr, "%s: one more run, to get progeny arrays\n", thisfunction);
         IF_DEBUG(DEBUG_LETHALS)
-            printf("%s: K->createlethal=%d\n", thisfunction, K->createlethal);
+            fprintf(stderr, "%s: K->createlethal=%d\n", thisfunction, K->createlethal);
         compute_self_progeny(K);
         compute_apomixis_progeny(K);
         compute_gametes(K);

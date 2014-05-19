@@ -15,13 +15,17 @@
 /////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////
 
+using namespace std;
+
 /////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////
 // Setup options                                                 
 /////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////
 
-#define DEBUG
+#include "version.h"
+
+#define _DEBUG
 
 //#define POISSON_TRUNCATE        1.0e-100
 //#define LOADCLASS_TRUNCATE      1.0e-100
@@ -96,6 +100,7 @@ struct      struct_KConfig     {
         KInt        createlethal; // 1 if lethal and should create progeny with j>0
         // generation
         KInt        generation;
+        KInt        progress;
         // type of mating system to be used
         KInt        mating_outcross;    // nonzero if outcrossing
         KInt        mating_self;        // nonzero if selfing

@@ -15,8 +15,8 @@ class Trajectory {
 #define  TRAJECTORY_ERROR        (-1)
 #define  TRAJECTORY_END_OF_GEN    1
         static const struct struct_types {
-            std::string       name;
-            std::string       define_name;
+            string       name;
+            string       define_name;
             int               type;
         } types[];
         static const int num_types;
@@ -26,8 +26,8 @@ class Trajectory {
         int            last_gen;  // gen last recorded
         int            next_gen;  // gen to record next
         int            num_recorded; // number of times
-        std::ofstream  file;     // the file stream
-        std::string    filename; // filename
+        ofstream  file;     // the file stream
+        string    filename; // filename
         bool           dropzero_flag;
         bool           writenow_flag;
 
@@ -36,8 +36,8 @@ class Trajectory {
         ~Trajectory();
 
         void start(KConfig K, 
-                   const std::string& file, 
-                   const std::string& type, 
+                   const string& file, 
+                   const string& type, 
                    int freq);
         void check(KConfig K);
         void write(KConfig K);
@@ -48,13 +48,13 @@ class Trajectory {
         void reset();
 
         static void                 dump_type  ();
-        static int                  match_type (const std::string& type);
-        static const std::string&   match_type (int type);
+        static int                  match_type (const string& type);
+        static const string&   match_type (int type);
 };
 
 /////////////////////////////////////////////////////////////////
 inline Trajectory::Trajectory()
-    : active_flag(false), dropzero_flag(true), debug_flag(false)
+    : active_flag(false), debug_flag(false), dropzero_flag(true), writenow_flag(false)
 { /* EMPTY */ }
 
 /////////////////////////////////////////////////////////////////
@@ -68,16 +68,16 @@ inline void Trajectory::check(KConfig K) {
     // will need to change with more than one trajectory
     // and with different types of trajectories
     if (debug_flag) {
-        std::cerr << thisfunction << " in gen " << this_gen
-            << " with next_gen == " << next_gen << std::endl;
+        cerr << thisfunction << " in gen " << this_gen
+            << " with next_gen == " << next_gen << endl;
     }
     if (! active_flag) {
-        std::cerr << thisfunction << ": no active trajectory" << std::endl;
+        cerr << thisfunction << ": no active trajectory" << endl;
         fatal(NULL);
     }
     if (this_gen != next_gen && ! writenow_flag) {
         if (debug_flag) {
-            std::cerr << thisfunction << " no write, returning" << std::endl;
+            cerr << thisfunction << " no write, returning" << endl;
         }
         return;
     }
@@ -88,19 +88,19 @@ inline void Trajectory::check(KConfig K) {
     next_gen += freq;
     ++ num_recorded;
     if (debug_flag) {
-        std::cerr << thisfunction << " in gen " << this_gen
-            << " finished writing" << std::endl;
+        cerr << thisfunction << " in gen " << this_gen
+            << " finished writing" << endl;
     }
 }
 
 /////////////////////////////////////////////////////////////////
 inline void Trajectory::write(KConfig K) {
-    const char* thisfunction = "Trajectory::write";
+    //const char* thisfunction = "Trajectory::write";
     int this_gen = K->generation;
     if (type == TRAJECTORY_END_OF_GEN) {
         this_gen -= 1;  // see Trajectory::check
         KArray& a = K->x;
-        file << std::endl << "Trajectory" 
+        file << endl << "Trajectory" 
             << "\tgen:" << this_gen
             << "\ttype:" << type 
             << "\tfreq:" << freq 
@@ -109,8 +109,8 @@ inline void Trajectory::write(KConfig K) {
             << "\tatequilibrium:" << is_equilibrium(K)
             << "\theterozygotes:" << "0" << "," << K->MI
             << "\thomozygotes:" << "0" << "," << K->MJ
-            << std::endl;
-        file << "heterozygote\thomozygote\tgenotype\tfrequency" << std::endl;
+            << endl;
+        file << "heterozygote\thomozygote\tgenotype\tfrequency" << endl;
         for (int i = 0; i <= K->MI; i++) {
             for (int j = 0; j <= K->MJ; j++) {
                 for (int g = 0; g < K->genotypes; g++) {
@@ -118,7 +118,7 @@ inline void Trajectory::write(KConfig K) {
                         continue;
                     }
                     file << i << "\t" << j << "\t" << g << "\t" 
-                        << a[i][j][g] << std::endl;
+                        << a[i][j][g] << endl;
                 }
             }
         }

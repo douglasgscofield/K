@@ -93,7 +93,7 @@ int         cmdline_args_n  (KConfig_n KN, int argc, char *argv[])
 void        cmdline_usage_n     (KConfig_n KN)
 {
     const char* thisfunction = "cmdline_usage_n";
-    fprintf(stdout, "K [args]\n\
+    fprintf(stderr, "K [args]\n\
 \n\
   -FLAG <ARGUMENT>  EXPLANATION [CURRENT VALUE]\n\
   ---------------------------------------------\n\

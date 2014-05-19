@@ -6,7 +6,7 @@ KConfig     initiate_KConfig    (void)
 ** allocate zeroed space for KConfig
 */
 {
-    const char* thisfunction = "initiate_KConfig";
+    //const char* thisfunction = "initiate_KConfig";
     KConfig K;
     K = (KConfig)calloc((size_t)1, sizeof(struct struct_KConfig));
     return K;
@@ -61,7 +61,7 @@ KConfig     initiate_quick      (KInt MI, KInt MJ, KInt g,
                                  KScalar s, KScalar h,
 								 KScalar S)
 {
-    const char* thisfunction = "initiate_quick";
+    //const char* thisfunction = "initiate_quick";
 	/* for now, only support one genotype in initiate_quick */
     KConfig K;
     K = initiate_KConfig();
@@ -84,15 +84,15 @@ void        initiate_model_state	(KConfig K)
     if (!K->option_nolethal) {
         if (K->fit_s == 1.0) {
             IF_DEBUG(DEBUG_LETHALS)
-                printf("%s: mutation class is lethal, so K->is_lethal=1\n",
+                fprintf(stderr, "%s: mutation class is lethal, so K->is_lethal=1\n",
                        thisfunction);
             K->is_lethal = 1;
             K->createlethal = 0;
         }
         IF_DEBUG(DEBUG_LETHALS)
-            printf("%s: K->is_lethal=%d\n", thisfunction, K->is_lethal);
+            fprintf(stderr, "%s: K->is_lethal=%d\n", thisfunction, K->is_lethal);
         IF_DEBUG(DEBUG_LETHALS)
-            printf("%s: if this is non-zero, expect normalization problems\n",
+            fprintf(stderr, "%s: if this is non-zero, expect normalization problems\n",
                    thisfunction);
     }
 }
@@ -104,7 +104,7 @@ void        compute_adults_initial (KConfig K)
 */
 {
     const char* thisfunction = "compute_adults_initial";
-	IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
+	IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     if (K->genotypes != 1) {
         not_implemented(thisfunction, "genotypes != 1");
 	}
@@ -123,12 +123,12 @@ void        compute_adults_initial (KConfig K)
     const char* thisfunction = "compute_adults_initial";
     KInt i, j, g;
     not_implemented(thisfunction);
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     for (i=0; i <= K->MI; i++) {
         for (j=0; j <= K->MJ; j++) {
             for (g=0; g < K->genotypes; g++) {
                 IF_DEBUG(DEBUG_TRACE2) {
-                    printf("%s: [%d][%d][%d]\n",
+                    fprintf(stderr, "%s: [%d][%d][%d]\n",
 						   thisfunction, i, j, g);
                 }
                 if (i == 0 && j == 0) {

@@ -67,24 +67,24 @@ void        initiate_model_state_n  (KConfig_n KN)
     if (!KN->option_nolethal) {
         if (KN->fit_s[0] == 1.0) {
             IF_DEBUG(DEBUG_LETHALS)
-                printf("%s: mutation class 0 is lethal, so KN->is_lethal[0]=1\n",
+                fprintf(stderr, "%s: mutation class 0 is lethal, so KN->is_lethal[0]=1\n",
                        thisfunction);
             KN->is_lethal[0] = 1;
             KN->createlethal[0] = 0;
         }
         if (KN->fit_s[1] == 1.0) {
             IF_DEBUG(DEBUG_LETHALS)
-                printf("%s: mutation class 1 is lethal, so KN->is_lethal[1]=1\n",
+                fprintf(stderr, "%s: mutation class 1 is lethal, so KN->is_lethal[1]=1\n",
                        thisfunction);
             KN->is_lethal[1] = 1;
             KN->createlethal[1] = 0;
         }
         IF_DEBUG(DEBUG_LETHALS)
-            printf("%s: KN->is_lethal[0]=%d\n", thisfunction, KN->is_lethal[0]);
+            fprintf(stderr, "%s: KN->is_lethal[0]=%d\n", thisfunction, KN->is_lethal[0]);
         IF_DEBUG(DEBUG_LETHALS)
-            printf("%s: KN->is_lethal[1]=%d\n", thisfunction, KN->is_lethal[1]);
+            fprintf(stderr, "%s: KN->is_lethal[1]=%d\n", thisfunction, KN->is_lethal[1]);
         IF_DEBUG(DEBUG_LETHALS)
-            printf("%s: if either of these are non-zero, expect normalization problems\n",
+            fprintf(stderr, "%s: if either of these are non-zero, expect normalization problems\n",
                    thisfunction);
     }
 }
@@ -96,7 +96,7 @@ void        compute_adults_initial_n    (KConfig_n KN)
 */
 {
     const char* thisfunction = "compute_adults_initial_n";
-	IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
+	IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     apply_adults_initial_n(KN, KN->x1);
     KN->current_x = KN_CURRENT_X1;
 }
@@ -108,7 +108,7 @@ void        apply_adults_initial_n  (KConfig_n KN, KArray_n& a)
 */
 {
     const char* thisfunction = "apply_adults_initial_n";
-	IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
+	IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     fill_KArray_n(KN, a, 0.0);
     a[0][0][0][0] = 1.0;
     check_normalization_n(KN, a, thisfunction, "a");

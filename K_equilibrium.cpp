@@ -14,12 +14,12 @@ int         is_equilibrium          (KConfig K)
 ** return 1 if K satisfies equilibrium constraints as defined by user
 */
 {
-    const char* thisfunction = "is_equilibrium";
+    //const char* thisfunction = "is_equilibrium";
     if (diff_epsilon_KArray(K, K->x, K->x_prevgen, K->epsilon)) {
-        IF_DEBUG(DEBUG_TRACE1) printf("is_equilibrium: no equilibrium\n");
+        if (DEBUG(DEBUG_TRACE1)) fprintf(stderr, "is_equilibrium: no equilibrium\n");
         return 0;
     } else {
-        IF_DEBUG(DEBUG_TRACE1) printf("is_equilibrium: at equilibrium\n");
+        if (DEBUG(DEBUG_TRACE1)) fprintf(stderr, "is_equilibrium: at equilibrium\n");
         return 1;
     }
 }
@@ -34,30 +34,13 @@ int         diff_epsilon_KArray     (KConfig K, KArray& a1, KArray& a2,
 {
     const char* thisfunction = "diff_epsilon_KArray";
     KInt i, j, g;
-    IF_DEBUG(DEBUG_FOLLOW_EQUILIBRIUM) {
+    if (DEBUG(DEBUG_FOLLOW_EQUILIBRIUM)) {
         KInt n, v, xi, l, lam, zeta;
+        n = v = xi = l = lam = zeta = -1;
         KScalar diff, maxdiff = 0.0;
-		for (n=0; n < K->MI; n++) {
-			for (v=0; v < K->MJ; v++) {
-				for (xi=0; xi < K->genotypes; xi++) {
-					diff = fabs(a1[n][v][xi] - a2[n][v][xi]);
-					if (diff > maxdiff) {
-						maxdiff = diff; 
-						l = n; lam = v; zeta = xi;
-					}
-				}
-			}
-		}
-		printf("%s: gen %d, epsilon = %lg, max diff [%d][%d][%d] = %lg\n",
-			   thisfunction, K->generation, epsilon, l, lam, zeta, maxdiff);
-    }
-    IF_DEBUG(DEBUG_EQUILIBRIUM) {
-    	KInt n, v, xi;
-	    KInt l = 0, lam = 0, zeta = 0;
-	    KScalar diff, maxdiff = 0.0;
-		IF_DEBUG(DEBUG_EQUILIBRIUM_DETAIL) {
-			printf("%s: BEGIN where (a1[][][]-a2[][][] != 0.0)\n", thisfunction);
-            printf("i\tj\tg\tdiff\n");
+		if (DEBUG(DEBUG_EQUILIBRIUM_DETAIL)) {
+			fprintf(stderr, "%s: BEGIN where (a1[][][]-a2[][][] != 0.0)\n", thisfunction);
+            fprintf(stderr, "i\tj\tg\tdiff\n");
         }
 		for (n=0; n < K->MI; n++) {
 			for (v=0; v < K->MJ; v++) {
@@ -67,23 +50,23 @@ int         diff_epsilon_KArray     (KConfig K, KArray& a1, KArray& a2,
 						maxdiff = diff; 
 						l = n; lam = v; zeta = xi;
 					}
-					IF_DEBUG(DEBUG_EQUILIBRIUM_DETAIL) {
+					if (DEBUG(DEBUG_EQUILIBRIUM_DETAIL)) {
 						if (n < 10 && v < 10) {
 							diff = a1[n][v][xi] - a2[n][v][xi];
 							if (diff != 0.0) {
-                                printf("%d\t%d\t%d\t%lg\n", n, v, xi, diff);
+                                fprintf(stderr, "%d\t%d\t%d\t%lg\n", n, v, xi, diff);
 							}
 						}
 					}
 				}
 			}
 		}
-		IF_DEBUG(DEBUG_EQUILIBRIUM_DETAIL) {
-			printf("%s: END (a1[][][]-a2[][][] != 0.0)\n", thisfunction);
+		if (DEBUG(DEBUG_EQUILIBRIUM_DETAIL)) {
+			fprintf(stderr, "%s: END (a1[][][]-a2[][][] != 0.0)\n", thisfunction);
         }
-		printf("%s: epsilon = %lg, max diff @ [%d][%d][%d] = %lg\n",
-			   thisfunction, epsilon, l, lam, zeta, maxdiff);
-	}
+		fprintf(stderr, "%s: gen %d, epsilon = %lg, max diff [%d][%d][%d] = %lg\n",
+			   thisfunction, K->generation, epsilon, l, lam, zeta, maxdiff);
+    }
     /* TODO: sort out whether these should be "<=" or "<" */
     for (i=0; i <= K->MI; i++) {
         for (j=0; j <= K->MJ; j++) {

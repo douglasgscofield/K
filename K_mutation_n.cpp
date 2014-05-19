@@ -21,7 +21,7 @@ void        compute_mutation_n  (KConfig_n KN)
 */
 {
     const char* thisfunction = "compute_mutation_n";
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     if (KN->current_x != KN_CURRENT_X1) {
         char buf[200];
         sprintf(buf, "%s: wrong current x array = %d",
@@ -39,9 +39,9 @@ void        apply_mutation_n    (KConfig_n KN, KArray_n& to,
     const char* thisfunction = "apply_mutation_n";
     KInt i0, j0, i1, j1, n0, n1;
     KScalar sum;
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     if (KN->U[0] == 0.0 && KN->U[1] == 0.0) {
-        IF_DEBUG(DEBUG_TRACE1) printf("no mutation\n");
+        IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "no mutation\n");
         copy_KArray_n(KN, to, from);
         check_normalization_n(KN, to, thisfunction, "to");
         return;
@@ -62,7 +62,7 @@ void        apply_mutation_n    (KConfig_n KN, KArray_n& to,
                     IF_DEBUG(DEBUG_TRACE2)
                         if (!(i0 % 10) && !(j0 % 10) &&
                             !(i1 % 10) && !(j1 % 10))
-                            printf("mut[%d,%d,%d,%d] ", 
+                            fprintf(stderr, "mut[%d,%d,%d,%d] ", 
                                    i0, j0, i1, j1);
 #endif
                     sum = 0.0;
@@ -81,7 +81,7 @@ void        apply_mutation_n    (KConfig_n KN, KArray_n& to,
             }
         }
     }
-    IF_DEBUG(DEBUG_TRACE2) printf("\n");
+    IF_DEBUG(DEBUG_TRACE2) fprintf(stderr, "\n");
     check_normalization_n(KN, to, thisfunction, "to");
 }
 
@@ -94,9 +94,9 @@ void        apply_mutation_general_n    (KConfig K, KScalar U,
     const char* thisfunction = "apply_mutation_general";
     KInt g, i, j, n1;
     KScalar sum;
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     if (K->U == 0.0) {
-        IF_DEBUG(DEBUG_TRACE1) printf("no mutation\n");
+        IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "no mutation\n");
         copy_KArray(K, K->xp, K->x);
         return;
     }
@@ -122,12 +122,12 @@ void        initiate_mut_term_n     (KConfig_n KN)
     KInt i0, i1;
     KScalar t0, t1;
     KScalar checksum = 0.0;
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     /*
     ** pois_term() behaves reasonably with U[0]==0.0 or U[1]==0.0
     **
     if (KN->U[0] == 0.0 || KN->U[1] == 0.0) {
-        IF_DEBUG(DEBUG_TRACE1) printf("no mutation\n");
+        IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "no mutation\n");
         not_implemented(thisfunction, "U[0]==0.0 or U[1]==0.0");
         for (i1=0; i1 <= KN->MI1; i1++) {
             for (i0=0; i0 <= KN->MI0; i0++) {
@@ -161,7 +161,7 @@ void        initiate_mut_term_n     (KConfig_n KN)
                 termsum += KN->mut_term[i0][i1];
             }
         }
-        printf("%s: U[0]=%lg, U[1]=%lg, sum mut_term=%lf\n", 
+        fprintf(stderr, "%s: U[0]=%lg, U[1]=%lg, sum mut_term=%lf\n", 
                thisfunction, KN->U[0], KN->U[1], termsum);
     }
 }
@@ -255,10 +255,10 @@ KScalar     mut_term_general_n      (KScalar U, KInt x)
         IF_DEBUG(DEBUG_NORMALIZATION) {
             KInt i;
             KScalar termsum = 0.0;
-            printf("%s: U = %lg\n", thisfunction, U);
+            fprintf(stderr, "%s: U = %lg\n", thisfunction, U);
             for (i=0; i <= MAX_MI; i++) {
                 termsum += pois_general[last_index][i];
-                printf("pois_general[last_index][%d] = %lg, cumulative sum = %lg\n",
+                fprintf(stderr, "pois_general[last_index][%d] = %lg, cumulative sum = %lg\n",
                        i, pois_general[last_index][i], termsum);
             }
         }

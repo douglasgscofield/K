@@ -14,31 +14,31 @@ const int Trajectory::num_types = sizeof(Trajectory::types)
 
 /////////////////////////////////////////////////////////////////
 void Trajectory::start     (KConfig K, 
-                            const std::string& fil, 
-                            const std::string& typ,
+                            const string& fil, 
+                            const string& typ,
                             int frq)
 {
     const char* thisfunction = "Trajectory::start";
     if (debug_flag) {
-        std::cerr << thisfunction << " in gen " << K->generation 
+        cerr << thisfunction << " in gen " << K->generation 
             << " with file='" << fil << "' type='" << typ
-            << "' freq=" << frq << std::endl;
+            << "' freq=" << frq << endl;
     }
     filename = fil;
     file.open(filename.c_str());
     if (file.fail()) {
-        std::cerr << thisfunction << ": could not open trajectory file "
-            << filename << std::endl;
+        cerr << thisfunction << ": could not open trajectory file "
+            << filename << endl;
         fatal(NULL);
     }
     if ((type = match_type(typ)) == TRAJECTORY_ERROR) {
-        std::cerr << thisfunction << ": unrecognized trajectory type '"
-            << type << "'" << std::endl;
+        cerr << thisfunction << ": unrecognized trajectory type '"
+            << type << "'" << endl;
         fatal(NULL);
     }
     if ((freq = frq) <= 0) {
-        std::cerr << thisfunction << ": trajectory frequency (" 
-            << freq << ") must be > 0" << std::endl;
+        cerr << thisfunction << ": trajectory frequency (" 
+            << freq << ") must be > 0" << endl;
         fatal(NULL);
     }
     // write trajectory header
@@ -54,10 +54,10 @@ void Trajectory::stop ()
 {
     const char* thisfunction = "Trajectory::stop";
     if (debug_flag) {
-        std::cerr << thisfunction << std::endl;
+        cerr << thisfunction << endl;
     }
     if (! active_flag) {
-        std::cerr << thisfunction << ": no active trajectory" << std::endl;
+        cerr << thisfunction << ": no active trajectory" << endl;
         fatal(NULL);
     }
     reset();
@@ -75,18 +75,18 @@ void Trajectory::stop ()
 // static functions for managing the type of trajectory
 void Trajectory::dump_type ()
 {
-    const char* thisfunction = "Trajectory::dump_type";
+    //const char* thisfunction = "Trajectory::dump_type";
     for (int i = 0; i < num_types; ++i) {
-        std::cout << "type " << i << ": name=<" << types[i].name
+        cout << "type " << i << ": name=<" << types[i].name
             << "> define_name=<" << types[i].define_name
-            << "> type=" << types[i].type << std::endl;
+            << "> type=" << types[i].type << endl;
     }
 }
 
 /////////////////////////////////////////////////////////////////
-const std::string& Trajectory::match_type (int type)
+const string& Trajectory::match_type (int type)
 {
-    const char* thisfunction = "Trajectory::match_type";
+    //const char* thisfunction = "Trajectory::match_type";
     for (int i = 0; i < num_types; ++i) {
         if (type == types[i].type) {
             return(types[i].name);
@@ -96,9 +96,9 @@ const std::string& Trajectory::match_type (int type)
 }
 
 /////////////////////////////////////////////////////////////////
-int Trajectory::match_type (const std::string& type)
+int Trajectory::match_type (const string& type)
 {
-    const char* thisfunction = "Trajectory::match_type";
+    //const char* thisfunction = "Trajectory::match_type";
     for (int i = 0; i < num_types; ++i) {
         if (type == types[i].name) {
             return(types[i].type);
@@ -110,7 +110,7 @@ int Trajectory::match_type (const std::string& type)
 /////////////////////////////////////////////////////////////////
 void Trajectory::reset() 
 {
-    const char* thisfunction = "Trajectory::reset";
+    //const char* thisfunction = "Trajectory::reset";
     active_flag = false;
     filename = "";
     if (file) file.close();

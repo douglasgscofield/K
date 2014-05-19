@@ -49,7 +49,7 @@ void        compute_selection   (KConfig K)
 */
 {
     const char* thisfunction = "compute_selection";
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     apply_selection(K, K->X, K->xpp);
     check_normalization(K, K->X, thisfunction, "K->X");
 }
@@ -63,7 +63,7 @@ void        apply_selection    (KConfig K, KArray& to, KArray& from)
     const char* thisfunction = "apply_selection";
     KInt g, i, j;
     KScalar recip_w_mean;
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     recip_w_mean = 1.0 / mean_fitness_allprogeny(K, from);
     for (i=0; i <= K->MI; i++) {
         for (j=0; j <= K->MJ; j++) {
@@ -109,7 +109,7 @@ KScalar     fitness                     (KConfig K, KInt i, KInt j,
 ** fitnesses are already in K->fitness_precomputed[][][]
 */
 {
-    const char* thisfunction = "fitness";
+    //const char* thisfunction = "fitness";
     if (fitness_functions[K->fitness_function].mustcompute) {
         return fitness_computed(K, i, j, g);
     } else {
@@ -123,7 +123,7 @@ KScalar     mean_fitness            (KConfig K, KArray& a)
 ** The mean fitness of the load class-genotype array
 */
 {
-    const char* thisfunction = "mean_fitness";
+    //const char* thisfunction = "mean_fitness";
     KScalar sum;
     sum = sum_KArray(K, a);
     if (sum == 0.0) {
@@ -144,8 +144,8 @@ KScalar     mean_fitness_allprogeny (KConfig K, KArray& a)
     if (sum == 0.0) {
         return 0.0;
     }
-    IF_DEBUG(DEBUG_LETHALS) printf("%s: sum_KArray was=%g\n", thisfunction, sum);
-    IF_DEBUG(DEBUG_LETHALS) printf("%s: K->createlethal=%d\n", thisfunction, K->createlethal);
+    IF_DEBUG(DEBUG_LETHALS) fprintf(stderr, "%s: sum_KArray was=%g\n", thisfunction, sum);
+    IF_DEBUG(DEBUG_LETHALS) fprintf(stderr, "%s: K->createlethal=%d\n", thisfunction, K->createlethal);
     if (K->is_lethal && sum < 1.0)
         /*
         ** sum should be 1.0 in any case, its computation here is
@@ -157,7 +157,7 @@ KScalar     mean_fitness_allprogeny (KConfig K, KArray& a)
         ** proportion of total progeny so that with S>0, sum<1.0.
         */
         sum = 1.0;
-    IF_DEBUG(DEBUG_LETHALS) printf("%s: sum_KArray is=%g\n", thisfunction, sum);
+    IF_DEBUG(DEBUG_LETHALS) fprintf(stderr, "%s: sum_KArray is=%g\n", thisfunction, sum);
     return cumulative_fitness(K, a) / sum;
 }
 
@@ -167,7 +167,7 @@ KScalar     cumulative_fitness  (KConfig K, KArray& a)
 ** The cumulative fitness of the load class-genotype array
 */
 {
-    const char* thisfunction = "cumulative_fitness";
+    //const char* thisfunction = "cumulative_fitness";
     KInt i, j, g;
     KScalar ans = 0.0;
     for (i=0; i <= K->MI; i++) {
@@ -188,7 +188,7 @@ void        initiate_fitness_precomputed    (KConfig K)
 ** initiation.  K->fitness_precomputed is correct upon exit.
 */
 {
-    const char* thisfunction = "initiate_fitness_precomputed";
+    //const char* thisfunction = "initiate_fitness_precomputed";
     KInt i, j, g;
     for (i=0; i <= K->MI; i++) {
         for (j=0; j <= K->MJ; j++) {
@@ -284,7 +284,7 @@ KScalar     fitness_multiplicative  (KConfig K, KInt i, KInt j,
 ** fitness model a la Charlesworth et al (1991)
 */
 {
-    const char* thisfunction = "fitness_multiplicative";
+    //const char* thisfunction = "fitness_multiplicative";
     KScalar t1, t2, ans;
     t1 = pow((1 - K->fit_h*K->fit_s), (KScalar)i);
     t2 = pow((1 - K->fit_s), (KScalar)j);
@@ -299,7 +299,7 @@ KScalar     fitness_kondrashov      (KConfig K, KInt i, KInt j,
 ** Compute fitness based on load class using Kondrashov (1985)
 */
 {
-    const char* thisfunction = "fitness_kondrashov";
+    //const char* thisfunction = "fitness_kondrashov";
     KScalar t1, t2, ans;
     t1 = ((KScalar)i + (K->fit_d*(KScalar)j)) / K->fit_k;
     t2 = pow(t1, (KScalar)K->fit_alpha);

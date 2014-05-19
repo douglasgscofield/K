@@ -8,7 +8,7 @@ void        compute_adults_prevgen_n(KConfig_n KN)
 */
 {
     const char* thisfunction = "compute_adults_prevgen_n";
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     if (KN->current_x != KN_CURRENT_X1) {
         char buf[200];
         sprintf(buf, "%s: wrong current x array = %d",
@@ -28,7 +28,7 @@ void        apply_adults_prevgen_n  (KConfig_n KN,
 */
 {
     const char* thisfunction = "apply_adults_prevgen_n";
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     copy_KArray_n(KN, prevgen, from);
     check_normalization_n(KN, prevgen, thisfunction, "prevgen");
 }

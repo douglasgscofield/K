@@ -13,7 +13,7 @@ void        load_savefile_n (KConfig_n KN, KArray_n& a)
     char* savefile;
     savefile = create_load_savefile_name_n(KN);
     if ((fp = fopen(savefile,"r")) != NULL) {
-        printf("loading from %s... ", savefile);
+        fprintf(stderr, "loading from %s... ", savefile);
         while (fscanf(fp, "%d\t%d\t%d\t%d\t%lg\n",
                       &i0, &j0, &i1, &j1, &val) != EOF) {
             if (i0 < 0 || i0 > KN->MI0) fatal("invalid input");
@@ -24,7 +24,7 @@ void        load_savefile_n (KConfig_n KN, KArray_n& a)
             a[i0][j0][i1][j1] = val;
         }
         fclose(fp);
-        printf("done\n");
+        fprintf(stderr, "done\n");
     } else {
         char buf[200];
         sprintf(buf, "could not find %s", savefile);
@@ -44,9 +44,9 @@ void        save_savefile_n (KConfig_n KN, KArray_n& a)
     FILE* fp;
     savefile = create_save_savefile_name_n(KN);
     fp = fopen(savefile,"w+");
-    printf("saving to %s... ", savefile);
+    fprintf(stderr, "saving to %s... ", savefile);
     dump_values_KArray_n(KN, fp, a, KN->MI0, KN->MJ0, KN->MI1, KN->MJ1);
-    printf("done\n");
+    fprintf(stderr, "done\n");
 }
 
 /*///////////////////////////////////////////////////////////////*/

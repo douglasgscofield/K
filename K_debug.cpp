@@ -24,10 +24,10 @@ void        check_normalization         (KConfig K, KArray& a,
                                          const char* caller, 
                                          const char* array_name)
 {
-    const char* thisfunction = "check_normalization";
+    //const char* thisfunction = "check_normalization";
     IF_DEBUG(DEBUG_NORMALIZATION) {
         if (!isOK_KArray(K, a)) {
-            printf("%s: %s not normalized: %f, tolerance=%lg\n", caller, 
+            fprintf(stderr, "%s: %s not normalized: %f, tolerance=%lg\n", caller, 
                    array_name, sum_KArray(K, a), NORMALIZATION_TOLERANCE);
         }
     }
@@ -45,17 +45,17 @@ void        dump_KArray                 (KConfig K, KArray& a,
         mj = K->MJ;
     if (mg > K->genotypes || mg < 1)
         mg = K->genotypes;
-    printf("%s BEGIN KArray @ %p; max i=%d max j=%d max g=%d\n",
+    fprintf(stderr, "%s BEGIN KArray @ %p; max i=%d max j=%d max g=%d\n",
            thisfunction, a, mi, mj, mg);
-    printf("i\tj\tg\ta[i][j][g]\n");
+    fprintf(stderr, "i\tj\tg\ta[i][j][g]\n");
     for (i=0; i <= mi; i++) {
         for (j=0; j <= mj; j++) {
             for (g=0; g < mg; g++) {
-                printf("%d\t%d\t%d\t%lg\n", i, j, g, a[i][j][g]);
+                fprintf(stderr, "%d\t%d\t%d\t%lg\n", i, j, g, a[i][j][g]);
             }
         }
     }
-    printf("%s END for KArray a @ %p\n", thisfunction, a);
+    fprintf(stderr, "%s END for KArray a @ %p\n", thisfunction, a);
 }
 
 /////////////////////////////////////////////////////////////////
@@ -78,10 +78,10 @@ void        dump_values_KArray      (KConfig K,
 void        dump_KArray_full            (KConfig K, KArray& a)
 {
     const char* thisfunction = "dump_KArray_full";
-    printf("%s BEGIN KArray @ %p; dump_KArray follows\n",
+    fprintf(stderr, "%s BEGIN KArray @ %p; dump_KArray follows\n",
            thisfunction, a);
     dump_KArray(K, a, K->MI, K->MJ, K->genotypes);
-    printf("%s END for KArray a @ %p\n", thisfunction, a);
+    fprintf(stderr, "%s END for KArray a @ %p\n", thisfunction, a);
 }
 
 /////////////////////////////////////////////////////////////////
@@ -97,31 +97,31 @@ void        dump_KVector1               (KConfig K, KVector1& v,
         mi = K->MI;
     if (mg > K->genotypes || mg < 1)
         mg = K->genotypes;
-    printf("%s BEGIN KVector1 @ %p; max i=%d max g=%d\n",
+    fprintf(stderr, "%s BEGIN KVector1 @ %p; max i=%d max g=%d\n",
            thisfunction, v, mi, mg);
-    printf("i\tg\tv[i] ...[g=0]\n");
+    fprintf(stderr, "i\tg\tv[i] ...[g=0]\n");
     for (i=0; i <= mi; i++) {
         for (g=0; g < mg; g++) {
-                printf("%d\t%d\t%lg\n", i, g, v[i]);
+                fprintf(stderr, "%d\t%d\t%lg\n", i, g, v[i]);
         }
     }
-    printf("%s END for KVector1 v @ %p\n", thisfunction, v);
+    fprintf(stderr, "%s END for KVector1 v @ %p\n", thisfunction, v);
 }
 
 /////////////////////////////////////////////////////////////////
 void        dump_KVector1_full          (KConfig K, KVector1& v)
 {
     const char* thisfunction = "dump_KVector1_full";
-    printf("%s BEGIN KArray @ %p; dump_KVector1 follows\n",
+    fprintf(stderr, "%s BEGIN KArray @ %p; dump_KVector1 follows\n",
            thisfunction, v);
     dump_KVector1(K, v, K->MI, K->genotypes);
-    printf("%s END for KVector1 v @ %p\n", thisfunction, v);
+    fprintf(stderr, "%s END for KVector1 v @ %p\n", thisfunction, v);
 }
 
 /////////////////////////////////////////////////////////////////
 void        set_debug                  (int lvl)
 {
-    const char* thisfunction = "set_debug";
+    //const char* thisfunction = "set_debug";
     if (lvl == 0) {
         debug_flags = 0;
     } else {

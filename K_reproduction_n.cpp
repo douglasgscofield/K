@@ -30,7 +30,7 @@ void        compute_self_progeny_n  (KConfig_n KN)
 */
 {
     const char* thisfunction = "compute_self_progeny_n";
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     if (KN->current_x != KN_CURRENT_PROGENY_TO_X1 &&
         KN->current_x != KN_CURRENT_X2) {
         char buf[200];
@@ -59,9 +59,9 @@ void        apply_self_progeny_n    (KConfig_n KN,
     const char* thisfunction = "apply_self_progeny_n";
     KInt i0, j0, i1, j1, n0, v0, n1, v1;
     KScalar sum, loadclass;
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     if (KN->S == 0.0) {
-        IF_DEBUG(DEBUG_TRACE1) printf("%s: no selfing\n", thisfunction);
+        IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s: no selfing\n", thisfunction);
         return;  /* nothing to add */
     }
     for (i0=0; i0 <= KN->MI0; i0++) {
@@ -72,9 +72,9 @@ void        apply_self_progeny_n    (KConfig_n KN,
                     IF_DEBUG(DEBUG_TRACE2)
                         if (!(i0 % 10) && !(j0 % 10) &&
                             !(i1 % 10) && !(j1 % 10)) {
-                            printf("s[%d,%d,%d,%d] ", 
+                            fprintf(stderr, "s[%d,%d,%d,%d] ", 
                                    i0, j0, i1, j1);
-                            fflush(stdout);
+                            fflush(stderr);
                         }
 #endif
                     /* L(i0,j0,i1,j1) is the destination load class */
@@ -135,7 +135,7 @@ void        apply_self_progeny_n    (KConfig_n KN,
             }
         }
     }
-    IF_DEBUG(DEBUG_TRACE2) printf("\n");
+    IF_DEBUG(DEBUG_TRACE2) fprintf(stderr, "\n");
 }
 
 /*///////////////////////////////////////////////////////////////*/
@@ -145,7 +145,7 @@ void        compute_apomixis_progeny_n  (KConfig_n KN)
 */
 {
     const char* thisfunction = "compute_apomixis_progeny_n";
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     if (KN->current_x != KN_CURRENT_PROGENY_TO_X1 &&
         KN->current_x != KN_CURRENT_X2) {
         char buf[200];
@@ -173,9 +173,9 @@ void        apply_apomixis_progeny_n    (KConfig_n KN,
 {
     const char* thisfunction = "apply_apomixis_progeny_n";
     KInt i0, j0, i1, j1, n0, v0, n1, v1;
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     if (KN->A == 0.0) {
-        IF_DEBUG(DEBUG_TRACE1) printf("%s: no apomixis\n", thisfunction);
+        IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s: no apomixis\n", thisfunction);
         return;  /* nothing to add */
     }
     for (i0=0; i0 <= KN->MI0; i0++) {
@@ -192,9 +192,9 @@ void        apply_apomixis_progeny_n    (KConfig_n KN,
                     IF_DEBUG(DEBUG_TRACE2)
                         if (!(i0 % 10) && !(j0 % 10) &&
                             !(i1 % 10) && !(j1 % 10)) {
-                            printf("a[%d,%d,%d,%d] ", 
+                            fprintf(stderr, "a[%d,%d,%d,%d] ", 
                                    i0, j0, i1, j1);
-                            fflush(stdout);
+                            fflush(stderr);
                         }
                     /* identical load class only */
                     n0 = i0;
@@ -210,7 +210,7 @@ void        apply_apomixis_progeny_n    (KConfig_n KN,
             }
         }
     }
-    IF_DEBUG(DEBUG_TRACE2) printf("\n");
+    IF_DEBUG(DEBUG_TRACE2) fprintf(stderr, "\n");
 }
 
 /*///////////////////////////////////////////////////////////////*/
@@ -220,7 +220,7 @@ void        compute_gametes_n   (KConfig_n KN)
 */
 {
     const char* thisfunction = "compute_gametes_n";
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     if (KN->current_x != KN_CURRENT_PROGENY_TO_X1 &&
         KN->current_x != KN_CURRENT_X2) {
         char buf[200];
@@ -268,7 +268,7 @@ void        apply_gametes_full_n    (KConfig_n KN,
     KScalar t1, t2, t3, t4;
     static KScalar p[MAX_MI_n+1][MAX_MI_n+1][MAX_MI_n+1][MAX_MI_n+1];
     static int runonce = 0;
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     if (!runonce) {
         runonce++;
         for (v1=0; v1 <= KN->MI1; v1++) {
@@ -289,8 +289,8 @@ void        apply_gametes_full_n    (KConfig_n KN,
         for (i1=0; i1 <= KN->MI1; i1++) {
             IF_DEBUG(DEBUG_TRACE2)
                 if (!(i0 % 10) && !(i1 % 10)) {
-                    printf("g[%d,%d] ", i0, i1);
-                    fflush(stdout);
+                    fprintf(stderr, "g[%d,%d] ", i0, i1);
+                    fflush(stderr);
                 }
             sum = 0.0;
             for (v0=0; v0 <= i0 && v0 <= KN->MJ0; v0++) {
@@ -321,7 +321,7 @@ void        apply_gametes_full_n    (KConfig_n KN,
             fgam[i0][i1] = sum;
         }
     }
-    IF_DEBUG(DEBUG_TRACE2) printf("\n");
+    IF_DEBUG(DEBUG_TRACE2) fprintf(stderr, "\n");
 }
 
 /*///////////////////////////////////////////////////////////////*/
@@ -334,7 +334,7 @@ void        adjust_gametes_n    (KConfig_n KN,
 {
     const char* thisfunction = "adjust_gametes_n";
     KInt i0, i1;
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     for (i0=0; i0 <= KN->MI0; i0++) {
         for (i1=0; i1 <= KN->MI1; i1++) {
             /* mgam[i0][i1] = mgam[i0][i1]; */
@@ -354,7 +354,7 @@ void        compute_zygotes_n   (KConfig_n KN)
 	** expected genotypic classes.  Note that all classes 
 	** L(,j>0) = 0.
 	*/
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     if (KN->current_x != KN_CURRENT_GAMETES_X2_TO_X1) {
         char buf[200];
         sprintf(buf, "%s: wrong current x array = %d",
@@ -379,9 +379,9 @@ void        apply_zygotes_n   (KConfig_n KN, KArray_n& to,
 	** expected genotypic classes.  Note that all classes 
 	** L(,j>0) = 0.
 	*/
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     if (KN->O == 0.0) {
-        IF_DEBUG(DEBUG_TRACE1) printf("%s: no outcrossing\n",
+        IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s: no outcrossing\n",
                                       thisfunction);
         return;
     }
@@ -389,8 +389,8 @@ void        apply_zygotes_n   (KConfig_n KN, KArray_n& to,
         for (i1=0; i1 <= KN->MI1; i1++) {
             IF_DEBUG(DEBUG_TRACE2)
                 if (!(i0 % 10) && !(i1 % 10)) {
-                    printf("z[%d,0,%d,0] ", i0, i1);
-                    fflush(stdout);
+                    fprintf(stderr, "z[%d,0,%d,0] ", i0, i1);
+                    fflush(stderr);
                 }
             sum = 0.0;
             for (k0=0; k0 <= i0; k0++) {
@@ -410,14 +410,14 @@ void        apply_zygotes_n   (KConfig_n KN, KArray_n& to,
             to[i0][0][i1][0] += sum * 0.25;
         }
     }
-    IF_DEBUG(DEBUG_TRACE2) printf("\n");
+    IF_DEBUG(DEBUG_TRACE2) fprintf(stderr, "\n");
 }
 
 /*///////////////////////////////////////////////////////////////*/
 void        compute_summed_progeny_n    (KConfig_n KN)
 {
     const char* thisfunction = "compute_summed_progeny_n";
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     if (KN->current_x != KN_CURRENT_PROGENY_TO_X1) {
         char buf[200];
         sprintf(buf, "%s: wrong current x array = %d",

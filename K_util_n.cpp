@@ -53,9 +53,9 @@ void        normalize_KArray_n  (KConfig_n KN, KArray_n& a)
     const char* thisfunction = "normalize_KArray_n";
     KInt i0, j0, i1, j1;
     KScalar sum = sum_KArray_n(KN, a);
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     IF_DEBUG(DEBUG_NORMALIZATION) {
-        printf("%s: prenormalization, sum_KArray_n = %lg\n", 
+        fprintf(stderr, "%s: prenormalization, sum_KArray_n = %lg\n", 
                thisfunction, sum);
     }
     if (sum != 1.0) {
@@ -70,7 +70,7 @@ void        normalize_KArray_n  (KConfig_n KN, KArray_n& a)
         }
     }
     IF_DEBUG(DEBUG_NORMALIZATION) {
-        printf("%s: postnormalization, sum_KArray_n = %lg\n", 
+        fprintf(stderr, "%s: postnormalization, sum_KArray_n = %lg\n", 
                thisfunction, sum_KArray_n(KN, a));
     }
 }
@@ -87,9 +87,9 @@ void        truncate_KArray_n   (KConfig_n KN, KArray_n& a,
     KInt i0, j0, i1, j1;
     KInt num = 0;
     KScalar sum = 0.0;
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     IF_DEBUG(DEBUG_TRUNCATE_DETAIL) {
-        printf("%s: truncating values lower than v=%lg \n", 
+        fprintf(stderr, "%s: truncating values lower than v=%lg \n", 
 			   thisfunction, v);
     }
     for (i0=0; i0 <= KN->MI0; i0++) {
@@ -102,7 +102,7 @@ void        truncate_KArray_n   (KConfig_n KN, KArray_n& a,
                         num++;
                         a[i0][j0][i1][j1] = 0.0;
                         IF_DEBUG(DEBUG_TRUNCATE_DETAIL) {
-                            printf("%s: truncated a[%d][%d][%d][%d]\n",
+                            fprintf(stderr, "%s: truncated a[%d][%d][%d][%d]\n",
                                    thisfunction, i0, j0, i1, j1);
                         }
                     }
@@ -111,7 +111,7 @@ void        truncate_KArray_n   (KConfig_n KN, KArray_n& a,
         }
     }
     IF_DEBUG(DEBUG_TRUNCATE) {
-        printf("%s: truncated %d elements, whose sum is %lg\n",
+        fprintf(stderr, "%s: truncated %d elements, whose sum is %lg\n",
                thisfunction, num, sum);
     }
 }

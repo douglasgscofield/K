@@ -42,7 +42,7 @@ void        set_repro_resources     (KConfig K)
 ** sets up the arrays that drive the reproductive resource algorithms
 */
 {
-    const char* thisfunction = "set_repro_resources_kondrashov";
+    //const char* thisfunction = "set_repro_resources_kondrashov";
     KInt g;
     for (g=0; g < K->genotypes; g++) {
         K->rsrc_SO[g] = 0.5 * (K->S[g] + K->D_S[g]*K->S[g]);
@@ -58,7 +58,7 @@ void        set_repro_resources_kondrashov  (KConfig K)
 ** sets up the arrays that drive the reproductive resource algorithms
 */
 {
-    const char* thisfunction = "set_repro_resources_kondrashov";
+    //const char* thisfunction = "set_repro_resources_kondrashov";
     KInt g;
     for (g=0; g < K->genotypes; g++) {
         K->rsrc_SO[g] = 0.5 * (K->S[g] + K->D_S[g]*K->S[g]);
@@ -72,7 +72,7 @@ void        set_repro_resources_kondrashov  (KConfig K)
 void        compute_self_progeny    (KConfig K)
 {
     const char* thisfunction = "compute_self_progeny";
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     apply_self_progeny(K, K->xpps, K->xp);
 }
 
@@ -87,7 +87,7 @@ void        apply_self_progeny  (KConfig K, KArray& to, KArray& from)
     const char* thisfunction = "apply_self_progeny";
     KInt i, j, n, v, g, xi;
     KScalar sum, loadclass;
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     if (K->genotypes != 1) {
         not_implemented(thisfunction, "genotypes != 1");
     }
@@ -133,7 +133,7 @@ void        apply_self_progeny  (KConfig K, KArray& to, KArray& from)
                         if ((loadclass = from[n][v][xi]) == 0.0) 
                             continue;
                         IF_DEBUG(DEBUG_TRACE3) 
-                            printf("%s: [%d][%d] <- [%d][%d]\n",
+                            fprintf(stderr, "%s: [%d][%d] <- [%d][%d]\n",
                                    thisfunction, i, j, n,v);
                         sum += s_self(i, j, n, v) * 
                                K->S[g] * loadclass;
@@ -158,7 +158,7 @@ void        apply_self_progeny_stats    (KConfig K,
 {
     const char* thisfunction = "apply_self_progeny_stats";
     KInt i, j, g;
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     if (K->genotypes != 1) {
         not_implemented(thisfunction, "genotypes != 1");
     }
@@ -184,19 +184,19 @@ void        compute_self_progeny_kondrashov (KConfig K)
     const char* thisfunction = "compute_self_progeny_kondrashov";
     KScalar sum, innersum, t1;
     KInt i, j, n, v, g, xi;
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
-    IF_DEBUG(DEBUG_TRACE2) printf("i,j =");
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE2) fprintf(stderr, "i,j =");
     for (g=0; g < K->genotypes; g++) {
         /* g is the destination genotype */
         for (i=0; i <= K->MI; i++) {
             for (j=0; j <= K->MJ; j++) {
                 /* L(i,j) is the destination load class */
                 IF_DEBUG(DEBUG_TRACE2) {
-                    printf(" %d,%d ", i, j);
+                    fprintf(stderr, " %d,%d ", i, j);
                 }
                 IF_DEBUG(DEBUG_TRACE3) {
                     if (i%10 == 0) 
-                        printf("%s: [%d][%d] <-\n", 
+                        fprintf(stderr, "%s: [%d][%d] <-\n", 
                                thisfunction, i, j);
                 }
                 if (K->S[g] == 0.0) {
@@ -207,7 +207,7 @@ void        compute_self_progeny_kondrashov (KConfig K)
                 for (n=0; n <= K->MI; n++) {
                     for (v=0; v <= K->MJ; v++) {
                         IF_DEBUG(DEBUG_TRACE3) 
-                            printf("%s: [%d][%d] <- [%d][%d]\n",
+                            fprintf(stderr, "%s: [%d][%d] <- [%d][%d]\n",
                                    thisfunction, i, j, n,v);
                         if (i <= n && j >= v && 
                             j <= n+v && i+j <= n+v) {
@@ -227,7 +227,7 @@ void        compute_self_progeny_kondrashov (KConfig K)
             }
         }
     }
-    IF_DEBUG(DEBUG_TRACE2) printf("\n");
+    IF_DEBUG(DEBUG_TRACE2) fprintf(stderr, "\n");
 }
 
 /*///////////////////////////////////////////////////////////////*/
@@ -239,7 +239,7 @@ void        compute_apomixis_progeny    (KConfig K)
 */
 {
     const char* thisfunction = "compute_apomixis_progeny";
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     apply_apomixis_progeny(K, K->xppa, K->xp);
 }
 
@@ -254,7 +254,7 @@ void        apply_apomixis_progeny  (KConfig K, KArray& to,
 {
     const char* thisfunction = "apply_apomixis_progeny";
     KInt i, j, n, v, g, xi;
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     if (K->genotypes != 1) {
         not_implemented(thisfunction, "genotypes != 1");
     }
@@ -298,19 +298,19 @@ void        compute_apomixis_progeny_kondrashov (KConfig K)
 {
     const char* thisfunction = "compute_apomixis_progeny_kondrashov";
     KInt i, j, n, v, g, xi;
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
-    IF_DEBUG(DEBUG_TRACE2) printf("i,j =");
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE2) fprintf(stderr, "i,j =");
     for (g=0; g < K->genotypes; g++) {
         /* g is the destination genotype */
         for (i=0; i <= K->MI; i++) {
             for (j=0; j <= K->MJ; j++) {
                 /* L(i,j) is the destination load class */
                 IF_DEBUG(DEBUG_TRACE2) {
-                    printf(" %d,%d ", i, j);
+                    fprintf(stderr, " %d,%d ", i, j);
                 }
                 IF_DEBUG(DEBUG_TRACE3) {
                     if (i%10 == 0) 
-                        printf("%s: [%d][%d] <-\n", 
+                        fprintf(stderr, "%s: [%d][%d] <-\n", 
                                thisfunction, i, j);
                 }
                 if (K->A[g] == 0.0) {
@@ -331,7 +331,7 @@ void        compute_apomixis_progeny_kondrashov (KConfig K)
             }
         }
     }
-    IF_DEBUG(DEBUG_TRACE2) printf("\n");
+    IF_DEBUG(DEBUG_TRACE2) fprintf(stderr, "\n");
 }
 
 /*///////////////////////////////////////////////////////////////*/
@@ -346,17 +346,17 @@ void        compute_outcross_progeny_kondrashov (KConfig K)
     const char* thisfunction = "compute_outcross_progeny_kondrashov";
     KInt g, i, j, n, v, l, lam, xi, zeta;
     KScalar sum, innersum, t1, t2;
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
-    IF_DEBUG(DEBUG_TRACE2) printf("i =");
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE2) fprintf(stderr, "i =");
     for (g=0; g < K->genotypes; g++) {
         for (i=0; i <= K->MI; i++) {
             /* note for outcrossing we only consider j==0 */
             for (j=0; j <= 0; j++) {
                 IF_DEBUG(DEBUG_TRACE2) {
-                    printf(" %d", i);
+                    fprintf(stderr, " %d", i);
                 }
                 IF_DEBUG(DEBUG_TRACE3) {
-                    printf("%s: [%d][%d] <-\n",
+                    fprintf(stderr, "%s: [%d][%d] <-\n",
                            thisfunction, i, j);
                 }
                 if (K->O[g] == 0.0) {
@@ -369,7 +369,7 @@ void        compute_outcross_progeny_kondrashov (KConfig K)
                     for (v=0; v <= K->MJ; v++) {
                         /* L(n,v) represents 'ovule' load class */
                         IF_DEBUG(DEBUG_TRACE3) {
-                            printf("%s: [%d][%d] <- [%d][%d] x ...\n",
+                            fprintf(stderr, "%s: [%d][%d] <- [%d][%d] x ...\n",
                                    thisfunction, i, j, n, v);
                         }
                         if (K->beta[n][v] == 0.0) {
@@ -385,7 +385,7 @@ void        compute_outcross_progeny_kondrashov (KConfig K)
                                 ** load class 
                                 */
                                 IF_DEBUG(DEBUG_TRACE3) {
-                                    printf("%s: [%d][%d] <- [%d][%d] x [%d][%d]\n",
+                                    fprintf(stderr, "%s: [%d][%d] <- [%d][%d] x [%d][%d]\n",
                                            thisfunction, i, j, 
                                            n, v, l, lam);
                                 }
@@ -422,7 +422,7 @@ void        compute_outcross_progeny_kondrashov (KConfig K)
                 /* final assignment to x"(o)i,j(g) */
                 K->xppo[i][j][g] = sum;
             }
-            IF_DEBUG(DEBUG_TRACE3) printf("%s: to [%d][>0]\n",
+            IF_DEBUG(DEBUG_TRACE3) fprintf(stderr, "%s: to [%d][>0]\n",
                                           thisfunction, i);
             for (j=1; j <= K->MJ; j++) {
                 /* not possible to produce homozygotes 
@@ -431,7 +431,7 @@ void        compute_outcross_progeny_kondrashov (KConfig K)
                 K->xppo[i][j][g] = 0.0;
             }
         }
-        IF_DEBUG(DEBUG_TRACE2) printf("\n");
+        IF_DEBUG(DEBUG_TRACE2) fprintf(stderr, "\n");
     }
 }
 
@@ -439,7 +439,7 @@ void        compute_outcross_progeny_kondrashov (KConfig K)
 void        compute_gametes     (KConfig K)
 {
     const char* thisfunction = "compute_gametes";
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     apply_gametes(K, K->mgam, K->fgam, K->xp);
 }
 
@@ -479,7 +479,7 @@ void        apply_gametes_full  (KConfig K,
     /* the process of segregation is the same for both gamete 
     ** pools
     */
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     if (K->genotypes != 1) {
         not_implemented(thisfunction, "genotypes != 1");
     }
@@ -543,7 +543,7 @@ void        adjust_gametes      (KConfig K,
 {
     const char* thisfunction = "adjust_gametes";
     KInt i, g;
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     if (K->genotypes != 1) {
         not_implemented(thisfunction, "genotypes != 1");
     }
@@ -585,7 +585,7 @@ void        apply_gametes_stats (KConfig K,
     /* the process of segregation is the same for both gamete 
     ** pools
     */
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     if (K->genotypes != 1) {
         not_implemented(thisfunction, "genotypes != 1");
     }
@@ -608,7 +608,7 @@ void        apply_gametes_stats (KConfig K,
 void        compute_zygotes     (KConfig K)
 {
     const char* thisfunction = "compute_zygotes";
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     apply_zygotes(K, K->xppo, K->mgam, K->fgam);
 }
 
@@ -629,7 +629,7 @@ void        apply_zygotes       (KConfig K, KArray& to,
     ** expected genotypic classes.  Note that all classes 
     ** L(,j>0) = 0.
     */
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     if (K->genotypes != 1) {
         not_implemented(thisfunction, "genotypes != 1");
     }
@@ -657,7 +657,7 @@ void        apply_zygotes       (KConfig K, KArray& to,
 void        compute_summed_progeny  (KConfig K)
 {
     const char* thisfunction = "compute_summed_progeny";
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     apply_summed_progeny(K, K->xpp, K->xpps, K->xppa, K->xppo);
 }
 
@@ -669,7 +669,7 @@ void        apply_summed_progeny    (KConfig K, KArray& to,
 {
     const char* thisfunction = "apply_summed_progeny";
     KInt i, j, g;
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     for (i=0; i <= K->MI; i++) {
         for (j=0; j <= K->MJ; j++) {
             for (g=0; g < K->genotypes; g++) {
@@ -686,7 +686,7 @@ void        apply_summed_progeny    (KConfig K, KArray& to,
     IF_DEBUG(DEBUG_NORMALIZATION)
         if (K->is_lethal && K->S[0] > 0.0 && K->createlethal == 0)
             /* so that we can produce homozygous lethal progeny */
-            printf("%s: lethal mut class, normalized array not expected here\n", thisfunction);
+            fprintf(stderr, "%s: lethal mut class, normalized array not expected here\n", thisfunction);
     check_normalization(K, to, thisfunction, "to");
 }
 
@@ -694,7 +694,7 @@ void        apply_summed_progeny    (KConfig K, KArray& to,
 void        compute_auxiliary_values    (KConfig K)
 {
     const char* thisfunction = "compute_auxiliary_values";
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     not_implemented(thisfunction, "not running in kondrashov mode");
 }
 
@@ -704,7 +704,7 @@ void        compute_auxiliary_values_kondrashov (KConfig K)
     const char* thisfunction = "compute_auxiliary_values_kondrashov";
     KInt g, i, j;
     KScalar t1, sum, SOsum, AOsum, OOsum, OPsum;
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     sum = 0.0;
     for (g=0; g < K->genotypes; g++) {
         t1 = K->rsrc_SO[g] + K->rsrc_AO[g] + K->rsrc_OO[g];
@@ -765,7 +765,7 @@ KScalar     s_self              (KInt i, KInt j, KInt n, KInt v)
 ** No need to know population data, works solely from i, j, n, v.
 */
 {
-    const char* thisfunction = "s_self";
+    //const char* thisfunction = "s_self";
     KScalar ans;
     KScalar t1, t2, t3;
     /* check for classes that cannot be produced through selfing */
@@ -800,7 +800,7 @@ KScalar     a_apomixis          (KInt i, KInt j, KInt n, KInt v)
 ** Apomixis duplicates the parent's genotype exactly.
 */
 {
-    const char* thisfunction = "a_apomixis";
+    //const char* thisfunction = "a_apomixis";
     if (i == n && j == v)
         return 1.0;
     else
@@ -829,7 +829,7 @@ KScalar     o_outcross          (KInt i, KInt j, KInt n, KInt v,
         ans = 0.0;
         /*
         IF_DEBUG(DEBUG_OUTCROSS) {
-            printf("o_outcross: L(%d,%d) <- L(%d,%d) X L(%d,%d) = %lg\n",
+            fprintf(stderr, "o_outcross: L(%d,%d) <- L(%d,%d) X L(%d,%d) = %lg\n",
                    i, j, n, v, l, lam, ans);
         }
         */
@@ -849,7 +849,7 @@ KScalar     o_outcross          (KInt i, KInt j, KInt n, KInt v,
     t2 = lnpow_half(n + l);
     ans = exp(t1 + t2);
     IF_DEBUG(DEBUG_OUTCROSS) {
-        printf("%s: L(%d,%d) <- L(%d,%d) X L(%d,%d) = %lg\n",
+        fprintf(stderr, "%s: L(%d,%d) <- L(%d,%d) X L(%d,%d) = %lg\n",
                thisfunction, i, j, n, v, l, lam, ans);
     }
     return ans;    

@@ -9,7 +9,7 @@ void        compute_adults_nextgen  (KConfig K)
 */
 {
     const char* thisfunction = "compute_adults_nextgen";
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     copy_KArray(K, K->x_prevgen, K->x);
     copy_KArray(K, K->x, K->X);
     K->generation++;

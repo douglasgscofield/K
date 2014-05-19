@@ -49,7 +49,7 @@ void        compute_selection_n (KConfig_n KN)
 */
 {
     const char* thisfunction = "compute_selection_n";
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     if (KN->current_x != KN_CURRENT_X1) {
         char buf[200];
         sprintf(buf, "%s: wrong current x array = %d",
@@ -70,7 +70,7 @@ void        apply_selection_n   (KConfig_n KN,
     const char* thisfunction = "apply_selection_n";
     KInt i0, j0, i1, j1;
     KScalar recip_w_mean;
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     recip_w_mean = 1.0 / mean_fitness_allprogeny_n(KN, from);
     for (i0=0; i0 <= KN->MI0; i0++) {
         for (j0=0; j0 <= KN->MJ0; j0++) {
@@ -79,7 +79,7 @@ void        apply_selection_n   (KConfig_n KN,
                     IF_DEBUG(DEBUG_TRACE2)
                         if (!(i0 % 10) && !(j0 % 10) &&
                             !(i1 % 10) && !(j1 % 10))
-                            printf("sel[%d,%d,%d,%d] ", 
+                            fprintf(stderr, "sel[%d,%d,%d,%d] ", 
                                    i0, j0, i1, j1);
                     to[i0][j0][i1][j1] = from[i0][j0][i1][j1] *
                                          fitness_n(KN,i0,j0,i1,j1) *
@@ -88,7 +88,7 @@ void        apply_selection_n   (KConfig_n KN,
             }
         }
     }
-    IF_DEBUG(DEBUG_TRACE2) printf("\n");
+    IF_DEBUG(DEBUG_TRACE2) fprintf(stderr, "\n");
     check_normalization_n(KN, to, thisfunction, "to");
 }
 
@@ -215,18 +215,18 @@ KScalar     mean_fitness_allprogeny_n   (KConfig_n KN, KArray_n& a)
     if (sum == 0.0) {
         return 0.0;
     }
-    IF_DEBUG(DEBUG_LETHALS) printf("%s: sum_KArray_n was=%g\n",
+    IF_DEBUG(DEBUG_LETHALS) fprintf(stderr, "%s: sum_KArray_n was=%g\n",
                                    thisfunction, sum);
-    IF_DEBUG(DEBUG_LETHALS) printf("%s: KN->createlethal[0]=%d\n",
+    IF_DEBUG(DEBUG_LETHALS) fprintf(stderr, "%s: KN->createlethal[0]=%d\n",
                                    thisfunction, KN->createlethal[0]);
-    IF_DEBUG(DEBUG_LETHALS) printf("%s: KN->createlethal[1]=%d\n",
+    IF_DEBUG(DEBUG_LETHALS) fprintf(stderr, "%s: KN->createlethal[1]=%d\n",
                                    thisfunction, KN->createlethal[1]);
     if ((KN->is_lethal[0] || KN->is_lethal[1]) && sum < 1.0)
         /*
         ** see mean_fitness_allprogeny()
         */
         sum = 1.0;
-    IF_DEBUG(DEBUG_LETHALS) printf("%s: sum_KArray_n is=%g\n", thisfunction, sum);
+    IF_DEBUG(DEBUG_LETHALS) fprintf(stderr, "%s: sum_KArray_n is=%g\n", thisfunction, sum);
     return cumulative_fitness_n(KN, a) / sum;
 }
 

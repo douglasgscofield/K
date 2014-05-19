@@ -12,7 +12,7 @@ KScalar     sum_KArray          (KConfig K, KArray& A)
 ** Computes sum of all array elements in A according to K
 */
 {
-    const char* thisfunction = "sum_KArray";
+    //const char* thisfunction = "sum_KArray";
     KInt i, j, g;
     KScalar ans = 0.0;
     for (i=0; i <= K->MI; i++) {
@@ -31,7 +31,7 @@ KScalar     sum_KArray2         (KConfig K, KArray2& A2)
 ** Computes sum of all array elements in A according to K
 */
 {
-    const char* thisfunction = "sum_KArray2";
+    //const char* thisfunction = "sum_KArray2";
     KInt i, j;
     KScalar ans = 0.0;
     for (i=0; i <= K->MI; i++) {
@@ -48,7 +48,7 @@ KScalar     sum_KVector1        (KConfig K, KVector1& v)
 ** Computes sum of all vector elements in v according to K
 */
 {
-    const char* thisfunction = "sum_KVector1";
+    //const char* thisfunction = "sum_KVector1";
     KInt i;
     KScalar ans = 0.0;
     for (i=0; i <= K->MI; i++) {
@@ -66,9 +66,9 @@ void        normalize_KArray    (KConfig K, KArray& a)
     const char* thisfunction = "normalize_KArray";
     KInt i, j, g;
     KScalar sum = sum_KArray(K, a);
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     IF_DEBUG(DEBUG_NORMALIZATION) 
-        printf("%s: prenormalization, sum_KArray = %lg\n", 
+        fprintf(stderr, "%s: prenormalization, sum_KArray = %lg\n", 
                thisfunction, sum);
     if (sum == 1.0)
         return;
@@ -80,7 +80,7 @@ void        normalize_KArray    (KConfig K, KArray& a)
         }
     }
     IF_DEBUG(DEBUG_NORMALIZATION) 
-        printf("%s: postnormalization, sum_KArray = %lg\n", 
+        fprintf(stderr, "%s: postnormalization, sum_KArray = %lg\n", 
                thisfunction, sum_KArray(K, a));
 }
 
@@ -95,9 +95,9 @@ void        truncate_KArray     (KConfig K, KArray& a, KScalar v)
     KInt i, j, g;
     KInt num = 0;
     KScalar sum = 0.0;
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     IF_DEBUG(DEBUG_TRUNCATE_DETAIL) {
-        printf("%s: truncating values lower than v=%lg \n", 
+        fprintf(stderr, "%s: truncating values lower than v=%lg \n", 
 			   thisfunction, v);
     }
     for (i=0; i <= K->MI; i++) {
@@ -108,7 +108,7 @@ void        truncate_KArray     (KConfig K, KArray& a, KScalar v)
                     num++;
                     a[i][j][g] = 0.0;
                     IF_DEBUG(DEBUG_TRUNCATE_DETAIL) {
-                        printf("%s: truncated a[%d][%d][%d]\n",
+                        fprintf(stderr, "%s: truncated a[%d][%d][%d]\n",
                                thisfunction, i, j, g);
                     }
                 }
@@ -117,7 +117,7 @@ void        truncate_KArray     (KConfig K, KArray& a, KScalar v)
     }
     IF_DEBUG(DEBUG_TRUNCATE) {
         if (num > 0) {
-            printf("%s: truncated %d elements, sum %lg\n", thisfunction, num, sum);
+            fprintf(stderr, "%s: truncated %d elements, sum %lg\n", thisfunction, num, sum);
         }
     }
 }
@@ -125,7 +125,7 @@ void        truncate_KArray     (KConfig K, KArray& a, KScalar v)
 /*///////////////////////////////////////////////////////////////*/
 void        fill_KArray         (KConfig K, KArray& a, KScalar val)
 {
-    const char* thisfunction = "fill_KArray";
+    //const char* thisfunction = "fill_KArray";
     KInt i, j, g;
     for (i=0; i <= K->MI; i++) {
         for (j=0; j <= K->MJ; j++) {
@@ -139,7 +139,7 @@ void        fill_KArray         (KConfig K, KArray& a, KScalar val)
 /*///////////////////////////////////////////////////////////////*/
 void        copy_KArray         (KConfig K, KArray& to, KArray& from)
 {
-    const char* thisfunction = "copy_KArray";
+    //const char* thisfunction = "copy_KArray";
     KInt i, j, g;
     for (i=0; i <= K->MI; i++) {
         for (j=0; j <= K->MJ; j++) {
@@ -156,7 +156,7 @@ int         isOK_KArray         (KConfig K, KArray& a)
 ** checks to see if the classes in a[][] sum to 1
 */
 {
-    const char* thisfunction = "isOK_KArray";
+    //const char* thisfunction = "isOK_KArray";
 	KScalar t1;
 	t1 = fabs(sum_KArray(K, a) - 1.0);
     return (t1 < NORMALIZATION_TOLERANCE) ? 1 : 0;
@@ -168,7 +168,7 @@ int         isOK_KVector1       (KConfig K, KVector1& v)
 ** checks to see if the classes in v[] sum to 1
 */
 {
-    const char* thisfunction = "isOK_KVector1";
+    //const char* thisfunction = "isOK_KVector1";
 	KScalar t1;
 	t1 = fabs(sum_KVector1(K, v) - 1.0);
     return (t1 < NORMALIZATION_TOLERANCE) ? 1 : 0;
@@ -184,7 +184,7 @@ int         isOK_KVector1       (KConfig K, KVector1& v)
 /*///////////////////////////////////////////////////////////////*/
 void        fatal               (const char* msg)
 {
-    const char* thisfunction = "fatal";
+    //const char* thisfunction = "fatal";
     fprintf(stderr, "FATAL ERROR: %s \n", msg);
     exit(1);
 }
@@ -192,7 +192,7 @@ void        fatal               (const char* msg)
 /*///////////////////////////////////////////////////////////////*/
 void        warning             (const char* msg)
 {
-    const char* thisfunction = "warning";
+    //const char* thisfunction = "warning";
     fprintf(stderr, "WARNING: %s \n", msg);
 }
 

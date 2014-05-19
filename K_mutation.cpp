@@ -20,11 +20,11 @@ void        compute_mutation    (KConfig K)
 */
 {
     const char* thisfunction = "compute_mutation";
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     if (K->U != 0.0) {
         apply_mutation(K, K->xp, K->x);
     } else {
-        IF_DEBUG(DEBUG_TRACE1) printf("no mutation\n");
+        IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "no mutation\n");
         copy_KArray(K, K->xp, K->x);
     }
     check_normalization(K, K->xp, thisfunction, "K->xp");
@@ -36,7 +36,7 @@ void        apply_mutation      (KConfig K, KArray& to, KArray& from)
     const char* thisfunction = "apply_mutation";
     KInt g, i, j, n1;
     KScalar sum;
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     for (g=0; g < K->genotypes; g++) {
         for (j=0; j <= K->MJ; j++) {
             for (i=0; i <= K->MI; i++) {
@@ -63,9 +63,9 @@ void        apply_mutation_general  (KConfig K, KScalar U,
     const char* thisfunction = "apply_mutation_general";
     KInt g, i, j, n1;
     KScalar sum;
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     if (K->U == 0.0) {
-        IF_DEBUG(DEBUG_TRACE1) printf("no mutation\n");
+        IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "no mutation\n");
         copy_KArray(K, K->xp, K->x);
         return;
     }
@@ -91,9 +91,9 @@ void        initiate_mut_term       (KConfig K)
     KInt i;
     KScalar t1;
     KScalar checksum = 0.0;
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     if (K->U == 0.0) {
-        IF_DEBUG(DEBUG_TRACE1) printf("no mutation\n");
+        IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "no mutation\n");
         for (i=0; i <= K->MI; i++) {
             K->mut_term[i] = pois_term(0.0, i);
         }
@@ -121,7 +121,7 @@ void        initiate_mut_term       (KConfig K)
         for (i=0; i <= K->MI; i++) {
             termsum += K->mut_term[i];
         }
-        printf("%s: U=%lg, sum mut_term=%lf\n", 
+        fprintf(stderr, "%s: U=%lg, sum mut_term=%lf\n", 
                thisfunction, K->U, termsum);
     }
 }
@@ -212,10 +212,10 @@ KScalar     mut_term_general        (KScalar U, KInt t)
         IF_DEBUG(DEBUG_NORMALIZATION) {
             KInt i;
             KScalar termsum = 0.0;
-            printf("%s: U = %lg\n", thisfunction, U);
+            fprintf(stderr, "%s: U = %lg\n", thisfunction, U);
             for (i=0; i <= MAX_MI; i++) {
                 termsum += pois_general[last_index][i];
-                printf("pois_general[last_index][%d] = %lg, cumulative sum = %lg\n",
+                fprintf(stderr, "pois_general[last_index][%d] = %lg, cumulative sum = %lg\n",
                        i, pois_general[last_index][i], termsum);
             }
         }

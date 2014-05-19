@@ -1,18 +1,18 @@
 #include "K.h"
 
-/*///////////////////////////////////////////////////////////////*/
-/*///////////////////////////////////////////////////////////////*/
-/* Routines for computing/displaying statistics of model results */
-/*///////////////////////////////////////////////////////////////*/
-/*///////////////////////////////////////////////////////////////*/
+//////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
+// Routines for computing/displaying statistics of model results
+//////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
 
 static      struct struct_KStats    KStats;
 
-/*///////////////////////////////////////////////////////////////*/
+//////////////////////////////////////////////////////////////////
 void        stats_print             (KConfig K)
-/*
-** Print all fields in the KStats structure
-*/
+
+// Print all fields in the KStats structure
+
 {
     if (K->option_table) {
         stats_print_table(K);
@@ -21,14 +21,14 @@ void        stats_print             (KConfig K)
     }
 }
 
-/*///////////////////////////////////////////////////////////////*/
+//////////////////////////////////////////////////////////////////
 void        stats_print_table       (KConfig K)
-/*
-** Print all fields in the KStats structure, as a table
-*/
+
+// Print all fields in the KStats structure, as a table
+
 {
     /* stats_print_table_heading(K); */
-    printf("%s %d\t%lg\t%lg\t%lg\t%lg\t%s\t\
+    fprintf(stdout, "%s %d\t%lg\t%lg\t%lg\t%lg\t%s\t\
 %lg\t%lg\t\
 %lg\t%lg\t\
 %lg\t%lg\t\
@@ -59,66 +59,66 @@ void        stats_print_table       (KConfig K)
            );
 }
 
-/*///////////////////////////////////////////////////////////////*/
+//////////////////////////////////////////////////////////////////
 void        stats_print_table_heading   (KConfig K)
-/*
-** Print heading for stats produced
-*/
+
+// Print heading for stats produced
+
 {
-    printf("generations\tU\tS_0\tA_0\tO_0\tfitness_function\t\
+    fprintf(stdout, "generations\tU\tS_0\tA_0\tO_0\tfitness_function\t\
 fit_s\tfit_h\tmean_hetloci\tvar_hetloci\tmean_homloci\tvar_homloci\tmean_totmuts\tvar_totmuts\tvar_mean_totmuts\t\
 w_self\tw_apomixis\tw_outcross\tw_popmean\tIBD\tS_secondary\n");
 }
 
-/*///////////////////////////////////////////////////////////////*/
+//////////////////////////////////////////////////////////////////
 void        stats_print_verbose     (KConfig K)
-/*
-** Print all fields in the KStats structure, verbosely
-*/
-{
-    printf("stats begin ========================================\n");
-    printf("generations = %d (out of %d max)\n", K->generation, 
-           GENERATION_CUTOFF);
-    printf("U = %lg\n", K->U);
-    printf("S[0] = %lg\n", K->S[0]);
-    printf("A[0] = %lg\n", K->A[0]);
-    printf("O[0] = %lg\n", K->O[0]);
-    printf("fitness function = %s\n",
-           get_fitness_function_name(K->fitness_function));
-    printf("fit_s = %lg\n", K->fit_s);
-    printf("fit_h = %lg\n", K->fit_h);
-    printf("option_truncate = %d\n", K->option_truncate);
-    printf("option_nolethal = %d\n", K->option_nolethal);
 
-    printf("mean_hetloci = %lg\n", KStats.mean_hetloci);
-    printf("var_hetloci = %lg\n", KStats.var_hetloci);
-    printf("mean_homloci = %lg\n", KStats.mean_homloci);
-    printf("var_homloci = %lg\n", KStats.var_homloci);
-    printf("mean_totmuts = %lg\n", KStats.mean_totmuts);
-    printf("var_totmuts = %lg\n", KStats.var_totmuts);
-    printf("var / mean totmuts = %lg\n",
+// Print all fields in the KStats structure, verbosely
+
+{
+    fprintf(stdout, "stats begin ========================================\n");
+    fprintf(stdout, "generations = %d (out of %d max)\n", K->generation, 
+           GENERATION_CUTOFF);
+    fprintf(stdout, "U = %lg\n", K->U);
+    fprintf(stdout, "S[0] = %lg\n", K->S[0]);
+    fprintf(stdout, "A[0] = %lg\n", K->A[0]);
+    fprintf(stdout, "O[0] = %lg\n", K->O[0]);
+    fprintf(stdout, "fitness function = %s\n",
+           get_fitness_function_name(K->fitness_function));
+    fprintf(stdout, "fit_s = %lg\n", K->fit_s);
+    fprintf(stdout, "fit_h = %lg\n", K->fit_h);
+    fprintf(stdout, "option_truncate = %d\n", K->option_truncate);
+    fprintf(stdout, "option_nolethal = %d\n", K->option_nolethal);
+
+    fprintf(stdout, "mean_hetloci = %lg\n", KStats.mean_hetloci);
+    fprintf(stdout, "var_hetloci = %lg\n", KStats.var_hetloci);
+    fprintf(stdout, "mean_homloci = %lg\n", KStats.mean_homloci);
+    fprintf(stdout, "var_homloci = %lg\n", KStats.var_homloci);
+    fprintf(stdout, "mean_totmuts = %lg\n", KStats.mean_totmuts);
+    fprintf(stdout, "var_totmuts = %lg\n", KStats.var_totmuts);
+    fprintf(stdout, "var / mean totmuts = %lg\n",
            KStats.var_to_mean_totmuts_ratio);
-    printf("mean_fitness_self_progeny = %lg\n", 
+    fprintf(stdout, "mean_fitness_self_progeny = %lg\n", 
            KStats.mean_fitness_self_progeny);
-    printf("mean_fitness_apomixis_progeny = %lg\n", 
+    fprintf(stdout, "mean_fitness_apomixis_progeny = %lg\n", 
            KStats.mean_fitness_apomixis_progeny);
-    printf("mean_fitness_outcross_progeny = %lg\n", 
+    fprintf(stdout, "mean_fitness_outcross_progeny = %lg\n", 
            KStats.mean_fitness_outcross_progeny);
-    printf("population_mean_fitness = %lg\n", 
+    fprintf(stdout, "population_mean_fitness = %lg\n", 
            KStats.population_mean_fitness);
-    printf("inbreeding_depression = %lg\n", 
+    fprintf(stdout, "inbreeding_depression = %lg\n", 
            KStats.inbreeding_depression);
-    printf("secondary_selfing_rate = %lg\n", 
+    fprintf(stdout, "secondary_selfing_rate = %lg\n", 
            KStats.secondary_selfing_rate);
-    printf("stats end ========================================\n");
+    fprintf(stdout, "stats end ========================================\n");
 }
 
-/*///////////////////////////////////////////////////////////////*/
+//////////////////////////////////////////////////////////////////
 void        stats_all               (KConfig K)
-/*
-** Compute inbreeding depression (1 - self/outcross) from
-** the load class date for selfed and outcrossed progeny.
-*/
+
+// Compute inbreeding depression (1 - self/outcross) from
+// the load class date for selfed and outcrossed progeny.
+
 {
     KStats.mean_hetloci = -999.9;
     KStats.var_hetloci = -999.9;
@@ -154,13 +154,12 @@ void        stats_all               (KConfig K)
     KStats.secondary_selfing_rate = stats_secondary_selfing_rate(K);
 }
 
-/*///////////////////////////////////////////////////////////////*/
+//////////////////////////////////////////////////////////////////
 KScalar     stats_mean_fitness_self_progeny (KConfig K)
-/*
-** Compute mean fitness of self progeny
-*/
+
+// Compute mean fitness of self progeny
+
 {
-    const char* thisfunction = "stats_mean_fitness_self_progeny";
     KScalar wmean, sum;
     if ((sum = sum_KArray(K, K->xpps)) == 0.0) {
         /* no self progeny were produced, so we have to
@@ -172,41 +171,36 @@ KScalar     stats_mean_fitness_self_progeny (KConfig K)
     return mean_fitness(K, K->xpps);
 }
 
-/*///////////////////////////////////////////////////////////////*/
+//////////////////////////////////////////////////////////////////
 KScalar     stats_mean_fitness_apomixis_progeny (KConfig K)
-/*
-** Compute mean fitness of apomixis progeny
-*/
+
+// Compute mean fitness of apomixis progeny
+
 {
-    const char* thisfunction = "stats_mean_fitness_apomixis_progeny";
     return mean_fitness(K, K->xppa);
 }
 
-/*///////////////////////////////////////////////////////////////*/
+//////////////////////////////////////////////////////////////////
 KScalar     stats_mean_fitness_outcross_progeny (KConfig K)
-/*
-** Compute mean fitness of outcross progeny
-*/
+
+// Compute mean fitness of outcross progeny
+
 {
-    const char* thisfunction = "stats_mean_fitness_outcross_progeny";
     return mean_fitness(K, K->xppo);
 }
 
-/*///////////////////////////////////////////////////////////////*/
+//////////////////////////////////////////////////////////////////
 KScalar     stats_inbreeding_depression (KConfig K)
-/*
-** Compute inbreeding depression (1 - self/outcross) from
-** the load class data for selfed and outcrossed progeny.
-*/
+
+// Compute inbreeding depression (1 - self/outcross) from
+// the load class data for selfed and outcrossed progeny.
+
 {
-    const char* thisfunction = "stats_inbreeding_depression";
+    const char * thisfunction = "stats_inbreeding_depression";
     KInt i, j, g;
     KArray a, via_fgam, via_mgam;
     KVector1 thismgam, thisfgam, allmgam, allfgam;
     KScalar w_self, w_out, ibd, thisibd;
-    IF_DEBUG(DEBUG_TRACE1) {
-        printf("%s\n", thisfunction);
-    }
     if (K->genotypes != 1) {
         not_implemented(thisfunction, "genotypes != 1");
     }
@@ -252,18 +246,15 @@ KScalar     stats_inbreeding_depression (KConfig K)
     return ibd;
 }
 
-/*///////////////////////////////////////////////////////////////*/
+//////////////////////////////////////////////////////////////////
 KScalar     stats_inbreeding_depression_old (KConfig K)
-/*
-** Compute inbreeding depression (1 - self/outcross) from
-** the load class date for selfed and outcrossed progeny.
-*/
+
+// Compute inbreeding depression (1 - self/outcross) from
+// the load class date for selfed and outcrossed progeny.
+
 {
-    const char* thisfunction = "stats_inbreeding_depression_old";
+    const char * thisfunction = "stats_inbreeding_depression_old";
     KScalar ibd;
-    IF_DEBUG(DEBUG_TRACE1) {
-        printf("%s\n", thisfunction);
-    }
     if (KStats.mean_fitness_self_progeny < 0.0 ||
         KStats.mean_fitness_outcross_progeny < 0.0) {
         char buf[200];
@@ -285,19 +276,16 @@ KScalar     stats_inbreeding_depression_old (KConfig K)
     return ibd;
 }
 
-/*///////////////////////////////////////////////////////////////*/
+//////////////////////////////////////////////////////////////////
 KScalar     stats_secondary_selfing_rate    (KConfig K)
-/*
-** Compute secondary selfing rate
-**     primary selfing rate * (self_w_mean / outcross_w_mean)
-*/
+
+// Compute secondary selfing rate
+//     primary selfing rate * (self_w_mean / outcross_w_mean)
+
 {
-    const char* thisfunction = "stats_secondary_selfing_rate";
+    const char * thisfunction = "stats_secondary_selfing_rate";
     KInt g;
     KScalar ans;
-    IF_DEBUG(DEBUG_TRACE1) {
-        printf("%s\n", thisfunction);
-    }
     if (K->genotypes != 1) {
         not_implemented(thisfunction, "genotypes != 1");
     }
@@ -317,16 +305,15 @@ KScalar     stats_secondary_selfing_rate    (KConfig K)
     return ans;
 }
 
-/*///////////////////////////////////////////////////////////////*/
+///////////////////////////////////////////////////////////////////
 KScalar     stats_population_mean_fitness   (KConfig K)
 /*
 ** Compute mean fitness of population
 */
 {
-    const char* thisfunction = "stats_mean_fitness";
+    const char * thisfunction = "stats_population_mean_fitness";
     KScalar ans;
     KInt g;
-    IF_DEBUG(DEBUG_TRACE1) printf("%s\n", thisfunction);
     if (K->genotypes != 1) {
         not_implemented(thisfunction, "genotypes != 1");
     }
@@ -344,21 +331,18 @@ KScalar     stats_population_mean_fitness   (KConfig K)
     return ans;
 }
 
-/*///////////////////////////////////////////////////////////////*/
+///////////////////////////////////////////////////////////////////
 void        stats_muts      (KConfig K)
 /*
 ** Compute statistics for the number of mutant
 ** alleles carried by each adult plant.
 */
 {
-    const char* thisfunction = "stats_muts";
+    //const char * thisfunction = "stats_muts";
     KScalar mean_hetloci, mean_homloci, mean_totmuts;
     KScalar var_hetloci, var_homloci, var_totmuts, t1;
     KInt hetloci, homloci, totmuts;
     KInt i, j, g;
-    IF_DEBUG(DEBUG_TRACE1) {
-        printf("%s\n", thisfunction);
-    }
     mean_hetloci = 0.0;
     mean_homloci = 0.0;
     mean_totmuts = 0.0;
@@ -401,25 +385,23 @@ void        stats_muts      (KConfig K)
 }
 
 
-/* //////////////////////////////////////////////////////////////
+/*
+///////////////////////////////////////////////////////////////
 KScalar     stats_variance_lethals  (KConfig K)
 
 // Compute the variance of the number of lethal
 // alleles carried by each adult plant.
 
 {
-    const char* thisfunction = "stats_variance_lethals";
+    const char * thisfunction = "stats_variance_lethals";
     KScalar variance_lethals, t1, t2, t3;
     KInt i, j, g;
-    IF_DEBUG(DEBUG_TRACE1) {
-        printf("%s\n", thisfunction);
-    }
     if (KStats.mean_totmuts < 0.0) {
         char buf[200];
         sprintf(buf, "%s: wrong stats order", thisfunction);
         fatal(buf);
     }
-    //printf("i\tj\tg\tx(ijg)\ti+j*2\tx\t(x-meanx)\tcumsum\t()^2\tcumsum^2\n");
+    //fprintf(stderr, "i\tj\tg\tx(ijg)\ti+j*2\tx\t(x-meanx)\tcumsum\t()^2\tcumsum^2\n");
     t3 = 0.0;
     variance_lethals = 0.0;
     for (i=0; i <= K->MI; i++) {
@@ -430,7 +412,7 @@ KScalar     stats_variance_lethals  (KConfig K)
                 t2 = t1 * t1;
                 t3 = K->x[i][j][g] * t2;
                 variance_lethals += t3;
-                //printf("%d\t%d\t%d\t%g\t%d\t%g\t%g\t%g\t%g\t%g\n",
+                //fprintf(stderr, "%d\t%d\t%d\t%g\t%d\t%g\t%g\t%g\t%g\t%g\n",
                 //    i, j, g, K->x[i][j][g], i+j*2, t1, t2, t3, t4, variance_lethals);
             }
         }

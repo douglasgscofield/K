@@ -47,13 +47,13 @@ int         main_nested     (int argc, char* argv[])
 
     set_repro_n(KN, KN->S, KN->A);
 
-    /* set_debug(DEBUG_LETHALS); /**/
-    /* set_debug(DEBUG_GENERATIONS); /**/
-    /* set_debug(DEBUG_TRACE1); /**/
-    /* set_debug(DEBUG_TRACE2); /**/
-    /* set_debug(DEBUG_EQUILIBRIUM); /**/
-    /* set_debug(DEBUG_NORMALIZATION); /**/
-    /* set_debug(DEBUG_TRUNCATE); /**/
+    // set_debug(DEBUG_LETHALS);
+    // set_debug(DEBUG_GENERATIONS);
+    // set_debug(DEBUG_TRACE1);
+    // set_debug(DEBUG_TRACE2);
+    // set_debug(DEBUG_EQUILIBRIUM);
+    // set_debug(DEBUG_NORMALIZATION);
+    // set_debug(DEBUG_TRUNCATE);
 
     initiate_model_state_n(KN);
 
@@ -84,23 +84,23 @@ int         main_nested     (int argc, char* argv[])
     }
     /**/
     /*
-    printf("K --------------------------------------------------\n");
-    printf("U\ts\th\tS\n%lg\t%lg\t%lg\t%lg\n", K->U, K->fit_s, K->fit_h, K->S[0]);
+    fprintf(stderr, "K --------------------------------------------------\n");
+    fprintf(stderr, "U\ts\th\tS\n%lg\t%lg\t%lg\t%lg\n", K->U, K->fit_s, K->fit_h, K->S[0]);
     /**/
     while (! is_equilibrium_n(KN)) {
         if (KN->generation > GENERATION_CUTOFF_n) {
 	        IF_DEBUG(DEBUG_TRACE1)
-                printf("exceeded GENERATION_CUTOFF_n=%d, stopping\n", 
+                fprintf(stderr, "exceeded GENERATION_CUTOFF_n=%d, stopping\n", 
                        GENERATION_CUTOFF_n);
 	        IF_DEBUG(DEBUG_GENERATIONS)
-                printf("exceeded GENERATION_CUTOFF_n=%d, stopping\n", 
+                fprintf(stderr, "exceeded GENERATION_CUTOFF_n=%d, stopping\n", 
                        GENERATION_CUTOFF_n);
             break;
         }
         IF_DEBUG(DEBUG_TRACE1)
-			printf("generation %d\n", KN->generation);
+			fprintf(stderr, "generation %d\n", KN->generation);
         IF_DEBUG(DEBUG_GENERATIONS)
-			printf("generation %d\n", KN->generation);
+			fprintf(stderr, "generation %d\n", KN->generation);
         compute_adults_prevgen_n(KN);
         if (KN->option_truncate)
             truncate_KArray_n(KN, KN->x1, LOADCLASS_TRUNCATE);
@@ -122,12 +122,12 @@ int         main_nested     (int argc, char* argv[])
         }
  
         IF_DEBUG(DEBUG_EQUILIBRIUM) {
-            printf("checking equilibrium at end of generation %d------------\n", KN->generation - 1);
-            printf("dump of KN->x[..][0][..][0]\n");
+            fprintf(stderr, "checking equilibrium at end of generation %d------------\n", KN->generation - 1);
+            fprintf(stderr, "dump of KN->x[..][0][..][0]\n");
             dump_KArray_n(KN, KN->x1, KN->MI0, 0, KN->MI1, 0);
-            printf("calling is_equilibrium(K) just to check...\n");
+            fprintf(stderr, "calling is_equilibrium(K) just to check...\n");
             (void) is_equilibrium_n(KN);
-            printf("end of equilibrium check ---------------\n");
+            fprintf(stderr, "end of equilibrium check ---------------\n");
         }
         /**/
         normalize_KArray_n(KN, KN->x1);
@@ -138,7 +138,7 @@ int         main_nested     (int argc, char* argv[])
         /**/
     }
     /*
-    printf("\n");
+    fprintf(stderr, "\n");
     /**/
 
     if (KN->is_lethal[0]) {
@@ -151,13 +151,13 @@ int         main_nested     (int argc, char* argv[])
         */
         KN->createlethal[0] = 1;
         IF_DEBUG(DEBUG_LETHALS)
-            printf("%s: KN->createlethal[0]=%d\n", thisfunction, 
+            fprintf(stderr, "%s: KN->createlethal[0]=%d\n", thisfunction, 
                    KN->createlethal[0]);
     }
     if (KN->is_lethal[1]) {
         KN->createlethal[1] = 1;
         IF_DEBUG(DEBUG_LETHALS)
-            printf("%s: KN->createlethal[1]=%d\n", thisfunction, 
+            fprintf(stderr, "%s: KN->createlethal[1]=%d\n", thisfunction, 
                    KN->createlethal[1]);
     }
 

@@ -19,8 +19,10 @@ void        set_debug               (int lvl);
 
 #if !defined(NO_DEBUG)
 #define     IF_DEBUG(_lvl_)         if (debug_flags & (0x1 << (_lvl_ - 1)))
+#define     DEBUG(_lvl_)            (debug_flags & (0x1 << (_lvl_ - 1)))
 #else
 #define     IF_DEBUG(_lvl_)         if (0)
+#define     DEBUG(_lvl_)            (0)
 #endif
 
 #define     DEBUG_TRACE1                1
