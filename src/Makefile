@@ -5,6 +5,8 @@ P_FLAG	=
 CXXFLAGS=	-Wall -D_FILE_OFFSET_BITS=64 $(O_FLAG) $(D_FLAG) $(P_FLAG)
 LIBS	=	-lm
 
+BINDIR  =   ../bin
+
 PROG	=	K
 
 OBJS = K.o \
@@ -39,19 +41,6 @@ HEAD = K.h \
 	   K_stats.h \
 	   K_util.h \
 	   Trajectory.h
-
-K: $(OBJS) version.h
-	$(CXX) $(LDFLAGS) $(OBJS) -o $@ $(LIBS)
-
-Kn: $(OBJS) $(OBJS_N) version.h
-	$(CXX) $(LDFLAGS) $(OBJS) $(OBJS_N) -o $@ $(LIBS) 
-
-$(OBJS): $(HEAD)
-$(OBJS_N): $(HEAD_N)
-
-.cpp.o:	$(HEAD) $(HEAD_N)
-
-K_cmdline.h:	SimpleOpt.h
 
 OBJS_N = K_n.o \
 	   K_cmdline_n.o \
@@ -94,6 +83,21 @@ HEAD_N = K_n.h \
 
 
 all: $(PROG)
+	mkdir -p $(BINDIR)
+	mv $? $(BINDIR)
+
+K: $(OBJS) version.h
+	$(CXX) $(LDFLAGS) $(OBJS) -o $@ $(LIBS)
+
+Kn: $(OBJS) $(OBJS_N) version.h
+	$(CXX) $(LDFLAGS) $(OBJS) $(OBJS_N) -o $@ $(LIBS) 
+
+$(OBJS): $(HEAD)
+$(OBJS_N): $(HEAD_N)
+
+.cpp.o:	$(HEAD) $(HEAD_N)
+
+K_cmdline.h:	SimpleOpt.h
 
 K.h K_n.h: version.h
 
