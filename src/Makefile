@@ -1,5 +1,5 @@
 CXX		=	g++
-O_FLAG	=	-O0
+O_FLAG	=	-O2
 D_FLAG	=	-D_WITH_DEBUG -ggdb -g3 -fvar-tracking-assignments -fno-inline -fno-inline-small-functions -fno-eliminate-unused-debug-types
 P_FLAG	=
 CXXFLAGS=	-Wall -D_FILE_OFFSET_BITS=64 $(O_FLAG) $(D_FLAG) $(P_FLAG)

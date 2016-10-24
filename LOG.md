@@ -1,6 +1,12 @@
 Project Log
 ===========
 
+2016/10/24
+----------
+
+More c++ idioms for I/O, and begin next steps towards speeding up simulations.
+
+
 2012/08/31
 ----------
 

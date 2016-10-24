@@ -28,35 +28,29 @@ void        stats_print_table       (KConfig K)
 
 {
     /* stats_print_table_heading(K); */
-    fprintf(stdout, "%s %d\t%lg\t%lg\t%lg\t%lg\t%s\t\
-%lg\t%lg\t\
-%lg\t%lg\t\
-%lg\t%lg\t\
-%lg\t%lg\t%lg\t\
-%lg\t%lg\t%lg\t%lg\t%lg\t%lg\n",
-           (K->generation > GENERATION_CUTOFF) ? "*" : " ",
-           K->generation,
-           K->U,
-           K->S[0],
-           K->A[0],
-           K->O[0],
-           get_fitness_function_name(K->fitness_function),
-           K->fit_s,
-           K->fit_h,
-           KStats.mean_hetloci,
-           KStats.var_hetloci,
-           KStats.mean_homloci,
-           KStats.var_homloci,
-           KStats.mean_totmuts,
-           KStats.var_totmuts,
-           KStats.var_to_mean_totmuts_ratio,
-           KStats.mean_fitness_self_progeny,
-           KStats.mean_fitness_apomixis_progeny,
-           KStats.mean_fitness_outcross_progeny,
-           KStats.population_mean_fitness,
-           KStats.inbreeding_depression,
-           KStats.secondary_selfing_rate
-           );
+    cout << (K->generation > GENERATION_CUTOFF) ? "x" : "+";
+    cout << sep << K->generation;
+    cout << sep << K->U;
+    cout << sep << K->S[0];
+    cout << sep << K->A[0];
+    cout << sep << K->O[0];
+    cout << sep << get_fitness_function_name(K->fitness_function);
+    cout << sep << K->fit_s;
+    cout << sep << K->fit_h;
+    cout << sep << KStats.mean_hetloci;
+    cout << sep << KStats.var_hetloci;
+    cout << sep << KStats.mean_homloci;
+    cout << sep << KStats.var_homloci;
+    cout << sep << KStats.mean_totmuts;
+    cout << sep << KStats.var_totmuts;
+    cout << sep << KStats.var_to_mean_totmuts_ratio;
+    cout << sep << KStats.mean_fitness_self_progeny;
+    cout << sep << KStats.mean_fitness_apomixis_progeny;
+    cout << sep << KStats.mean_fitness_outcross_progeny;
+    cout << sep << KStats.population_mean_fitness;
+    cout << sep << KStats.inbreeding_depression;
+    cout << sep << KStats.secondary_selfing_rate;
+    cout << endl;
 }
 
 //////////////////////////////////////////////////////////////////
@@ -65,9 +59,29 @@ void        stats_print_table_heading   (KConfig K)
 // Print heading for stats produced
 
 {
-    fprintf(stdout, "generations\tU\tS_0\tA_0\tO_0\tfitness_function\t\
-fit_s\tfit_h\tmean_hetloci\tvar_hetloci\tmean_homloci\tvar_homloci\tmean_totmuts\tvar_totmuts\tvar_mean_totmuts\t\
-w_self\tw_apomixis\tw_outcross\tw_popmean\tIBD\tS_secondary\n");
+    cout << "converge";
+    cout << sep << "gen";
+    cout << sep << "U";
+    cout << sep << "S_0";
+    cout << sep << "A_0";
+    cout << sep << "O_0";
+    cout << sep << "fitfunc";
+    cout << sep << "fit_s";
+    cout << sep << "fit_h";
+    cout << sep << "m_het";
+    cout << sep << "v_het";
+    cout << sep << "m_hom";
+    cout << sep << "v_hom";
+    cout << sep << "m_totmuts";
+    cout << sep << "v_totmuts";
+    cout << sep << "v_m_totmuts";
+    cout << sep << "w_self";
+    cout << sep << "w_apom";
+    cout << sep << "w_outc";
+    cout << sep << "w_m_pop";
+    cout << sep << "IBD";
+    cout << sep << "S_sec;";
+    cout << endl;
 }
 
 //////////////////////////////////////////////////////////////////
@@ -76,41 +90,19 @@ void        stats_print_verbose     (KConfig K)
 // Print all fields in the KStats structure, verbosely
 
 {
-    fprintf(stdout, "stats begin ========================================\n");
-    fprintf(stdout, "generations = %d (out of %d max)\n", K->generation, 
-           GENERATION_CUTOFF);
-    fprintf(stdout, "U = %lg\n", K->U);
-    fprintf(stdout, "S[0] = %lg\n", K->S[0]);
-    fprintf(stdout, "A[0] = %lg\n", K->A[0]);
-    fprintf(stdout, "O[0] = %lg\n", K->O[0]);
-    fprintf(stdout, "fitness function = %s\n",
-           get_fitness_function_name(K->fitness_function));
-    fprintf(stdout, "fit_s = %lg\n", K->fit_s);
-    fprintf(stdout, "fit_h = %lg\n", K->fit_h);
-    fprintf(stdout, "option_truncate = %d\n", K->option_truncate);
-    fprintf(stdout, "option_nolethal = %d\n", K->option_nolethal);
-
-    fprintf(stdout, "mean_hetloci = %lg\n", KStats.mean_hetloci);
-    fprintf(stdout, "var_hetloci = %lg\n", KStats.var_hetloci);
-    fprintf(stdout, "mean_homloci = %lg\n", KStats.mean_homloci);
-    fprintf(stdout, "var_homloci = %lg\n", KStats.var_homloci);
-    fprintf(stdout, "mean_totmuts = %lg\n", KStats.mean_totmuts);
-    fprintf(stdout, "var_totmuts = %lg\n", KStats.var_totmuts);
-    fprintf(stdout, "var / mean totmuts = %lg\n",
-           KStats.var_to_mean_totmuts_ratio);
-    fprintf(stdout, "mean_fitness_self_progeny = %lg\n", 
-           KStats.mean_fitness_self_progeny);
-    fprintf(stdout, "mean_fitness_apomixis_progeny = %lg\n", 
-           KStats.mean_fitness_apomixis_progeny);
-    fprintf(stdout, "mean_fitness_outcross_progeny = %lg\n", 
-           KStats.mean_fitness_outcross_progeny);
-    fprintf(stdout, "population_mean_fitness = %lg\n", 
-           KStats.population_mean_fitness);
-    fprintf(stdout, "inbreeding_depression = %lg\n", 
-           KStats.inbreeding_depression);
-    fprintf(stdout, "secondary_selfing_rate = %lg\n", 
-           KStats.secondary_selfing_rate);
-    fprintf(stdout, "stats end ========================================\n");
+    cout << "stats begin ========================================" << endl;
+    cout << "generations = " << K->generation << " (out of " << GENERATION_CUTOFF << " max)" << endl;
+    cout << "fitness function = " << get_fitness_function_name(K->fitness_function) 
+        << "  option_truncate = " << K->option_truncate << "  option_nolethal = " << K->option_nolethal
+        << endl;
+    cout << "U = " << K->U << "  S[0] = " << K->S[0] << "  A[0] = " << K->A[0] << "  O[0] = " << K->O[0] << endl;
+    cout << "fit_s = " << K->fit_s << "  fit_h = " << K->fit_h << endl;
+    cout << "hetloci mean = " << KStats.mean_hetloci << "  var = " << KStats.var_hetloci << endl;
+    cout << "homloci mean = " << KStats.mean_homloci << "  var = " << KStats.var_homloci << endl;
+    cout << "totmuts mean = " << KStats.mean_totmuts << "  var = " << KStats.var_totmuts << "  var / mean totmuts = " << KStats.var_to_mean_totmuts_ratio << endl;
+    cout << "mean_fitness self_progeny = " << KStats.mean_fitness_self_progeny << "  apomixis_progeny = " << KStats.mean_fitness_apomixis_progeny << "  outcross_progeny = " << KStats.mean_fitness_outcross_progeny << endl;
+    cout << "population_mean_fitness = " << KStats.population_mean_fitness << "  inbreeding_depression = " << KStats.inbreeding_depression << "  secondary_selfing_rate = " << KStats.secondary_selfing_rate << endl;
+    cout << "stats end ========================================" << endl;
 }
 
 //////////////////////////////////////////////////////////////////
