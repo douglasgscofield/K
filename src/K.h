@@ -15,6 +15,8 @@
 /////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////
 
+extern int GENERATION_CUTOFF;
+
 using namespace std;
 
 /////////////////////////////////////////////////////////////////
@@ -32,7 +34,8 @@ using namespace std;
 #define POISSON_TRUNCATE        1.0e-50
 #define LOADCLASS_TRUNCATE      1.0e-50
 #define NORMALIZATION_TOLERANCE 1.0e-9
-#define GENERATION_CUTOFF       2000
+
+#define DEFAULT_GENERATION_CUTOFF       2000
 /*
 **  Define this to make a bounds-checking function call, rather than
 **  direct K->mut_term[] array access, in apply_mutation()

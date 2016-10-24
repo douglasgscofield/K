@@ -18,6 +18,7 @@ int         cmdline_args        (KConfig K, int argc, char *argv[])
     enum {
         o_help,
         o_progress,
+        o_generation_cutoff,
         o_nested,
         o_unnested,
         o_U_mutation,
@@ -38,6 +39,7 @@ int         cmdline_args        (KConfig K, int argc, char *argv[])
         { o_help, "-?", SO_NONE },
         { o_help, "--help", SO_NONE },
         { o_progress, "--progress", SO_REQ_SEP },
+        { o_generation_cutoff, "--generation-cutoff", SO_REQ_SEP },
         { o_nested, "--nested", SO_NONE },
         { o_unnested, "--unnested", SO_NONE },
         { o_U_mutation, "-U", SO_REQ_SEP },
@@ -46,7 +48,7 @@ int         cmdline_args        (KConfig K, int argc, char *argv[])
         { o_S_selfing_rate, "-S", SO_REQ_SEP },
         { o_A_apomixis_rate, "-A", SO_REQ_SEP },
         { o_truncate, "--truncate", SO_NONE },
-        { o_no_lethal, "--no-lethal", SO_NONE },
+        { o_no_lethal, "--no-lethal-shortcut", SO_NONE },
         { o_table_heading_only, "--table-heading-only", SO_NONE },
         { o_table, "--table", SO_NONE },
         { o_load_savefile, "--load-savefile", SO_NONE },
@@ -69,6 +71,8 @@ int         cmdline_args        (KConfig K, int argc, char *argv[])
                 cmdline_usage(K); exit(0); break;
             case o_progress:
                 K->progress = atol(args.OptionArg()); break;
+            case o_generation_cutoff:
+                GENERATION_CUTOFF = atoi(args.OptionArg()); break;
             case o_nested:
                 cerr << "Unnested simulation, option invalid '" << args.OptionText() << "'" << endl; break;
                 exit(1);
