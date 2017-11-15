@@ -1,17 +1,16 @@
 #include "K.h"
 #include "SimpleOpt.h"
 
-/*///////////////////////////////////////////////////////////////*/
-/*///////////////////////////////////////////////////////////////*/
-/* Routines for handling command-line arguments                  */
-/*///////////////////////////////////////////////////////////////*/
-/*///////////////////////////////////////////////////////////////*/
+////////////////////////////////////////////////////////////////
+//
+// Routines for handling command-line arguments
+//
+////////////////////////////////////////////////////////////////
 
-/*///////////////////////////////////////////////////////////////*/
+////////////////////////////////////////////////////////////////
 int         cmdline_args        (KConfig K, int argc, char *argv[])
 {
     const char* thisfunction = "cmdline_args";
-    int i;
     if (K->genotypes != 1) {
         not_implemented(thisfunction, "genotypes != 1");
     }
@@ -19,8 +18,10 @@ int         cmdline_args        (KConfig K, int argc, char *argv[])
         o_help,
         o_progress,
         o_generation_cutoff,
+        o_generation_minimum,
         o_nested,
         o_unnested,
+        o_epsilon,
         o_U_mutation,
         o_s_selection,
         o_h_dominance,
@@ -30,18 +31,20 @@ int         cmdline_args        (KConfig K, int argc, char *argv[])
         o_no_lethal,
         o_table_heading_only,
         o_table,
-        o_load_savefile,
-        o_load_savefile_name,
-        o_save_savefile,
-        o_save_savefile_name,
+        o_load,
+        o_loadfile,
+        o_save,
+        o_savefile,
     };
     CSimpleOpt::SOption K_options[] = {
-        { o_help, "-?", SO_NONE },
+        { o_help, "-h", SO_NONE },
         { o_help, "--help", SO_NONE },
         { o_progress, "--progress", SO_REQ_SEP },
         { o_generation_cutoff, "--generation-cutoff", SO_REQ_SEP },
+        { o_generation_minimum, "--generation-minimum", SO_REQ_SEP },
         { o_nested, "--nested", SO_NONE },
         { o_unnested, "--unnested", SO_NONE },
+        { o_epsilon, "--epsilon", SO_REQ_SEP },
         { o_U_mutation, "-U", SO_REQ_SEP },
         { o_s_selection, "-s", SO_REQ_SEP },
         { o_h_dominance, "-h", SO_REQ_SEP },
@@ -51,10 +54,10 @@ int         cmdline_args        (KConfig K, int argc, char *argv[])
         { o_no_lethal, "--no-lethal-shortcut", SO_NONE },
         { o_table_heading_only, "--table-heading-only", SO_NONE },
         { o_table, "--table", SO_NONE },
-        { o_load_savefile, "--load-savefile", SO_NONE },
-        { o_load_savefile_name, "--load-savefile-name", SO_REQ_SEP },
-        { o_save_savefile, "--save-savefile", SO_NONE },
-        { o_save_savefile_name, "--save-savefile-name", SO_REQ_SEP },
+        { o_load, "--load", SO_NONE },
+        { o_loadfile, "--loadfile", SO_REQ_SEP },
+        { o_save, "--save", SO_NONE },
+        { o_savefile, "--savefile", SO_REQ_SEP },
         SO_END_OF_OPTIONS
     };
 
@@ -73,11 +76,15 @@ int         cmdline_args        (KConfig K, int argc, char *argv[])
                 K->progress = atol(args.OptionArg()); break;
             case o_generation_cutoff:
                 GENERATION_CUTOFF = atoi(args.OptionArg()); break;
+            case o_generation_minimum:
+                GENERATION_MINIMUM = atoi(args.OptionArg()); break;
             case o_nested:
                 cerr << "Unnested simulation, option invalid '" << args.OptionText() << "'" << endl; break;
                 exit(1);
             case o_unnested:
                 /* ignored here */ break;
+            case o_epsilon:
+                K->epsilon = atof(args.OptionArg()); break;
             case o_U_mutation:
                 K->U = atof(args.OptionArg()); break;
             case o_s_selection:
@@ -96,14 +103,14 @@ int         cmdline_args        (KConfig K, int argc, char *argv[])
                 stats_print_table_heading(K); exit(0); break;
             case o_table:
                 K->option_table = 1; break;
-            case o_load_savefile:
-                K->load_savefile = 1; break;
-            case o_load_savefile_name:
-                K->load_savefile_name = args.OptionArg(); break;
-            case o_save_savefile:
-                K->save_savefile = 1; break;
-            case o_save_savefile_name:
-                K->save_savefile_name = args.OptionArg(); break;
+            case o_load:
+                K->load = 1; break;
+            case o_loadfile:
+                K->loadfile = args.OptionArg(); K->load = 1; break;
+            case o_save:
+                K->save = 1; break;
+            case o_savefile:
+                K->savefile = args.OptionArg(); K->save = 1; break;
             default:
                 cerr << "Invalid option '" << args.OptionText() << "'" << endl; exit(1); break;
 
@@ -143,34 +150,36 @@ void        cmdline_usage           (KConfig K)
 {
     fprintf(stderr, "K [args]\n\
 \n\
-  -FLAG <ARGUMENT>  EXPLANATION [CURRENT VALUE]\n\
-  ---------------------------------------------\n\
-  --help            This help message\n\
-  -U <float>        Genomic mutation rate [%lg]\n\
-  -s <float>        Selection coefficient [%lg]\n\
-  -h <float>        Dominance coefficient [%lg]\n\
-  -S <float>        Selfing rate [%lg]\n\
-  -A <float>        Apomixis rate [%lg]\n\
-  --truncate         Turn on truncate [%d]\n\
-  --no-lethal         Do not shortcut computations with lethals [%d]\n\
-  --table            Print stats output in single-line format\n\
-  --table-heading-only Print the heading for a table and exit\n\
-  --load-savefile    Load a saved file of frequencies [%d]\n\
-  --load-savefile-name <string>  File from which to load [%s]\n\
-  --save-savefile    Save a file of frequencies [%d]\n\
-  --save-savefile-name <string>  File to which to save [%s]\n\
+  -FLAG <ARGUMENT>      EXPLANATION [CURRENT VALUE]\n\
+  -----------------------------------------------------\n\
+  -h or --help          This help message\n\
+  -U <float>            Genomic mutation rate [%lg]\n\
+  -s <float>            Selection coefficient [%lg]\n\
+  -h <float>            Dominance coefficient [%lg]\n\
+  -S <float>            Selfing rate [%lg]\n\
+  -A <float>            Apomixis rate [%lg]\n\
+  --epsilon <float>     Maximum different for stopping [%lg]\n\
+  --truncate            Turn on truncate [%d]\n\
+  --no-lethal           Do not shortcut computations with lethals [%d]\n\
+  --table               Print stats output in single-line format\n\
+  --table-heading-only  Print the heading for a table and exit\n\
+  --load                Load a saved file of frequencies [%d]\n\
+  --loadfile <string>   File from which to load [%s]. Implies --load\n\
+  --save                Save a file of frequencies [%d]\n\
+  --savefile <string>   File to which to save [%s]. Implies --save\n\
 ",
     K->U,
     K->fit_s,
     K->fit_h,
     K->S[0],
     K->A[0],
+    K->epsilon,
     K->option_truncate,
     K->option_nolethal,
-    K->load_savefile,
-    K->load_savefile_name,
-    K->save_savefile,
-    K->save_savefile_name
+    K->load,
+    K->loadfile,
+    K->save,
+    K->savefile
     );
 }
 

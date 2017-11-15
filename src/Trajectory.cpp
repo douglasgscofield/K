@@ -8,8 +8,7 @@ const struct Trajectory::struct_types Trajectory::types[] = {
     {"*error*",     "TRAJECTORY_ERROR",       TRAJECTORY_ERROR},
     {"end_of_gen",  "TRAJECTORY_END_OF_GEN",  TRAJECTORY_END_OF_GEN},
 };
-const int Trajectory::num_types = sizeof(Trajectory::types)
-                                  / sizeof(Trajectory::struct_types);
+const int Trajectory::num_types = sizeof(Trajectory::types) / sizeof(Trajectory::struct_types);
 
 
 /////////////////////////////////////////////////////////////////
@@ -20,25 +19,20 @@ void Trajectory::start     (KConfig K,
 {
     const char* thisfunction = "Trajectory::start";
     if (debug_flag) {
-        cerr << thisfunction << " in gen " << K->generation 
-            << " with file='" << fil << "' type='" << typ
-            << "' freq=" << frq << endl;
+        cerr << thisfunction << " gen=" << K->generation << " file='" << fil << "' type='" << typ << "' freq=" << frq << endl;
     }
     filename = fil;
     file.open(filename.c_str());
     if (file.fail()) {
-        cerr << thisfunction << ": could not open trajectory file "
-            << filename << endl;
+        cerr << thisfunction << ": could not open trajectory file " << filename << endl;
         fatal(NULL);
     }
     if ((type = match_type(typ)) == TRAJECTORY_ERROR) {
-        cerr << thisfunction << ": unrecognized trajectory type '"
-            << type << "'" << endl;
+        cerr << thisfunction << ": unrecognized trajectory type '" << type << "'" << endl;
         fatal(NULL);
     }
     if ((freq = frq) <= 0) {
-        cerr << thisfunction << ": trajectory frequency (" 
-            << freq << ") must be > 0" << endl;
+        cerr << thisfunction << ": trajectory frequency (" << freq << ") must be > 0" << endl;
         fatal(NULL);
     }
     // write trajectory header
@@ -77,7 +71,8 @@ void Trajectory::dump_type ()
 {
     //const char* thisfunction = "Trajectory::dump_type";
     for (int i = 0; i < num_types; ++i) {
-        cout << "type " << i << ": name=<" << types[i].name
+        cout << "type " << i 
+            << " name=<" << types[i].name
             << "> define_name=<" << types[i].define_name
             << "> type=" << types[i].type << endl;
     }
@@ -113,7 +108,8 @@ void Trajectory::reset()
     //const char* thisfunction = "Trajectory::reset";
     active_flag = false;
     filename = "";
-    if (file) file.close();
+    if (file)
+        file.close();
     type = TRAJECTORY_ERROR;
     freq = 0;
     num_recorded = 0;

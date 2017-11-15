@@ -2,34 +2,34 @@
 #define TRAJECTORY_H
 
 /////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////
+//
 // Class for tracking genotype trajectories through time
-/////////////////////////////////////////////////////////////////
+//
 /////////////////////////////////////////////////////////////////
 
 class Trajectory {
     private:
-        bool           active_flag;
-        bool           debug_flag;
-        int            type;     // type of trajectory
+        bool             active_flag;
+        bool             debug_flag;
+        int              type;     // type of trajectory
 #define  TRAJECTORY_ERROR        (-1)
 #define  TRAJECTORY_END_OF_GEN    1
         static const struct struct_types {
             string       name;
             string       define_name;
-            int               type;
+            int          type;
         } types[];
         static const int num_types;
-        int            freq;     // frequency of recording
-        int            gen_started;  // gen trajectory started
-        int            gen_to_end; // not implemented
-        int            last_gen;  // gen last recorded
-        int            next_gen;  // gen to record next
-        int            num_recorded; // number of times
-        ofstream  file;     // the file stream
-        string    filename; // filename
-        bool           dropzero_flag;
-        bool           writenow_flag;
+        int              freq;     // frequency of recording
+        int              gen_started;  // gen trajectory started
+        int              gen_to_end; // not implemented
+        int              last_gen;  // gen last recorded
+        int              next_gen;  // gen to record next
+        int              num_recorded; // number of times
+        ofstream         file;     // the file stream
+        string           filename; // filename
+        bool             dropzero_flag;
+        bool             writenow_flag;
 
     public:
         Trajectory();
@@ -47,14 +47,17 @@ class Trajectory {
         void stop();
         void reset();
 
-        static void                 dump_type  ();
-        static int                  match_type (const string& type);
+        static void            dump_type  ();
+        static int             match_type (const string& type);
         static const string&   match_type (int type);
 };
 
 /////////////////////////////////////////////////////////////////
 inline Trajectory::Trajectory()
-    : active_flag(false), debug_flag(false), dropzero_flag(true), writenow_flag(false)
+    : active_flag(false),
+      debug_flag(false),
+      dropzero_flag(true),
+      writenow_flag(false)
 { /* EMPTY */ }
 
 /////////////////////////////////////////////////////////////////
@@ -68,8 +71,7 @@ inline void Trajectory::check(KConfig K) {
     // will need to change with more than one trajectory
     // and with different types of trajectories
     if (debug_flag) {
-        cerr << thisfunction << " in gen " << this_gen
-            << " with next_gen == " << next_gen << endl;
+        cerr << thisfunction << " in gen " << this_gen << " with next_gen == " << next_gen << endl;
     }
     if (! active_flag) {
         cerr << thisfunction << ": no active trajectory" << endl;
@@ -88,8 +90,7 @@ inline void Trajectory::check(KConfig K) {
     next_gen += freq;
     ++ num_recorded;
     if (debug_flag) {
-        cerr << thisfunction << " in gen " << this_gen
-            << " finished writing" << endl;
+        cerr << thisfunction << " in gen " << this_gen << " finished writing" << endl;
     }
 }
 
@@ -117,8 +118,7 @@ inline void Trajectory::write(KConfig K) {
                     if (dropzero_flag && a[i][j][g] == 0.0) {
                         continue;
                     }
-                    file << i << "\t" << j << "\t" << g << "\t" 
-                        << a[i][j][g] << endl;
+                    file << i << "\t" << j << "\t" << g << "\t" << a[i][j][g] << endl;
                 }
             }
         }

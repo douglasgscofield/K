@@ -1,13 +1,19 @@
-CXX		=	g++
-O_FLAG	=	-O2
-D_FLAG	=	-D_WITH_DEBUG -ggdb -g3 -fvar-tracking-assignments -fno-inline -fno-inline-small-functions -fno-eliminate-unused-debug-types
-P_FLAG	=
-CXXFLAGS=	-Wall -D_FILE_OFFSET_BITS=64 $(O_FLAG) $(D_FLAG) $(P_FLAG)
-LIBS	=	-lm
+ifeq ($(shell uname -n | cut -f1 -d.),eb30)
+  CXX=g++44
+else
+  CXX=g++
+endif
 
-BINDIR  =   ../bin
 
-PROG	=	K
+O_FLAG = -O2
+D_FLAG = -D_WITH_DEBUG -ggdb -g3 -fvar-tracking-assignments -fno-inline -fno-inline-small-functions -fno-eliminate-unused-debug-types
+#for gcc 4.1.x as is default on eb30
+#D_FLAG  = -D_WITH_DEBUG -ggdb -g3 -fno-inline -fno-eliminate-unused-debug-types
+P_FLAG  =
+CXXFLAGS= -Wall -D_FILE_OFFSET_BITS=64 $(O_FLAG) $(D_FLAG) $(P_FLAG)
+LIBS    = -lm
+BINDIR  = ../bin
+PROG    = K
 
 OBJS = K.o \
 	   K_cmdline.o \
@@ -19,7 +25,7 @@ OBJS = K.o \
 	   K_mutation.o \
 	   K_nextgen.o \
 	   K_reproduction.o \
-	   K_savefile.o \
+	   K_loadsave.o \
 	   K_selection.o \
 	   K_stats.o \
 	   K_util.o \
@@ -36,7 +42,7 @@ HEAD = K.h \
 	   K_mutation.h \
 	   K_nextgen.h \
 	   K_reproduction.h \
-	   K_savefile.h \
+	   K_loadsave.h \
 	   K_selection.h \
 	   K_stats.h \
 	   K_util.h \
@@ -123,8 +129,7 @@ profile: .FORCE
 
 
 clean:
-	rm -f gmon.out $(OBJS) $(OBJS_N) $(PROG) version.h
-
+	rm -f gmon.out $(OBJS) $(PROG) version.h
 
 clean-all: clean
 

@@ -75,7 +75,7 @@ void        apply_mutation_general  (KConfig K, KScalar U,
                 sum = 0.0;
                 for (n1=0; n1 <= i; n1++) {
                     sum += from[n1][j][g] * 
-						   mut_term_general(U, i - n1);
+                           mut_term_general(U, i - n1);
                 }
                 to[i][j][g] = sum;
             }
@@ -161,8 +161,8 @@ KScalar     mut_term_general        (KScalar U, KInt t)
 {
     const char* thisfunction = "mut_term_general";
     /* note that the term [][MAX_MI+1] of pois_general 
-	** holds the U value
-	*/
+    ** holds the U value
+    */
     static KScalar  pois_general    [pois_general_MAX][MAX_MI+2];
     static KInt     last_index      = -1;
     static KScalar  prev_U          = -1.0;
@@ -190,7 +190,7 @@ KScalar     mut_term_general        (KScalar U, KInt t)
         if (i >= pois_general_MAX) {
             char buf[200];
             sprintf(buf, "%s: pois_general_MAX too low",
-				    thisfunction);
+                    thisfunction);
             fatal(buf);
         }
         /* create new entry */
@@ -201,8 +201,8 @@ KScalar     mut_term_general        (KScalar U, KInt t)
             checksum += t1;
         }
         /* verify that the contents of the mut_term[] array 
-		** are OK
-		*/
+        ** are OK
+        */
         if (fabs(checksum - 1.0) > 0.000000001) {
             char buf[200];
             sprintf(buf, "%s: not valid pdf, U=%lg: 1 != %f\n", 
@@ -242,7 +242,7 @@ KScalar     pois_term           (KScalar U, KInt term)
     ** t1 = exp_neg_U * pow(K->U, i) / factorial(i);
     ** alternate log space
     ** t1 = exp(-K->U) * exp(i*log(K->U) - lnfactorial(i));
-	*/
+    */
     /* log space */
     if (U < 0.0) {
         char buf[200];

@@ -28,5 +28,5 @@ KScalar     stats_mean_fitness_apomixis_progeny_n   (KConfig_n KN);
 KScalar     stats_mean_fitness_outcross_progeny_n   (KConfig_n KN);
 KScalar     stats_population_mean_fitness_n (KConfig_n KN);
 KScalar     stats_inbreeding_depression_n   (KConfig_n KN);
-KScalar     stats_inbreeding_depression_old_n	(KConfig_n KN);
+KScalar     stats_inbreeding_depression_old_n    (KConfig_n KN);
 KScalar     stats_secondary_selfing_rate_n  (KConfig_n KN);

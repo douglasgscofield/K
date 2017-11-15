@@ -114,9 +114,9 @@ void        apply_self_progeny_n    (KConfig_n KN,
                                     ** These checks all must be redundant.
                                     **
                                     ** if (i0 <= n0 && j0 >= v0 && 
-						            **     j0 <= n0+v0 && i0+j0 <= n0+v0 &&
+                                    **     j0 <= n0+v0 && i0+j0 <= n0+v0 &&
                                     **     i1 <= n1 && j1 >= v1 && 
-						            **     j1 <= n1+v1 && i1+j1 <= n1+v1) {
+                                    **     j1 <= n1+v1 && i1+j1 <= n1+v1) {
                                     **     sum += s_self_n(i0,j0,i1,j1,n0,v0,n1,v1) * 
                                     **            KN->S *
                                     **            loadclass;
@@ -205,7 +205,7 @@ void        apply_apomixis_progeny_n    (KConfig_n KN,
                     to[i0][j0][i1][j1] += 
                         a_apomixis_n(i0,j0,i1,j1,n0,v0,n1,v1) *
                         KN->A *
-						from[n0][v0][n1][v1];
+                        from[n0][v0][n1][v1];
                 }
             }
         }
@@ -351,9 +351,9 @@ void        compute_zygotes_n   (KConfig_n KN)
 {
     const char* thisfunction = "compute_zygotes_n";
     /* Combines proportions of male and female gametes into
-	** expected genotypic classes.  Note that all classes 
-	** L(,j>0) = 0.
-	*/
+    ** expected genotypic classes.  Note that all classes 
+    ** L(,j>0) = 0.
+    */
     IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     if (KN->current_x != KN_CURRENT_GAMETES_X2_TO_X1) {
         char buf[200];
@@ -376,9 +376,9 @@ void        apply_zygotes_n   (KConfig_n KN, KArray_n& to,
     KInt i0, i1, k0, k1;
     KScalar sum;    
     /* Combines proportions of male and female gametes into
-	** expected genotypic classes.  Note that all classes 
-	** L(,j>0) = 0.
-	*/
+    ** expected genotypic classes.  Note that all classes 
+    ** L(,j>0) = 0.
+    */
     IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     if (KN->O == 0.0) {
         IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s: no outcrossing\n",

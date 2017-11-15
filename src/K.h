@@ -16,6 +16,7 @@
 /////////////////////////////////////////////////////////////////
 
 extern int GENERATION_CUTOFF;
+extern int GENERATION_MINIMUM;
 
 using namespace std;
 
@@ -36,6 +37,7 @@ using namespace std;
 #define NORMALIZATION_TOLERANCE 1.0e-9
 
 #define DEFAULT_GENERATION_CUTOFF       2000
+#define DEFAULT_GENERATION_MINIMUM      1
 /*
 **  Define this to make a bounds-checking function call, rather than
 **  direct K->mut_term[] array access, in apply_mutation()
@@ -186,11 +188,11 @@ struct      struct_KConfig     {
         // bits are set according to the debug flags in effect
         int         debug_flags;
         // if != 0, create a savefile
-        int         save_savefile;
-        char*       save_savefile_name;
-        // if != 0, load a savefile
-        int         load_savefile;
-        char*       load_savefile_name;
+        int         save;
+        char*       savefile;
+        // if != 0, load from a loadfile
+        int         load;
+        char*       loadfile;
 };
 
 int main_unnested(int argc, char* argv[]);
@@ -204,7 +206,7 @@ int main_unnested(int argc, char* argv[]);
 #include "K_mutation.h"
 #include "K_nextgen.h"
 #include "K_reproduction.h"
-#include "K_savefile.h"
+#include "K_loadsave.h"
 #include "K_selection.h"
 #include "K_stats.h"
 #include "K_util.h"

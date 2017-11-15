@@ -1,16 +1,16 @@
 #include "K.h"
 
-/*///////////////////////////////////////////////////////////////*/
-/*///////////////////////////////////////////////////////////////*/
-/* Utility routines for math operations                          */
-/*///////////////////////////////////////////////////////////////*/
-/*///////////////////////////////////////////////////////////////*/
+////////////////////////////////////////////////////////////////
+//
+// Utility routines for math operations
+//
+////////////////////////////////////////////////////////////////
 
-/*
-** Static arrays that hold precomputed values for the
-** math functions.  These are all filled by one call to 
-** init_math().
-*/
+
+// Static arrays that hold precomputed values for the
+// math functions.  These are all filled by one call to 
+// init_math().
+
 
 static KScalar a_pow_half       [pow_half_VALS+1] = { -1.0 };
 static int     done_pow_half = 0;  /* set to 1 in init_math */
@@ -23,11 +23,11 @@ static int     done_lnfactorial = 0;  /* set to 1 in init_math */
 static KScalar a_lnbinomial     [binomial_N_VALS+1][binomial_K_VALS+1] = { -1.0 };
 static int     done_lnbinomial = 0;  /* set to 1 in init_math */
 
-/*///////////////////////////////////////////////////////////////*/
+////////////////////////////////////////////////////////////////
 KScalar     pow_half            (KInt n)
-/*
-** Returns (1/2)^n for integer powers of n
-*/
+
+// Returns (1/2)^n for integer powers of n
+
 {
     const char* thisfunction = "pow_half";
     if (n > pow_half_VALS) {
@@ -40,11 +40,11 @@ KScalar     pow_half            (KInt n)
     return a_pow_half[n];
 }
 
-/*///////////////////////////////////////////////////////////////*/
+////////////////////////////////////////////////////////////////
 KScalar     lnpow_half          (KInt n)
-/*
-** Returns n*ln(1/2) for integer powers of n
-*/
+
+// Returns n*ln(1/2) for integer powers of n
+
 {
     const char* thisfunction = "lnpow_half";
     if (n > pow_half_VALS) {
@@ -57,7 +57,7 @@ KScalar     lnpow_half          (KInt n)
     return a_lnpow_half[n];
 }
 
-/*///////////////////////////////////////////////////////////////*/
+////////////////////////////////////////////////////////////////
 KScalar     factorial           (KInt n)
 {
     const char* thisfunction = "factorial";
@@ -71,11 +71,11 @@ KScalar     factorial           (KInt n)
     return a_factorial[n];
 }
 
-/*///////////////////////////////////////////////////////////////*/
+////////////////////////////////////////////////////////////////
 KScalar     lnfactorial         (KInt n)
-/*
-** Returns ln(n!).
-*/
+
+// Returns ln(n!).
+
 {
     const char* thisfunction = "lnfactorial";
     if (n < 0 || n > factorial_VALS) {
@@ -88,13 +88,13 @@ KScalar     lnfactorial         (KInt n)
     return a_lnfactorial[n];
 }
 
-/*///////////////////////////////////////////////////////////////*/
+////////////////////////////////////////////////////////////////
 KScalar     binomial            (KInt n, KInt k)
-/*
-** Returns nCk = n!/(k!(n-k)!).  This will overflow in any
-** realistic parameter space.  For general use, work in
-** natural log space and use lnbinomial() instead.
-*/
+
+// Returns nCk = n!/(k!(n-k)!).  This will overflow in any
+// realistic parameter space.  For general use, work in
+// natural log space and use lnbinomial() instead.
+
 {
     const char* thisfunction = "binomial";
     KScalar t1, t2;
@@ -110,11 +110,11 @@ KScalar     binomial            (KInt n, KInt k)
 }
 
 
-/*///////////////////////////////////////////////////////////////*/
+////////////////////////////////////////////////////////////////
 KScalar     lnbinomial          (KInt n, KInt k)
-/*
-** Returns ln(nCk) = ln(n!/(k!(n-k)!)).
-*/
+
+// Returns ln(nCk) = ln(n!/(k!(n-k)!)).
+
 {
     const char* thisfunction = "lnbinomial";
     if (k < 0 || n < 0 || k > n) {
@@ -135,11 +135,11 @@ KScalar     lnbinomial          (KInt n, KInt k)
 }
 
 
-/*///////////////////////////////////////////////////////////////*/
+////////////////////////////////////////////////////////////////
 void        init_math           (void)
-/*
-** Initialize the static arrays used by the math functions.
-*/
+
+// Initialize the static arrays used by the math functions.
+
 {
     const char* thisfunction = "init_math";
     {
@@ -166,8 +166,8 @@ void        init_math           (void)
         /* factorial */
         KInt i;
         a_factorial[0] = 1.0;
-        /* on a Windows PC with Visual C++, this will 
-        ** quietly overflow around 171 */
+        // on a Windows PC with Visual C++, this will 
+        // quietly overflow around 171 
         for (i=1; i <= factorial_VALS; i++) {
             a_factorial[i] = (a_factorial[i-1] * i);
         }
@@ -195,9 +195,8 @@ void        init_math           (void)
         for (nn=0; nn <= binomial_N_VALS; nn++) {
             a_lnbinomial[nn][0] = 0.0;
             a_lnbinomial[nn][1] = log((KScalar)nn);
-            /* if nn is even, then max k=n/2; 
-            ** else nn is odd, then max k=(n-1)/2 
-            */
+            // if nn is even, then max k=n/2; 
+            // else nn is odd, then max k=(n-1)/2 
             max_kk = ((nn % 2) == 0) ? nn/2 : (nn-1)/2;
             for (kk=2; kk <= max_kk; kk++) {
                 a_lnbinomial[nn][kk] = lnfactorial(nn) - 

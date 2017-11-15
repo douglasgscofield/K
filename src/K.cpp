@@ -2,15 +2,16 @@
 #include "Trajectory.h"
 
 
-/*///////////////////////////////////////////////////////////////*/
-/*///////////////////////////////////////////////////////////////*/
-/* Global variables (keep to an absolute minimum)                */
-/*///////////////////////////////////////////////////////////////*/
-/*///////////////////////////////////////////////////////////////*/
+/////////////////////////////////////////////////////////////////
+//
+// Global variables (keep to an absolute minimum)                
+//
+/////////////////////////////////////////////////////////////////
 
 int GENERATION_CUTOFF = DEFAULT_GENERATION_CUTOFF;
+int GENERATION_MINIMUM = DEFAULT_GENERATION_MINIMUM;
 
-/*///////////////////////////////////////////////////////////////*/
+/////////////////////////////////////////////////////////////////
 int         main_unnested       (int argc, char* argv[])
 {
     cerr << "K version: " << VERSION << endl;
@@ -42,6 +43,7 @@ int         main_unnested       (int argc, char* argv[])
         K->fit_h = h;
         K->S[0] = S;
         K->epsilon = 0.00000001;
+	K->savefile = K->loadfile = "savefile.txt";
 
         if (cmdline_args(K, argc, argv)) {
             fatal("Usage: K --help");
@@ -65,9 +67,9 @@ int         main_unnested       (int argc, char* argv[])
     compute_adults_initial(K);
 
     // K->option_table = 1;
-	// K->load_savefile = 1;
-    if (K->load_savefile) {
-        load_savefile(K, K->x);
+    // K->load = 1;
+    if (K->load) {
+        load_loadfile(K, K->x);
     } else {
         fill_KArray(K, K->x, 0.0);
         K->x[10][0][0] = 1.0;
@@ -89,20 +91,17 @@ int         main_unnested       (int argc, char* argv[])
     // fprintf(stderr, "K --------------------------------------------------\n");
     // fprintf(stderr, "U\ts\th\tS\n%lg\t%lg\t%lg\t%lg\n", K->U, K->fit_s, K->fit_h, K->S[0]);
 
-    while (! is_equilibrium(K)) {
+    while (! is_equilibrium(K) || K->generation <= GENERATION_MINIMUM) {
 
         if (K->generation > GENERATION_CUTOFF) {
-			IF_DEBUG(DEBUG_GENERATIONS)
-				fprintf(stderr, "exceeded GENERATION_CUTOFF=%d, stopping\n", GENERATION_CUTOFF);
-			IF_DEBUG(DEBUG_TRACE1)
-				fprintf(stderr, "exceeded GENERATION_CUTOFF=%d, stopping\n", GENERATION_CUTOFF);
+            fprintf(stderr, "exceeded GENERATION_CUTOFF=%d, stopping\n", GENERATION_CUTOFF);
             break;
         }
 
         if (DEBUG(DEBUG_GENERATIONS) || (K->progress && K->generation % K->progress == 0))
-			fprintf(stderr, "generation %d\n", K->generation);
+            fprintf(stderr, "generation %d\n", K->generation);
         IF_DEBUG(DEBUG_TRACE1)
-			fprintf(stderr, "generation %d\n", K->generation);
+            fprintf(stderr, "generation %d\n", K->generation);
 
         if (K->option_truncate)
             truncate_KArray(K, K->x, LOADCLASS_TRUNCATE);
@@ -119,7 +118,7 @@ int         main_unnested       (int argc, char* argv[])
 
         IF_DEBUG(DEBUG_EQUILIBRIUM) {
             fprintf(stderr, "checking equilibrium at end of generation %d------------\n", 
-				   K->generation - 1);
+                   K->generation - 1);
             fprintf(stderr, "dump of K->x[..][0][0]\n");
             dump_KArray(K, K->x, K->MI, 0, 1);
             fprintf(stderr, "calling is_equilibrium(K) just to check...\n");
@@ -178,7 +177,7 @@ int         main_unnested       (int argc, char* argv[])
     // dump_KArray(K, K->x, 10, 0, 0);
 
     //K->save_savefile = 1;
-	if (K->save_savefile) {
+    if (K->save) {
         save_savefile(K, K->x);
     }
 

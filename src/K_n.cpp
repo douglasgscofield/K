@@ -89,18 +89,18 @@ int         main_nested     (int argc, char* argv[])
     /**/
     while (! is_equilibrium_n(KN)) {
         if (KN->generation > GENERATION_CUTOFF_n) {
-	        IF_DEBUG(DEBUG_TRACE1)
+            IF_DEBUG(DEBUG_TRACE1)
                 fprintf(stderr, "exceeded GENERATION_CUTOFF_n=%d, stopping\n", 
                        GENERATION_CUTOFF_n);
-	        IF_DEBUG(DEBUG_GENERATIONS)
+            IF_DEBUG(DEBUG_GENERATIONS)
                 fprintf(stderr, "exceeded GENERATION_CUTOFF_n=%d, stopping\n", 
                        GENERATION_CUTOFF_n);
             break;
         }
         IF_DEBUG(DEBUG_TRACE1)
-			fprintf(stderr, "generation %d\n", KN->generation);
+            fprintf(stderr, "generation %d\n", KN->generation);
         IF_DEBUG(DEBUG_GENERATIONS)
-			fprintf(stderr, "generation %d\n", KN->generation);
+            fprintf(stderr, "generation %d\n", KN->generation);
         compute_adults_prevgen_n(KN);
         if (KN->option_truncate)
             truncate_KArray_n(KN, KN->x1, LOADCLASS_TRUNCATE);

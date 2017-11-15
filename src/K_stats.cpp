@@ -28,7 +28,7 @@ void        stats_print_table       (KConfig K)
 
 {
     /* stats_print_table_heading(K); */
-    cout << (K->generation > GENERATION_CUTOFF) ? "x" : "+";
+    cout << (K->generation > GENERATION_CUTOFF ? "x" : "+");
     cout << sep << K->generation;
     cout << sep << K->U;
     cout << sep << K->S[0];

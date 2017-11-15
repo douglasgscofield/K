@@ -90,7 +90,7 @@ void        truncate_KArray_n   (KConfig_n KN, KArray_n& a,
     IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     IF_DEBUG(DEBUG_TRUNCATE_DETAIL) {
         fprintf(stderr, "%s: truncating values lower than v=%lg \n", 
-			   thisfunction, v);
+               thisfunction, v);
     }
     for (i0=0; i0 <= KN->MI0; i0++) {
         for (j0=0; j0 <= KN->MJ0; j0++) {
@@ -168,8 +168,8 @@ int         isOK_KArray_n   (KConfig_n KN, KArray_n& a)
 */
 {
     const char* thisfunction = "isOK_KArray_n";
-	KScalar t1;
-	t1 = fabs(sum_KArray_n(KN, a) - 1.0);
+    KScalar t1;
+    t1 = fabs(sum_KArray_n(KN, a) - 1.0);
     return (t1 < NORMALIZATION_TOLERANCE) ? 1 : 0;
 }
 
@@ -180,8 +180,8 @@ int         isOK_KVector_n  (KConfig_n KN, KVector_n& v)
 */
 {
     const char* thisfunction = "isOK_KVector_n";
-	KScalar t1;
-	t1 = fabs(sum_KVector_n(KN, v) - 1.0);
+    KScalar t1;
+    t1 = fabs(sum_KVector_n(KN, v) - 1.0);
     return (t1 < NORMALIZATION_TOLERANCE) ? 1 : 0;
 }
 

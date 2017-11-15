@@ -34,11 +34,11 @@ void        set_repro               (KConfig K,
                                      KScalar s, KScalar ds,
                                      KScalar a, KScalar da);
 KScalar     s_self                  (KInt i, KInt j, 
-									 KInt n, KInt v);
+                                     KInt n, KInt v);
 KScalar     a_apomixis              (KInt i, KInt j,
-									 KInt n, KInt v);
+                                     KInt n, KInt v);
 KScalar     o_outcross              (KInt i, KInt j, 
-									 KInt n, KInt v, 
+                                     KInt n, KInt v, 
                                      KInt l, KInt lam);
 
 void        set_repro_resources_kondrashov  (KConfig K);

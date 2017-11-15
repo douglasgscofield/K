@@ -13,9 +13,9 @@ KConfig     initiate_KConfig    (void)
 }
 
 /*///////////////////////////////////////////////////////////////*/
-void		initiate_load_classes  (KConfig K, KInt MI, KInt MJ)
+void        initiate_load_classes  (KConfig K, KInt MI, KInt MJ)
 {
-	const char* thisfunction = "initiate_load_classes";
+    const char* thisfunction = "initiate_load_classes";
     int err = 0;
     char buf[200];
     sprintf(buf, "%s: ", thisfunction);
@@ -26,7 +26,7 @@ void		initiate_load_classes  (KConfig K, KInt MI, KInt MJ)
     } else if (MI < 0) {
         strcat(buf, "MI too small, <0; ");
         err++;
-	}
+    }
     if (MJ > MAX_MJ) {
         strcat(buf, "MJ too large, adjust MAX_MJ; ");
         err++;
@@ -40,8 +40,8 @@ void		initiate_load_classes  (KConfig K, KInt MI, KInt MJ)
     }
     if (err)
         fatal(buf);
-	K->MI = MI;
-	K->MJ = MJ;
+    K->MI = MI;
+    K->MJ = MJ;
 }
 
 /*///////////////////////////////////////////////////////////////*/
@@ -50,7 +50,7 @@ void        initiate_genotypes  (KConfig K, KInt g)
     const char* thisfunction = "initiate_genotypes";
     if (g != 1) {
         not_implemented(thisfunction, "genotypes != 1");
-	}
+    }
     K->genotypes = g;
     set_transform_one_genotype(K);
 }
@@ -59,25 +59,25 @@ void        initiate_genotypes  (KConfig K, KInt g)
 KConfig     initiate_quick      (KInt MI, KInt MJ, KInt g,
                                  KScalar U,
                                  KScalar s, KScalar h,
-								 KScalar S)
+                                 KScalar S)
 {
     //const char* thisfunction = "initiate_quick";
-	/* for now, only support one genotype in initiate_quick */
+    /* for now, only support one genotype in initiate_quick */
     KConfig K;
     K = initiate_KConfig();
-	initiate_load_classes(K, MI, MJ);
-	initiate_genotypes(K, g);
+    initiate_load_classes(K, MI, MJ);
+    initiate_genotypes(K, g);
     K->U = U;
     K->fit_s = s;
     K->fit_h = h;
-	set_repro(K, S, 0.0, 0.0, 0.0);
+    set_repro(K, S, 0.0, 0.0, 0.0);
     return K;
 }
 
 /*///////////////////////////////////////////////////////////////*/
-void        initiate_model_state	(KConfig K)
+void        initiate_model_state    (KConfig K)
 {
-	const char* thisfunction = "initiate_model_state";
+    const char* thisfunction = "initiate_model_state";
     initiate_mut_term(K);
     initiate_fitness_precomputed(K);
     K->generation = 0;
@@ -104,10 +104,10 @@ void        compute_adults_initial (KConfig K)
 */
 {
     const char* thisfunction = "compute_adults_initial";
-	IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
+    IF_DEBUG(DEBUG_TRACE1) fprintf(stderr, "%s\n", thisfunction);
     if (K->genotypes != 1) {
         not_implemented(thisfunction, "genotypes != 1");
-	}
+    }
     fill_KArray(K, K->x, 0.0);
     K->x[0][0][0] = 1.0;
 }
@@ -129,7 +129,7 @@ void        compute_adults_initial (KConfig K)
             for (g=0; g < K->genotypes; g++) {
                 IF_DEBUG(DEBUG_TRACE2) {
                     fprintf(stderr, "%s: [%d][%d][%d]\n",
-						   thisfunction, i, j, g);
+                           thisfunction, i, j, g);
                 }
                 if (i == 0 && j == 0) {
                     K->x[i][j][g] = K->initial_genotype_freqs[g];
