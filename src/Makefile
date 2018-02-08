@@ -89,8 +89,10 @@ HEAD_N = K_n.h \
 
 
 all: $(PROG)
+
+install: all
 	mkdir -p $(BINDIR)
-	mv $? $(BINDIR)
+	cp -av $(PROG) $(BINDIR)
 
 K: $(OBJS) version.h
 	$(CXX) $(LDFLAGS) $(OBJS) -o $@ $(LIBS)
