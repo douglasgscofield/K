@@ -6,6 +6,9 @@ endif
 
 
 O_FLAG = -O2
+# for clang
+# D_FLAG = -D_WITH_DEBUG -ggdb -g3 -fno-inline -fno-eliminate-unused-debug-types
+# for full gcc
 D_FLAG = -D_WITH_DEBUG -ggdb -g3 -fvar-tracking-assignments -fno-inline -fno-inline-small-functions -fno-eliminate-unused-debug-types
 #for gcc 4.1.x as is default on eb30
 #D_FLAG  = -D_WITH_DEBUG -ggdb -g3 -fno-inline -fno-eliminate-unused-debug-types
